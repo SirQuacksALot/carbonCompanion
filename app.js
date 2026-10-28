@@ -1,0 +1,661 @@
+"use strict";
+(function () {
+  /* ============================================================
+     Konstanten & Modell
+     ============================================================ */
+  var FIXED = { kWhPerTraining: 30, sensorEmbodied: 2.0, gatewayEmbodied: 80, lifetimeYr: 5, networkKWhPerGB: 0.06 };
+  var UNC = { savingsPct: 0.25, gridEF: 0.15, dcEF: 0.15, sensorEmbodied: 0.30, networkKWhPerGB: 0.40, kWhPerTraining: 0.50, inferenceW: 0.20 };
+
+  var GRID = [ { v: 50, k: "gridRenew" }, { v: 400, k: "gridEU" }, { v: 420, k: "gridDE" }, { v: 900, k: "gridCoal" } ];
+  var DC = [ { v: 50, k: "dcRenew" }, { v: 350, k: "dcMix" }, { v: 800, k: "dcCoal" } ];
+
+  var PRESETS = {
+    buero: { k: "p_buero", baselineMWh: 800, savingsPct: 12, gridEF: 420, numSensors: 250, dataGBday: 40, trainingsPerYear: 6, inferenceW: 120, dcEF: 350 },
+    cloud: { k: "p_cloud", baselineMWh: 120, savingsPct: 6, gridEF: 400, numSensors: 150, dataGBday: 120, trainingsPerYear: 52, inferenceW: 400, dcEF: 350 },
+    grid:  { k: "p_grid", baselineMWh: 30000, savingsPct: 8, gridEF: 420, numSensors: 5000, dataGBday: 2000, trainingsPerYear: 12, inferenceW: 800, dcEF: 350 },
+    grau:  { k: "p_grau", baselineMWh: 300, savingsPct: 4, gridEF: 50, numSensors: 100, dataGBday: 60, trainingsPerYear: 26, inferenceW: 300, dcEF: 800 }
+  };
+
+  var LANGS = [
+    { code: "en", name: "English" }, { code: "de", name: "Deutsch" }, { code: "pl", name: "Polski" },
+    { code: "it", name: "Italiano" }, { code: "es", name: "Español" }, { code: "fr", name: "Français" }
+  ];
+  var LOCALES = { en: "en-US", de: "de-DE", pl: "pl-PL", it: "it-IT", es: "es-ES", fr: "fr-FR" };
+
+  /* ============================================================
+     Übersetzungen (neue Sprachen: einfach einen Block ergänzen)
+     ============================================================ */
+  var I18N = {
+    en: {
+      brandSub: "Net Carbon Balance · BIP 2026 · E2", hintTap: "tap me", hintMore: "tap again",
+      topicsLabel: "Topics", companionAria: "Tap the companion to show the next piece of information",
+      debugCloseAria: "Close", grpTitle: "Parameters", grpSave: "Savings", grpCost: "AI footprint",
+      l_baseline: "Managed energy", l_savings: "Savings rate by AI", l_grid: "Grid mix (saved energy)",
+      l_sensors: "Sensors", l_data: "Data transfer", l_train: "Training runs / year", l_infer: "Inference (avg load)", l_dc: "Data-center power",
+      gridRenew: "Renewable (≈ 50 g/kWh)", gridEU: "EU mix (≈ 400 g/kWh)", gridDE: "DE mix (≈ 420 g/kWh)", gridCoal: "Coal (≈ 900 g/kWh)",
+      dcRenew: "Renewable DC (≈ 50 g/kWh)", dcMix: "Average mix (≈ 350 g/kWh)", dcCoal: "Coal (≈ 800 g/kWh)",
+      p_buero: "Office building", p_cloud: "Cloud-heavy, small", p_grid: "Smart grid", p_grau: "Green saved, grey computed",
+      note: "Illustrative example — not real measurements.",
+      u_mwhYr: "MWh/yr", u_gbDay: "GB/day", u_timesYr: "×/yr",
+      greeting: "Hi! I'm your <b>Carbon Companion</b>. Tap me — I'll show you the AI's net carbon balance.",
+      introPrompt: "Tap the companion to start.",
+      v_great: "Strongly worth it", v_good: "Worth it", v_ok: "Uncertain", v_bad: "Not worth it", v_awful: "Clearly negative",
+      worthQ: "Is the AI worth it?", worthP: "P(worth it)", w_yes: "yes", w_mid: "marginal", w_no: "no",
+      topic_result: "Result", topic_footprint: "Footprint", topic_uncertainty: "Uncertainty", topic_breakeven: "Break-even", topic_boundary: "System boundary",
+      b_result: "Net {net} CO₂e per year — after subtracting the AI's own footprint.",
+      b_footprint: "The footprint has four sources — here's which one dominates.",
+      b_uncertainty: "Every factor has a spread — I run 2,000 simulations.",
+      b_breakeven: "From {be} savings rate it's worth it — below, it isn't.",
+      b_boundary: "I account for the whole AI system — not just the server.",
+      r_eyebrow: "Result", r_unit: "CO₂e / year net avoided", r_meta: "Median · 90 % interval {a} … {b}",
+      f_eyebrow: "What makes up the footprint?", f_sum: "Total", f_meta: "That is {p} % of the emissions avoided.",
+      c_hw: "Hardware", c_data: "Data transfer", c_train: "Training", c_infer: "Inference",
+      u_eyebrow: "How certain is this?", u_median: "Median", u_ci: "90 % interval", u_p: "P(worth it)",
+      u_meta: "Monte-Carlo over emission factors, savings rate and device balance.",
+      be_eyebrow: "When is it not worth it?", be_big: "from {be} %", be_unit: "savings rate the balance is positive",
+      be_title: "Not worth it when one of these applies:",
+      be_savings: "Savings rate ({s}) is below break-even ({be}).",
+      be_green: "The saved energy is almost carbon-free (grid ≈ {g} g/kWh).",
+      be_coal: "The data center runs on coal power ({g} g/kWh).",
+      be_small: "The site is very small ({m} MWh/yr).",
+      sy_eyebrow: "What is accounted for?", sy_sensors: "Sensors & gateways (embodied)", sy_data: "Data transfer (network / IoT)",
+      sy_train: "Training (GPU power)", sy_infer: "Inference (always-on)", sy_meta: "Boundary = entire AI system incl. embodied hardware.",
+      tag_meas: "measured", tag_est: "factor"
+    },
+    de: {
+      brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
+      topicsLabel: "Themen", companionAria: "Companion antippen — zeigt die nächste Information",
+      debugCloseAria: "Schließen", grpTitle: "Parameter", grpSave: "Einsparung", grpCost: "AI-Fußabdruck",
+      l_baseline: "Gesteuerte Energie", l_savings: "Einsparrate durch AI", l_grid: "Strommix (gesparte Energie)",
+      l_sensors: "Sensoren", l_data: "Datentransfer", l_train: "Trainingsläufe / Jahr", l_infer: "Inferenz (mittlere Last)", l_dc: "Rechenzentrum-Strom",
+      gridRenew: "Erneuerbar (≈ 50 g/kWh)", gridEU: "EU-Mix (≈ 400 g/kWh)", gridDE: "DE-Mix (≈ 420 g/kWh)", gridCoal: "Kohle (≈ 900 g/kWh)",
+      dcRenew: "Erneuerbares RZ (≈ 50 g/kWh)", dcMix: "Mittlerer Mix (≈ 350 g/kWh)", dcCoal: "Kohle (≈ 800 g/kWh)",
+      p_buero: "Bürogebäude", p_cloud: "Cloud-schwer, klein", p_grid: "Smart Grid", p_grau: "Grün gespart, grau gerechnet",
+      note: "Illustratives Rechenbeispiel — keine realen Messwerte.",
+      u_mwhYr: "MWh/Jahr", u_gbDay: "GB/Tag", u_timesYr: "×/Jahr",
+      greeting: "Hi! Ich bin dein <b>Carbon Companion</b>. Tipp mich an — ich zeige dir die Netto-CO₂-Bilanz der AI.",
+      introPrompt: "Tipp den Companion an, um zu starten.",
+      v_great: "Lohnt sich stark", v_good: "Lohnt sich", v_ok: "Knapp / unsicher", v_bad: "Lohnt sich nicht", v_awful: "Deutlich negativ",
+      worthQ: "Lohnt sich die AI?", worthP: "P(lohnt sich)", w_yes: "ja", w_mid: "knapp", w_no: "nein",
+      topic_result: "Ergebnis", topic_footprint: "Fußabdruck", topic_uncertainty: "Unsicherheit", topic_breakeven: "Break-even", topic_boundary: "Systemgrenze",
+      b_result: "Netto {net} CO₂e im Jahr — nach Abzug des eigenen AI-Fußabdrucks.",
+      b_footprint: "Der Fußabdruck hat vier Quellen — hier siehst du, welche dominiert.",
+      b_uncertainty: "Jeder Faktor hat eine Streuung — ich rechne 2.000 Simulationen.",
+      b_breakeven: "Ab {be} Einsparrate lohnt es sich — darunter nicht.",
+      b_boundary: "Ich bilanzieren das ganze AI-System — nicht nur den Server.",
+      r_eyebrow: "Ergebnis", r_unit: "CO₂e / Jahr netto vermieden", r_meta: "Median · 90 %-Intervall {a} … {b}",
+      f_eyebrow: "Woraus besteht der Fußabdruck?", f_sum: "Summe", f_meta: "Das sind {p} % der vermiedenen Emissionen.",
+      c_hw: "Hardware", c_data: "Datentransfer", c_train: "Training", c_infer: "Inferenz",
+      u_eyebrow: "Wie sicher ist das?", u_median: "Median", u_ci: "90 %-Intervall", u_p: "P(lohnt sich)",
+      u_meta: "Monte-Carlo über Emissionsfaktoren, Einsparrate und Gerätebilanz.",
+      be_eyebrow: "Wann lohnt es sich nicht?", be_big: "ab {be} %", be_unit: "Einsparrate ist die Bilanz positiv",
+      be_title: "Nicht lohnenswert, wenn einer dieser Punkte zutrifft:",
+      be_savings: "Einsparrate ({s}) liegt unter dem Break-even ({be}).",
+      be_green: "Die gesparte Energie ist fast CO₂-frei (Netz ≈ {g} g/kWh).",
+      be_coal: "Das Rechenzentrum läuft mit Kohle-Strom ({g} g/kWh).",
+      be_small: "Das Objekt ist sehr klein ({m} MWh/Jahr).",
+      sy_eyebrow: "Was wird bilanziert?", sy_sensors: "Sensoren & Gateways (verkörpert)", sy_data: "Datentransfer (Netz / IoT)",
+      sy_train: "Training (GPU-Strom)", sy_infer: "Inferenz (Dauerbetrieb)", sy_meta: "Bilanzgrenze = gesamtes AI-System inkl. verkörperter Hardware.",
+      tag_meas: "gemessen", tag_est: "Faktor"
+    },
+    pl: {
+      brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
+      topicsLabel: "Tematy", companionAria: "Dotknij companiona, aby pokazać następną informację",
+      debugCloseAria: "Zamknij", grpTitle: "Parametry", grpSave: "Oszczędność", grpCost: "Ślad AI",
+      l_baseline: "Zarządzana energia", l_savings: "Stopa oszczędności AI", l_grid: "Miks sieci (oszczędzana energia)",
+      l_sensors: "Czujniki", l_data: "Transfer danych", l_train: "Trenowania / rok", l_infer: "Inferencja (śr. obciążenie)", l_dc: "Zasilanie centrum danych",
+      gridRenew: "Odnawialna (≈ 50 g/kWh)", gridEU: "Miks UE (≈ 400 g/kWh)", gridDE: "Miks DE (≈ 420 g/kWh)", gridCoal: "Węgiel (≈ 900 g/kWh)",
+      dcRenew: "Odnawialne DC (≈ 50 g/kWh)", dcMix: "Miks średni (≈ 350 g/kWh)", dcCoal: "Węgiel (≈ 800 g/kWh)",
+      p_buero: "Biurowiec", p_cloud: "Chmurowy, mały", p_grid: "Smart grid", p_grau: "Zielono zaoszczędzone, szaro liczone",
+      note: "Przykład ilustracyjny — nie realne pomiary.",
+      u_mwhYr: "MWh/rok", u_gbDay: "GB/dzień", u_timesYr: "×/rok",
+      greeting: "Cześć! Jestem Twoim <b>Carbon Companionem</b>. Dotknij mnie — pokażę Ci bilans węglowy AI.",
+      introPrompt: "Dotknij companiona, aby zacząć.",
+      v_great: "Bardzo się opłaca", v_good: "Opłaca się", v_ok: "Niepewne", v_bad: "Nie opłaca się", v_awful: "Wyraźnie ujemny",
+      worthQ: "Czy AI się opłaca?", worthP: "P(opłacalne)", w_yes: "tak", w_mid: "granicznie", w_no: "nie",
+      topic_result: "Wynik", topic_footprint: "Ślad węglowy", topic_uncertainty: "Niepewność", topic_breakeven: "Próg opłacalności", topic_boundary: "Granica systemu",
+      b_result: "Netto {net} CO₂e rocznie — po odjęciu własnego śladu AI.",
+      b_footprint: "Ślad ma cztery źródła — zobacz, które dominuje.",
+      b_uncertainty: "Każdy czynnik ma rozrzut — robię 2 000 symulacji.",
+      b_breakeven: "Od {be} oszczędności się opłaca — poniżej nie.",
+      b_boundary: "Bilansuję cały system AI — nie tylko serwer.",
+      r_eyebrow: "Wynik", r_unit: "CO₂e / rok uniknięte netto", r_meta: "Mediana · przedział 90 % {a} … {b}",
+      f_eyebrow: "Z czego składa się ślad?", f_sum: "Suma", f_meta: "To {p} % unikniętych emisji.",
+      c_hw: "Sprzęt", c_data: "Transfer danych", c_train: "Trenowanie", c_infer: "Inferencja",
+      u_eyebrow: "Jak pewne to jest?", u_median: "Mediana", u_ci: "przedział 90 %", u_p: "P(opłacalne)",
+      u_meta: "Monte-Carlo nad czynnikami emisji, stopą oszczędności i bilansem urządzeń.",
+      be_eyebrow: "Kiedy się nie opłaca?", be_big: "od {be} %", be_unit: "oszczędności bilans jest dodatni",
+      be_title: "Nie opłaca się, gdy spełniony jest któryś z tych warunków:",
+      be_savings: "Stopa oszczędności ({s}) jest poniżej progu ({be}).",
+      be_green: "Oszczędzana energia jest prawie bezemisyjna (sieć ≈ {g} g/kWh).",
+      be_coal: "Centrum danych działa na prąd z węgla ({g} g/kWh).",
+      be_small: "Obiekt jest bardzo mały ({m} MWh/rok).",
+      sy_eyebrow: "Co jest bilansowane?", sy_sensors: "Czujniki i bramki (wbudowane)", sy_data: "Transfer danych (sieć / IoT)",
+      sy_train: "Trenowanie (moc GPU)", sy_infer: "Inferencja (praca ciągła)", sy_meta: "Granica = cały system AI, włącznie z wbudowanym sprzętem.",
+      tag_meas: "mierzone", tag_est: "czynnik"
+    },
+    it: {
+      brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
+      topicsLabel: "Argomenti", companionAria: "Tocca il companion per mostrare la prossima informazione",
+      debugCloseAria: "Chiudi", grpTitle: "Parametri", grpSave: "Risparmio", grpCost: "Impronta AI",
+      l_baseline: "Energia gestita", l_savings: "Tasso di risparmio AI", l_grid: "Mix di rete (energia risparmiata)",
+      l_sensors: "Sensori", l_data: "Trasferimento dati", l_train: "Addestramenti / anno", l_infer: "Inferenza (carico medio)", l_dc: "Alimentazione data center",
+      gridRenew: "Rinnovabile (≈ 50 g/kWh)", gridEU: "Mix UE (≈ 400 g/kWh)", gridDE: "Mix DE (≈ 420 g/kWh)", gridCoal: "Carbone (≈ 900 g/kWh)",
+      dcRenew: "DC rinnovabile (≈ 50 g/kWh)", dcMix: "Mix medio (≈ 350 g/kWh)", dcCoal: "Carbone (≈ 800 g/kWh)",
+      p_buero: "Edificio uffici", p_cloud: "Cloud-heavy, piccolo", p_grid: "Smart grid", p_grau: "Verde risparmiato, grigio contato",
+      note: "Esempio illustrativo — non misurazioni reali.",
+      u_mwhYr: "MWh/anno", u_gbDay: "GB/giorno", u_timesYr: "×/anno",
+      greeting: "Ciao! Sono il tuo <b>Carbon Companion</b>. Toccami — ti mostro il bilancio carbonio netto dell'AI.",
+      introPrompt: "Tocca il companion per iniziare.",
+      v_great: "Conviene molto", v_good: "Conviene", v_ok: "Incertamente", v_bad: "Non conviene", v_awful: "Decisamente negativo",
+      worthQ: "L'AI conviene?", worthP: "P(conviene)", w_yes: "sì", w_mid: "al limite", w_no: "no",
+      topic_result: "Risultato", topic_footprint: "Impronta", topic_uncertainty: "Incertezza", topic_breakeven: "Pareggio", topic_boundary: "Confine del sistema",
+      b_result: "Netto {net} CO₂e all'anno — dopo aver sottratto l'impronta dell'AI.",
+      b_footprint: "L'impronta ha quattro fonti — ecco quale domina.",
+      b_uncertainty: "Ogni fattore ha una dispersione — eseguo 2.000 simulazioni.",
+      b_breakeven: "Dal {be} di risparmio conviene — sotto, no.",
+      b_boundary: "Bilancio l'intero sistema AI — non solo il server.",
+      r_eyebrow: "Risultato", r_unit: "CO₂e / anno netti evitati", r_meta: "Mediana · intervallo 90 % {a} … {b}",
+      f_eyebrow: "Da cosa è composta l'impronta?", f_sum: "Totale", f_meta: "È il {p} % delle emissioni evitate.",
+      c_hw: "Hardware", c_data: "Trasferimento dati", c_train: "Addestramento", c_infer: "Inferenza",
+      u_eyebrow: "Quanto è certo?", u_median: "Mediana", u_ci: "intervallo 90 %", u_p: "P(conviene)",
+      u_meta: "Monte-Carlo su fattori di emissione, tasso di risparmio e bilancio dei dispositivi.",
+      be_eyebrow: "Quando non conviene?", be_big: "dal {be} %", be_unit: "di risparmio il bilancio è positivo",
+      be_title: "Non conviene quando si verifica una di queste condizioni:",
+      be_savings: "Il tasso di risparmio ({s}) è sotto il pareggio ({be}).",
+      be_green: "L'energia risparmiata è quasi a zero emissioni (rete ≈ {g} g/kWh).",
+      be_coal: "Il data center usa energia a carbone ({g} g/kWh).",
+      be_small: "Il sito è molto piccolo ({m} MWh/anno).",
+      sy_eyebrow: "Cosa viene bilanciato?", sy_sensors: "Sensori e gateway (incorporati)", sy_data: "Trasferimento dati (rete / IoT)",
+      sy_train: "Addestramento (potenza GPU)", sy_infer: "Inferenza (sempre attiva)", sy_meta: "Confine = intero sistema AI incl. hardware incorporato.",
+      tag_meas: "misurato", tag_est: "fattore"
+    },
+    es: {
+      brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
+      topicsLabel: "Temas", companionAria: "Toca el companion para mostrar la siguiente información",
+      debugCloseAria: "Cerrar", grpTitle: "Parámetros", grpSave: "Ahorro", grpCost: "Huella de la IA",
+      l_baseline: "Energía gestionada", l_savings: "Tasa de ahorro de la IA", l_grid: "Mix de red (energía ahorrada)",
+      l_sensors: "Sensores", l_data: "Transferencia de datos", l_train: "Entrenamientos / año", l_infer: "Inferencia (carga media)", l_dc: "Energía del centro de datos",
+      gridRenew: "Renovable (≈ 50 g/kWh)", gridEU: "Mix UE (≈ 400 g/kWh)", gridDE: "Mix DE (≈ 420 g/kWh)", gridCoal: "Carbón (≈ 900 g/kWh)",
+      dcRenew: "DC renovable (≈ 50 g/kWh)", dcMix: "Mix medio (≈ 350 g/kWh)", dcCoal: "Carbón (≈ 800 g/kWh)",
+      p_buero: "Edificio de oficinas", p_cloud: "Cloud-heavy, pequeño", p_grid: "Smart grid", p_grau: "Verde ahorrado, gris contado",
+      note: "Ejemplo ilustrativo — no mediciones reales.",
+      u_mwhYr: "MWh/año", u_gbDay: "GB/día", u_timesYr: "×/año",
+      greeting: "¡Hola! Soy tu <b>Carbon Companion</b>. Tócame y te muestro el balance neto de carbono de la IA.",
+      introPrompt: "Toca el companion para empezar.",
+      v_great: "Merece mucho la pena", v_good: "Merece la pena", v_ok: "Incierto", v_bad: "No merece la pena", v_awful: "Claramente negativo",
+      worthQ: "¿Merece la pena la IA?", worthP: "P(merece la pena)", w_yes: "sí", w_mid: "justo", w_no: "no",
+      topic_result: "Resultado", topic_footprint: "Huella", topic_uncertainty: "Incertidumbre", topic_breakeven: "Punto de equilibrio", topic_boundary: "Límite del sistema",
+      b_result: "Neto {net} CO₂e al año — tras restar la propia huella de la IA.",
+      b_footprint: "La huella tiene cuatro fuentes — mira cuál domina.",
+      b_uncertainty: "Cada factor tiene dispersión — ejecuto 2.000 simulaciones.",
+      b_breakeven: "Desde {be} de ahorro merece la pena — por debajo, no.",
+      b_boundary: "Contabilizo todo el sistema de IA — no solo el servidor.",
+      r_eyebrow: "Resultado", r_unit: "CO₂e / año netos evitados", r_meta: "Mediana · intervalo 90 % {a} … {b}",
+      f_eyebrow: "¿De qué se compone la huella?", f_sum: "Total", f_meta: "Es el {p} % de las emisiones evitadas.",
+      c_hw: "Hardware", c_data: "Transferencia de datos", c_train: "Entrenamiento", c_infer: "Inferencia",
+      u_eyebrow: "¿Qué tan seguro es?", u_median: "Mediana", u_ci: "intervalo 90 %", u_p: "P(merece la pena)",
+      u_meta: "Monte-Carlo sobre factores de emisión, tasa de ahorro y balance de dispositivos.",
+      be_eyebrow: "¿Cuándo no merece la pena?", be_big: "desde {be} %", be_unit: "de ahorro el balance es positivo",
+      be_title: "No merece la pena cuando se cumple una de estas:",
+      be_savings: "La tasa de ahorro ({s}) está por debajo del equilibrio ({be}).",
+      be_green: "La energía ahorrada es casi libre de carbono (red ≈ {g} g/kWh).",
+      be_coal: "El centro de datos usa energía de carbón ({g} g/kWh).",
+      be_small: "El sitio es muy pequeño ({m} MWh/año).",
+      sy_eyebrow: "¿Qué se contabiliza?", sy_sensors: "Sensores y gateways (incorporados)", sy_data: "Transferencia de datos (red / IoT)",
+      sy_train: "Entrenamiento (potencia GPU)", sy_infer: "Inferencia (siempre activa)", sy_meta: "Límite = todo el sistema de IA incl. hardware incorporado.",
+      tag_meas: "medido", tag_est: "factor"
+    },
+    fr: {
+      brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
+      topicsLabel: "Sujets", companionAria: "Touche le companion pour afficher l'information suivante",
+      debugCloseAria: "Fermer", grpTitle: "Paramètres", grpSave: "Économie", grpCost: "Empreinte IA",
+      l_baseline: "Énergie gérée", l_savings: "Taux d'économie de l'IA", l_grid: "Mix réseau (énergie économisée)",
+      l_sensors: "Capteurs", l_data: "Transfert de données", l_train: "Entraînements / an", l_infer: "Inférence (charge moy.)", l_dc: "Alimentation data center",
+      gridRenew: "Renouvelable (≈ 50 g/kWh)", gridEU: "Mix UE (≈ 400 g/kWh)", gridDE: "Mix DE (≈ 420 g/kWh)", gridCoal: "Charbon (≈ 900 g/kWh)",
+      dcRenew: "DC renouvelable (≈ 50 g/kWh)", dcMix: "Mix moyen (≈ 350 g/kWh)", dcCoal: "Charbon (≈ 800 g/kWh)",
+      p_buero: "Immeuble de bureaux", p_cloud: "Cloud-heavy, petit", p_grid: "Smart grid", p_grau: "Vert économisé, gris compté",
+      note: "Exemple illustratif — pas de mesures réelles.",
+      u_mwhYr: "MWh/an", u_gbDay: "GB/jour", u_timesYr: "×/an",
+      greeting: "Salut ! Je suis ton <b>Carbon Companion</b>. Touche-moi — je te montre le bilan carbone net de l'IA.",
+      introPrompt: "Touche le companion pour commencer.",
+      v_great: "Très rentable", v_good: "Rentable", v_ok: "Incertain", v_bad: "Pas rentable", v_awful: "Clairement négatif",
+      worthQ: "L'IA est-elle rentable ?", worthP: "P(rentable)", w_yes: "oui", w_mid: "limite", w_no: "non",
+      topic_result: "Résultat", topic_footprint: "Empreinte", topic_uncertainty: "Incertitude", topic_breakeven: "Seuil", topic_boundary: "Frontière du système",
+      b_result: "Net {net} CO₂e par an — après avoir soustrait l'empreinte de l'IA.",
+      b_footprint: "L'empreinte a quatre sources — voici laquelle domine.",
+      b_uncertainty: "Chaque facteur a une dispersion — je lance 2 000 simulations.",
+      b_breakeven: "Dès {be} d'économie c'est rentable — en dessous, non.",
+      b_boundary: "Je comptabilise tout le système d'IA — pas seulement le serveur.",
+      r_eyebrow: "Résultat", r_unit: "CO₂e / an nets évités", r_meta: "Médiane · intervalle 90 % {a} … {b}",
+      f_eyebrow: "De quoi se compose l'empreinte ?", f_sum: "Total", f_meta: "C'est {p} % des émissions évitées.",
+      c_hw: "Matériel", c_data: "Transfert de données", c_train: "Entraînement", c_infer: "Inférence",
+      u_eyebrow: "Quelle est la certitude ?", u_median: "Médiane", u_ci: "intervalle 90 %", u_p: "P(rentable)",
+      u_meta: "Monte-Carlo sur les facteurs d'émission, le taux d'économie et le bilan des appareils.",
+      be_eyebrow: "Quand n'est-ce pas rentable ?", be_big: "dès {be} %", be_unit: "d'économie le bilan est positif",
+      be_title: "Pas rentable si l'une de ces conditions est remplie :",
+      be_savings: "Le taux d'économie ({s}) est sous le seuil ({be}).",
+      be_green: "L'énergie économisée est quasi neutre en carbone (réseau ≈ {g} g/kWh).",
+      be_coal: "Le centre de données tourne au charbon ({g} g/kWh).",
+      be_small: "Le site est très petit ({m} MWh/an).",
+      sy_eyebrow: "Qu'est-ce qui est comptabilisé ?", sy_sensors: "Capteurs et passerelles (incorporés)", sy_data: "Transfert de données (réseau / IoT)",
+      sy_train: "Entraînement (puissance GPU)", sy_infer: "Inférence (toujours active)", sy_meta: "Frontière = tout le système d'IA, matériel incorporé inclus.",
+      tag_meas: "mesuré", tag_est: "facteur"
+    }
+  };
+
+  /* ============================================================
+     State & Helfer
+     ============================================================ */
+  var params = Object.assign({}, PRESETS.buero);
+  var topic = -1;
+  var LANG = "de";
+  try { var s = localStorage.getItem("cc-params"); if (s) params = Object.assign({}, PRESETS.buero, JSON.parse(s)); } catch (e) {}
+  try { var lg = localStorage.getItem("cc-lang"); if (lg && I18N[lg]) LANG = lg; } catch (e) {}
+
+  function $(id) { return document.getElementById(id); }
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function t(key, vars) {
+    var dict = I18N[LANG] || I18N.en;
+    var s = (key in dict) ? dict[key] : (key in I18N.en ? I18N.en[key] : key);
+    if (vars) for (var k in vars) s = s.split("{" + k + "}").join(vars[k]);
+    return s;
+  }
+  function fmtNum(v, d) { return v.toLocaleString(LOCALES[LANG] || "en-US", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
+  function fmtT(v) {
+    var a = Math.abs(v);
+    if (a < 1) return fmtNum(v * 1000, 0) + " kg";
+    if (a < 100) return fmtNum(v, 1) + " t";
+    return fmtNum(v, 0) + " t";
+  }
+  function fmtTsign(v) { return (v >= 0 ? "+" : "−") + fmtT(Math.abs(v)); }
+  function fmtPct(v) { return fmtNum(v, 1).replace(/([.,])0$/, "") + " %"; }
+
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  /* ============================================================
+     Modell
+     ============================================================ */
+  function compute(p) {
+    var savings_t = p.baselineMWh * 1000 * p.savingsPct / 100 * p.gridEF / 1e6;
+    var hw_t = (p.numSensors * FIXED.sensorEmbodied + FIXED.gatewayEmbodied) / FIXED.lifetimeYr / 1000;
+    var data_t = p.dataGBday * 365 * FIXED.networkKWhPerGB * p.gridEF / 1e6;
+    var train_t = p.trainingsPerYear * FIXED.kWhPerTraining * p.dcEF / 1e6;
+    var inf_t = p.inferenceW / 1000 * 8760 * p.dcEF / 1e6;
+    var cost_t = hw_t + data_t + train_t + inf_t;
+    var net_t = savings_t - cost_t;
+    var bePct = cost_t / (p.baselineMWh * 1000 * p.gridEF / 1e6) * 100;
+    return {
+      savings_t: savings_t, cost_t: cost_t, net_t: net_t, bePct: bePct,
+      components: [
+        { lk: "c_hw", value: hw_t, color: "var(--series-2)" },
+        { lk: "c_data", value: data_t, color: "var(--series-1)" },
+        { lk: "c_train", value: train_t, color: "var(--series-3)" },
+        { lk: "c_infer", value: inf_t, color: "var(--series-4)" }
+      ]
+    };
+  }
+
+  function montecarlo(p, N) {
+    var rand = mulberry32(20261028), spare = null;
+    function normal() {
+      if (spare !== null) { var s = spare; spare = null; return s; }
+      var u = 0, v = 0;
+      while (u === 0) u = rand(); while (v === 0) v = rand();
+      var m = Math.sqrt(-2 * Math.log(u));
+      spare = m * Math.sin(2 * Math.PI * v);
+      return m * Math.cos(2 * Math.PI * v);
+    }
+    var samples = new Float64Array(N);
+    for (var i = 0; i < N; i++) {
+      var gridEF = Math.max(5, p.gridEF * (1 + UNC.gridEF * normal()));
+      var dcEF = Math.max(5, p.dcEF * (1 + UNC.dcEF * normal()));
+      var sp = clamp(p.savingsPct * (1 + UNC.savingsPct * normal()), 0, 100);
+      var se = Math.max(0.1, FIXED.sensorEmbodied * (1 + UNC.sensorEmbodied * normal()));
+      var nk = Math.max(0.01, FIXED.networkKWhPerGB * (1 + UNC.networkKWhPerGB * normal()));
+      var kt = Math.max(1, FIXED.kWhPerTraining * (1 + UNC.kWhPerTraining * normal()));
+      var iw = Math.max(0, p.inferenceW * (1 + UNC.inferenceW * normal()));
+
+      var sav = p.baselineMWh * 1000 * sp / 100 * gridEF / 1e6;
+      var hw = (p.numSensors * se + FIXED.gatewayEmbodied) / FIXED.lifetimeYr / 1000;
+      var data = p.dataGBday * 365 * nk * gridEF / 1e6;
+      var train = p.trainingsPerYear * kt * dcEF / 1e6;
+      var inf = iw / 1000 * 8760 * dcEF / 1e6;
+      samples[i] = sav - (hw + data + train + inf);
+    }
+    var sorted = Array.prototype.slice.call(samples).sort(function (a, b) { return a - b; });
+    function q(pp) { return sorted[clamp(Math.round((N - 1) * pp), 0, N - 1)]; }
+    var pos = 0; for (var j = 0; j < N; j++) if (samples[j] > 0) pos++;
+    return { samples: sorted, median: q(0.5), p5: q(0.05), p95: q(0.95), pPos: pos / N };
+  }
+
+  function moodOf(res, mc) {
+    if (mc.p5 > 0) return res.cost_t < res.savings_t * 0.05 ? "great" : "good";
+    if (mc.p95 < 0) return res.savings_t < res.cost_t * 0.3 ? "awful" : "bad";
+    return "ok";
+  }
+
+  /* ============================================================
+     Companion (emotional: 5 Stimmungen)
+     ============================================================ */
+  var MOODS = {
+    great: { color: "#0ca30c", eyes: "happy", happyL: "M38 53 Q46 45 54 53", happyR: "M66 53 Q74 45 82 53", mouth: "bigsmile", cheeks: true, brows: false },
+    good:  { color: "#0c7a63", eyes: "happy", happyL: "M39 54 Q46 47 53 54", happyR: "M67 54 Q74 47 81 54", mouth: "smile", cheeks: true, brows: false },
+    ok:    { color: "#fab219", eyes: "dot", mouth: "flat", cheeks: false, brows: false },
+    bad:   { color: "#ec835a", eyes: "dot", mouth: "frown", cheeks: false, brows: true },
+    awful: { color: "#d03b3b", eyes: "dot", mouth: "bigfrown", cheeks: false, brows: true }
+  };
+  var MOUTHS = {
+    bigsmile: "M47 66 Q60 79 73 66", smile: "M50 68 Q60 76 70 68", flat: "M52 71 L68 71",
+    frown: "M50 76 Q60 67 70 76", bigfrown: "M48 79 Q60 66 72 79"
+  };
+
+  function setMood(mood) {
+    var cfg = MOODS[mood];
+    $("av-body").style.stroke = cfg.color;
+    $("av-tint").style.fill = cfg.color;
+    function show(id, on) { $(id).setAttribute("opacity", on ? "1" : "0"); }
+    var happy = cfg.eyes === "happy";
+    show("av-eyes", !happy);
+    show("av-happy-eyes", happy);
+    show("av-cheeks", cfg.cheeks);
+    show("av-brows", cfg.brows);
+    if (happy) {
+      $("av-happyL").setAttribute("d", cfg.happyL);
+      $("av-happyR").setAttribute("d", cfg.happyR);
+    }
+    $("av-mouth").setAttribute("d", MOUTHS[cfg.mouth]);
+    var r = (mood === "bad" || mood === "awful") ? 3.2 : 4;
+    $("av-eyeL").setAttribute("r", r);
+    $("av-eyeR").setAttribute("r", r);
+  }
+
+  /* ============================================================
+     Themen
+     ============================================================ */
+  var TOPICS = [
+    {
+      label: "topic_result",
+      bubble: function (res) { return t("b_result", { net: fmtT(res.net_t) }); },
+      card: function (res, mc, mood) {
+        var color = (mood === "great" || mood === "good") ? "var(--good)" : mood === "ok" ? "var(--warn-txt)" : "var(--crit)";
+        return '<div class="a-eyebrow">' + t("r_eyebrow") + '</div>'
+          + '<div class="a-big" style="color:' + color + '">' + fmtTsign(res.net_t) + '</div>'
+          + '<div class="a-unit">' + t("r_unit") + '</div>'
+          + '<div class="a-meta">' + t("r_meta", { a: fmtTsign(mc.p5), b: fmtTsign(mc.p95) }) + '</div>'
+          + '<div class="verdict ' + mood + '"><span class="dot"></span>' + t("v_" + mood) + '</div>';
+      }
+    },
+    {
+      label: "topic_footprint",
+      bubble: function () { return t("b_footprint"); },
+      card: function (res) {
+        var comps = res.components.slice().sort(function (a, b) { return a.value - b.value; });
+        var maxC = Math.max.apply(null, comps.map(function (c) { return c.value; })) || 1;
+        var rows = comps.map(function (c) {
+          var w = Math.max(1, c.value / maxC * 100);
+          return '<div class="mbar"><span class="mbar-lbl">' + t(c.lk) + '</span>'
+            + '<span class="mbar-track"><span class="mbar-fill" style="width:' + w.toFixed(1) + '%;background:' + c.color + '"></span></span>'
+            + '<span class="mbar-val">' + fmtT(c.value) + '</span></div>';
+        }).join("");
+        var share = res.savings_t > 0 ? Math.round(res.cost_t / res.savings_t * 100) : 0;
+        return '<div class="a-eyebrow">' + t("f_eyebrow") + '</div>'
+          + '<div class="mini-rows">' + rows + '</div>'
+          + '<div class="mbar-total"><span>' + t("f_sum") + '</span><span class="t-val">' + fmtT(res.cost_t) + '</span></div>'
+          + '<div class="a-meta">' + t("f_meta", { p: share }) + '</div>';
+      }
+    },
+    {
+      label: "topic_uncertainty",
+      bubble: function () { return t("b_uncertainty"); },
+      card: function (res, mc) {
+        var p = mc.pPos >= 0.995 ? "> 99 %" : fmtNum(mc.pPos * 100, 0) + " %";
+        return '<div class="a-eyebrow">' + t("u_eyebrow") + '</div>'
+          + sparkSVG(mc)
+          + '<div class="stats">'
+          + '<div class="stat"><div class="s-l">' + t("u_median") + '</div><div class="s-v">' + fmtTsign(mc.median) + '</div></div>'
+          + '<div class="stat"><div class="s-l">' + t("u_ci") + '</div><div class="s-v">' + fmtTsign(mc.p5) + ' … ' + fmtTsign(mc.p95) + '</div></div>'
+          + '<div class="stat"><div class="s-l">' + t("u_p") + '</div><div class="s-v">' + p + '</div></div>'
+          + '</div>'
+          + '<div class="a-meta">' + t("u_meta") + '</div>';
+      }
+    },
+    {
+      label: "topic_breakeven",
+      bubble: function (res) { return t("b_breakeven", { be: fmtNum(res.bePct, 1) + " %" }); },
+      card: function (res, p) {
+        var checks = [
+          { on: p.savingsPct < res.bePct, text: t("be_savings", { s: fmtPct(p.savingsPct), be: fmtNum(res.bePct, 1) + " %" }) },
+          { on: p.gridEF < 100, text: t("be_green", { g: fmtNum(p.gridEF, 0) }) },
+          { on: p.dcEF >= 800, text: t("be_coal", { g: fmtNum(p.dcEF, 0) }) },
+          { on: p.baselineMWh < 200, text: t("be_small", { m: fmtNum(p.baselineMWh, 0) }) }
+        ];
+        var items = checks.map(function (c) {
+          return '<li><span class="mark ' + (c.on ? "on" : "off") + '"></span><span>' + c.text + '</span></li>';
+        }).join("");
+        return '<div class="a-eyebrow">' + t("be_eyebrow") + '</div>'
+          + '<div class="a-big" style="color:var(--accent)">' + t("be_big", { be: fmtNum(res.bePct, 1) }) + '</div>'
+          + '<div class="a-unit">' + t("be_unit") + '</div>'
+          + '<div class="a-meta">' + t("be_title") + '</div>'
+          + '<ul class="list">' + items + '</ul>';
+      }
+    },
+    {
+      label: "topic_boundary",
+      bubble: function () { return t("b_boundary"); },
+      card: function () {
+        return '<div class="a-eyebrow">' + t("sy_eyebrow") + '</div>'
+          + '<ul class="list">'
+          + '<li><span class="mark off"></span><span>' + t("sy_sensors") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_data") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_train") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_infer") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
+          + '</ul>'
+          + '<div class="a-meta">' + t("sy_meta") + '</div>';
+      }
+    }
+  ];
+
+  function sparkSVG(mc) {
+    var W = 480, H = 96, padL = 6, padR = 6, padT = 8, padB = 6;
+    var iw = W - padL - padR, ih = H - padT - padB;
+    var samples = mc.samples, N = samples.length;
+    var lo = samples[Math.floor(N * 0.002)], hi = samples[Math.ceil(N * 0.998) - 1];
+    var span = Math.max(hi - lo, 1e-9);
+    var bins = 40, counts = new Array(bins).fill(0);
+    for (var i = 0; i < N; i++) { var idx = Math.floor((samples[i] - lo) / span * bins); if (idx >= bins) idx = bins - 1; if (idx < 0) idx = 0; counts[idx]++; }
+    var maxC = Math.max.apply(null, counts) || 1;
+    var x = function (v) { return padL + (v - lo) / span * iw; };
+    var xs = function (i) { return padL + (i + 0.5) / bins * iw; };
+    var ys = function (c) { return padT + ih - (c / maxC) * ih; };
+    var line = "", area = "";
+    for (var k = 0; k < bins; k++) { line += (k ? "L" : "M") + xs(k).toFixed(1) + "," + ys(counts[k]).toFixed(1) + " "; }
+    area = line + "L" + xs(bins - 1).toFixed(1) + "," + (padT + ih) + " L" + xs(0).toFixed(1) + "," + (padT + ih) + " Z";
+    var zx = clamp(x(0), padL, padL + iw);
+    var midX = x(mc.median);
+    var s = "";
+    if (0 > lo) s += '<rect x="' + x(lo).toFixed(1) + '" y="' + padT + '" width="' + (zx - x(lo)).toFixed(1) + '" height="' + ih + '" class="zone-bad"/>';
+    if (0 < hi) s += '<rect x="' + zx.toFixed(1) + '" y="' + padT + '" width="' + (x(hi) - zx).toFixed(1) + '" height="' + ih + '" class="zone-good"/>';
+    s += '<line x1="' + padL + '" y1="' + (padT + ih) + '" x2="' + (padL + iw) + '" y2="' + (padT + ih) + '" class="axis-line"/>';
+    s += '<line x1="' + zx.toFixed(1) + '" y1="' + padT + '" x2="' + zx.toFixed(1) + '" y2="' + (padT + ih) + '" class="zero-line"/>';
+    s += '<path d="' + area + '" class="spark-area"/>';
+    s += '<path d="' + line + '" class="spark-line"/>';
+    s += '<circle cx="' + midX.toFixed(1) + '" cy="' + ys(counts[Math.floor((mc.median - lo) / span * bins)] || 0).toFixed(1) + '" r="4" class="dot-bk"/>';
+    return '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Distribution">' + s + '</svg>';
+  }
+
+  /* ============================================================
+     Render
+     ============================================================ */
+  function render() {
+    var res = compute(params);
+    var mc = montecarlo(params, 2000);
+    var mood = moodOf(res, mc);
+    setMood(mood);
+
+    var bubble = $("bubble"), answer = $("answer"), hint = $("hint");
+
+    if (topic < 0) {
+      bubble.innerHTML = t("greeting");
+      answer.innerHTML = '<div class="a-meta" style="margin-top:0">' + t("introPrompt") + '</div>';
+      hint.textContent = t("hintTap");
+    } else {
+      var tp = TOPICS[topic];
+      bubble.innerHTML = tp.bubble(res);
+      answer.innerHTML = tp.card(res, mc, mood, params);
+      hint.textContent = (topic + 1) + " / " + TOPICS.length + " · " + t(tp.label) + " · " + t("hintMore");
+    }
+    answer.classList.remove("in"); void answer.offsetWidth; answer.classList.add("in");
+
+    renderWorth(mc, mood);
+    renderProgress();
+  }
+
+  function renderWorth(mc, mood) {
+    var word = (mood === "great" || mood === "good") ? "yes" : mood === "ok" ? "mid" : "no";
+    var wordKey = word === "yes" ? "w_yes" : word === "mid" ? "w_mid" : "w_no";
+    var v = $("worthV");
+    v.textContent = t(wordKey);
+    v.className = "worth-v " + word;
+    $("needle").style.left = (clamp(mc.pPos, 0.01, 0.99) * 100) + "%";
+    $("worthMeta").innerHTML = t("worthP") + ": <b>" + fmtNum(mc.pPos * 100, 0) + " %</b>";
+  }
+
+  function renderProgress() {
+    var prog = $("progress");
+    if (topic < 0) { prog.innerHTML = ""; return; }
+    var dots = "";
+    for (var i = 0; i < TOPICS.length; i++) {
+      dots += '<button class="pdot' + (i === topic ? " active" : "") + '" data-i="' + i + '" aria-label="' + t(TOPICS[i].label) + '"></button>';
+    }
+    prog.innerHTML = dots;
+  }
+
+  /* ============================================================
+     Interaktion
+     ============================================================ */
+  $("companion").addEventListener("click", function () {
+    topic = topic < 0 ? 0 : (topic + 1) % TOPICS.length;
+    render();
+  });
+  $("progress").addEventListener("click", function (e) {
+    var d = e.target.closest(".pdot"); if (!d) return;
+    topic = parseInt(d.getAttribute("data-i"), 10);
+    render();
+  });
+
+  var debug = $("debug"), backdrop = $("backdrop"), toggle = $("debugToggle");
+  function openDebug() { debug.hidden = false; backdrop.hidden = false; toggle.setAttribute("aria-expanded", "true"); }
+  function closeDebug() { debug.hidden = true; backdrop.hidden = true; toggle.setAttribute("aria-expanded", "false"); }
+  toggle.addEventListener("click", function () { debug.hidden ? openDebug() : closeDebug(); });
+  $("debugClose").addEventListener("click", closeDebug);
+  backdrop.addEventListener("click", closeDebug);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !debug.hidden) closeDebug(); });
+
+  /* ============================================================
+     Steuerung (Debug)
+     ============================================================ */
+  var sBase = $("s-baseline");
+  var _scheduled = false;
+  function schedule() { if (_scheduled) return; _scheduled = true; setTimeout(function () { _scheduled = false; persist(); render(); }, 30); }
+
+  function bindRange(id, getLabel, set) {
+    var el = $(id);
+    el.addEventListener("input", function () { set(parseFloat(el.value)); el.previousElementSibling.querySelector(".val").textContent = getLabel(); schedule(); });
+  }
+
+  sBase.addEventListener("input", function () {
+    params.baselineMWh = Math.round(Math.pow(10, parseFloat(sBase.value)));
+    $("v-baseline").textContent = fmtNum(params.baselineMWh, 0) + " " + t("u_mwhYr");
+    schedule();
+  });
+  bindRange("s-savings", function () { return fmtPct(params.savingsPct); }, function (v) { params.savingsPct = v; });
+  bindRange("s-sensors", function () { return fmtNum(params.numSensors, 0); }, function (v) { params.numSensors = Math.round(v); });
+  bindRange("s-data", function () { return fmtNum(params.dataGBday, 0) + " " + t("u_gbDay"); }, function (v) { params.dataGBday = v; });
+  bindRange("s-train", function () { return fmtNum(params.trainingsPerYear, 0) + " " + t("u_timesYr"); }, function (v) { params.trainingsPerYear = Math.round(v); });
+  bindRange("s-infer", function () { return fmtNum(params.inferenceW, 0) + " W"; }, function (v) { params.inferenceW = v; });
+
+  function fillSelects() {
+    fillSelect($("s-grid"), GRID, params.gridEF);
+    fillSelect($("s-dc"), DC, params.dcEF);
+  }
+  function fillSelect(el, opts, selected) {
+    el.innerHTML = opts.map(function (o) { return '<option value="' + o.v + '">' + t(o.k) + '</option>'; }).join("");
+    el.value = String(selected);
+  }
+  $("s-grid").addEventListener("change", function () { params.gridEF = parseFloat(this.value); schedule(); });
+  $("s-dc").addEventListener("change", function () { params.dcEF = parseFloat(this.value); schedule(); });
+
+  function fillPresets() {
+    var presetWrap = $("presets");
+    presetWrap.innerHTML = Object.keys(PRESETS).map(function (k) { return '<button class="preset" data-k="' + k + '">' + t(PRESETS[k].k) + '</button>'; }).join("");
+  }
+  $("presets").addEventListener("click", function (e) {
+    var b = e.target.closest(".preset"); if (!b) return;
+    params = Object.assign({}, PRESETS[b.getAttribute("data-k")]);
+    syncControls(); schedule();
+  });
+
+  function syncControls() {
+    sBase.value = Math.log10(params.baselineMWh);
+    $("s-savings").value = params.savingsPct;
+    $("s-sensors").value = params.numSensors;
+    $("s-data").value = params.dataGBday;
+    $("s-train").value = params.trainingsPerYear;
+    $("s-infer").value = params.inferenceW;
+    fillSelects();
+    updateLabels();
+  }
+  function updateLabels() {
+    $("v-baseline").textContent = fmtNum(params.baselineMWh, 0) + " " + t("u_mwhYr");
+    $("v-savings").textContent = fmtPct(params.savingsPct);
+    $("v-sensors").textContent = fmtNum(params.numSensors, 0);
+    $("v-data").textContent = fmtNum(params.dataGBday, 0) + " " + t("u_gbDay");
+    $("v-train").textContent = fmtNum(params.trainingsPerYear, 0) + " " + t("u_timesYr");
+    $("v-infer").textContent = fmtNum(params.inferenceW, 0) + " W";
+  }
+
+  function persist() { try { localStorage.setItem("cc-params", JSON.stringify(params)); } catch (e) {} }
+
+  /* ============================================================
+     Sprache
+     ============================================================ */
+  function buildLangSelect() {
+    var sel = $("langSel");
+    sel.innerHTML = LANGS.map(function (l) { return '<option value="' + l.code + '">' + l.name + '</option>'; }).join("");
+  }
+  function applyStatic() {
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) nodes[i].textContent = t(nodes[i].getAttribute("data-i18n"));
+    $("worthQ").textContent = t("worthQ");
+    $("wNo").textContent = t("w_no");
+    $("wMid").textContent = t("w_mid");
+    $("wYes").textContent = t("w_yes");
+    $("progress").setAttribute("aria-label", t("topicsLabel"));
+    $("companion").setAttribute("aria-label", t("companionAria"));
+    $("debugClose").setAttribute("aria-label", t("debugCloseAria"));
+  }
+  function setLang(code) {
+    LANG = code;
+    document.documentElement.lang = code;
+    applyStatic();
+    fillSelects();
+    fillPresets();
+    updateLabels();
+    render();
+    try { localStorage.setItem("cc-lang", code); } catch (e) {}
+  }
+  $("langSel").addEventListener("change", function () { setLang(this.value); });
+
+  /* ============================================================
+     Init
+     ============================================================ */
+  buildLangSelect();
+  $("langSel").value = LANG;
+  document.documentElement.lang = LANG;
+  applyStatic();
+  fillSelects();
+  fillPresets();
+  syncControls();
+  render();
+})();

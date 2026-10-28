@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Carbon Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700;800;900&family=Chivo+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">Carbon Companion</span>
+      <span class="brand-sub" data-i18n="brandSub">Netto-Carbon-Balance · BIP 2026 · E2</span>
+    </div>
+    <div class="topbar-right">
+      <select class="lang-select" id="langSel" aria-label="Language / Sprache"></select>
+      <button class="debug-toggle" id="debugToggle" aria-controls="debug" aria-expanded="false">
+        <span aria-hidden="true">⚙</span> Debug
+      </button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <div class="companion-col">
+      <div class="bubble" id="bubble"></div>
+
+      <button class="companion" id="companion" aria-label="Companion antippen">
+        <svg class="avatar" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <g id="av-sprout">
+            <path d="M60 22 Q60 15 60 11" stroke="#0ca30c" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="69" cy="8" rx="7" ry="4" fill="#0ca30c" transform="rotate(26 69 8)"/>
+            <ellipse cx="51" cy="8" rx="7" ry="4" fill="#0ca30c" transform="rotate(-26 51 8)"/>
+          </g>
+          <circle id="av-body" cx="60" cy="60" r="42" fill="var(--surface-2)" stroke="#0ca30c" stroke-width="3"/>
+          <circle id="av-tint" cx="60" cy="60" r="42" fill="#0ca30c" opacity="0.13"/>
+          <g id="av-brows" opacity="0">
+            <line x1="38" y1="44" x2="54" y2="49" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="82" y1="44" x2="66" y2="49" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g id="av-eyes">
+            <circle id="av-eyeL" cx="46" cy="56" r="4" fill="var(--fg)"/>
+            <circle id="av-eyeR" cx="74" cy="56" r="4" fill="var(--fg)"/>
+          </g>
+          <g id="av-happy-eyes" opacity="0" fill="none" stroke="var(--fg)" stroke-width="3" stroke-linecap="round">
+            <path id="av-happyL" d="M39 54 Q46 47 53 54"/>
+            <path id="av-happyR" d="M67 54 Q74 47 81 54"/>
+          </g>
+          <path id="av-mouth" d="M50 68 Q60 76 70 68" fill="none" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"/>
+          <g id="av-cheeks" opacity="0">
+            <circle cx="37" cy="64" r="5" fill="#0ca30c" opacity="0.3"/>
+            <circle cx="83" cy="64" r="5" fill="#0ca30c" opacity="0.3"/>
+          </g>
+        </svg>
+      </button>
+
+      <p class="hint" id="hint" data-i18n="hintTap">antippen</p>
+    </div>
+
+    <div class="content-col">
+      <section class="worth" aria-live="polite">
+        <div class="worth-head">
+          <span class="worth-q" id="worthQ">Lohnt sich die AI?</span>
+          <span class="worth-v yes" id="worthV">ja</span>
+        </div>
+        <div class="gauge" role="img" aria-label="Lohnt-sich-Anzeige">
+          <div class="gauge-track">
+            <div class="gauge-zone z-red"></div>
+            <div class="gauge-zone z-amber"></div>
+            <div class="gauge-zone z-green"></div>
+          </div>
+          <div class="gauge-needle" id="needle"></div>
+        </div>
+        <div class="gauge-labels">
+          <span id="wNo">nein</span>
+          <span id="wMid">knapp</span>
+          <span id="wYes">ja</span>
+        </div>
+        <div class="worth-meta" id="worthMeta"></div>
+      </section>
+
+      <section class="answer" id="answer" aria-live="polite"></section>
+
+      <nav class="progress" id="progress" aria-label="Themen"></nav>
+    </div>
+  </main>
+
+  <aside class="debug" id="debug" hidden aria-label="Debug-Menü Parameter">
+    <div class="debug-head">
+      <span class="eyebrow" data-i18n="grpTitle">Parameter</span>
+      <button class="icon-btn" id="debugClose" aria-label="Schließen">✕</button>
+    </div>
+
+    <div class="debug-body">
+      <div class="presets" id="presets" role="group" aria-label="Szenarien"></div>
+
+      <div class="grp-label" data-i18n="grpSave">Einsparung</div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_baseline">Gesteuerte Energie</span><span class="val" id="v-baseline"></span></div>
+        <input type="range" id="s-baseline" min="1.7" max="4.48" step="0.01" aria-label="Gesteuerte Energie in MWh pro Jahr">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_savings">Einsparrate durch AI</span><span class="val" id="v-savings"></span></div>
+        <input type="range" id="s-savings" min="0" max="30" step="0.5" aria-label="Einsparrate in Prozent">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_grid">Strommix (gesparte Energie)</span></div>
+        <select id="s-grid" aria-label="Strommix der gesparten Energie"></select>
+      </div>
+
+      <div class="grp-label" data-i18n="grpCost">AI-Fußabdruck</div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_sensors">Sensoren</span><span class="val" id="v-sensors"></span></div>
+        <input type="range" id="s-sensors" min="0" max="5000" step="10" aria-label="Anzahl Sensoren">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_data">Datentransfer</span><span class="val" id="v-data"></span></div>
+        <input type="range" id="s-data" min="0" max="2000" step="10" aria-label="Datentransfer in Gigabyte pro Tag">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_train">Trainingsläufe / Jahr</span><span class="val" id="v-train"></span></div>
+        <input type="range" id="s-train" min="0" max="52" step="1" aria-label="Trainingsläufe pro Jahr">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_infer">Inferenz (mittlere Last)</span><span class="val" id="v-infer"></span></div>
+        <input type="range" id="s-infer" min="0" max="1000" step="10" aria-label="Inferenz mittlere Last in Watt">
+      </div>
+      <div class="field">
+        <div class="lbl"><span data-i18n="l_dc">Rechenzentrum-Strom</span></div>
+        <select id="s-dc" aria-label="Strommix des Rechenzentrums"></select>
+      </div>
+
+      <p class="note" data-i18n="note">Illustratives Rechenbeispiel — keine realen Messwerte.</p>
+    </div>
+  </aside>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "carbon-companion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimalistische interaktive Netto-Carbon-Balance mit Companion-Avatar (BIP 2026 · E2 Energy)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

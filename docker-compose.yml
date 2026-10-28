@@ -1,0 +1,8 @@
+services:
+  carbon-companion:
+    build: .
+    image: carbon-companion:latest
+    container_name: carbon-companion
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
