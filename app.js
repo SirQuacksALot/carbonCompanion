@@ -949,7 +949,7 @@
 
     renderWorth(mc, mood);
     renderProgress();
-    $("calcBtn").hidden = (topic < 0);
+    $("calcBtn").hidden = (topic < 0 || topic === 0);
   }
 
   function renderWorth(mc, mood) {
