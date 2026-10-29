@@ -68,7 +68,20 @@
       impact_eyebrow: "Impact",
       impact_line: "A system that turns AI saving energy into a verifiable net carbon balance.",
       impact_next: "Next step: a pilot with real metering on one building or grid.",
-      b_impact: "Why fund it? Because carbon accounting only works if the net balance is measurable."
+      b_impact: "Why fund it? Because carbon accounting only works if the net balance is measurable.",
+      glossTitle: "Glossary",
+      gl_net: "Net carbon balance", gl_net_d: "Avoided CO₂e minus the AI's own footprint — the result of the balance.",
+      gl_co2: "CO₂e", gl_co2_d: "CO₂ equivalent: bundles different greenhouse gases into one unit.",
+      gl_ef: "Emission factor", gl_ef_d: "Grams of CO₂e per kWh — converts energy use into emissions.",
+      gl_save: "Savings rate", gl_save_d: "Share of energy the AI saves through optimisation.",
+      gl_be: "Break-even", gl_be_d: "Savings rate from which the net balance turns positive.",
+      gl_train: "Training", gl_train_d: "Model retraining — energy of the GPU/server runs.",
+      gl_infer: "Inference", gl_infer_d: "Running the model continuously (always-on).",
+      gl_data: "Data transfer", gl_data_d: "Energy to transmit sensor data over the network.",
+      gl_hw: "Embodied hardware", gl_hw_d: "CO₂ from manufacturing sensors and gateways, spread over their lifetime.",
+      gl_mc: "Monte-Carlo simulation", gl_mc_d: "Many random runs (2,000) to estimate the balance's uncertainty.",
+      gl_ci: "90 % interval", gl_ci_d: "Range the result lies in with 90 % probability.",
+      gl_p: "P(AI is worth it)", gl_p_d: "Probability that the net balance is greater than zero."
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -112,7 +125,20 @@
       impact_eyebrow: "Impact",
       impact_line: "Ein System, das AI-Energieeinsparungen in eine nachprüfbare Netto-CO₂-Bilanz überführt.",
       impact_next: "Nächster Schritt: ein Pilot mit echter Messtechnik an einem Gebäude oder Netz.",
-      b_impact: "Warum finanzieren? Weil CO₂-Bilanzierung nur funktioniert, wenn die Nettobilanz messbar ist."
+      b_impact: "Warum finanzieren? Weil CO₂-Bilanzierung nur funktioniert, wenn die Nettobilanz messbar ist.",
+      glossTitle: "Glossar",
+      gl_net: "Netto-Carbon-Balance", gl_net_d: "Vermiedene CO₂e minus der eigene AI-Fußabdruck — das Ergebnis der Bilanz.",
+      gl_co2: "CO₂e", gl_co2_d: "CO₂-Äquivalent: fasst verschiedene Treibhausgase in einer Einheit zusammen.",
+      gl_ef: "Emissionsfaktor", gl_ef_d: "Gramm CO₂e pro kWh — wandelt Energieverbrauch in Emissionen um.",
+      gl_save: "Einsparrate", gl_save_d: "Anteil der Energie, den die AI durch Optimierung einspart.",
+      gl_be: "Break-even", gl_be_d: "Einsparrate, ab der die Nettobilanz positiv wird.",
+      gl_train: "Training", gl_train_d: "Modell-Retraining — Energie der GPU-/Serverläufe.",
+      gl_infer: "Inferenz", gl_infer_d: "Laufende Modellausführung im Dauerbetrieb.",
+      gl_data: "Datentransfer", gl_data_d: "Energie für die Übertragung der Sensordaten über das Netz.",
+      gl_hw: "Verkörperte Hardware", gl_hw_d: "CO₂ aus der Herstellung von Sensoren und Gateways, über die Lebensdauer verteilt.",
+      gl_mc: "Monte-Carlo-Simulation", gl_mc_d: "Viele Zufallsläufe (2.000), um die Unsicherheit der Bilanz zu schätzen.",
+      gl_ci: "90 %-Intervall", gl_ci_d: "Bereich, in dem das Ergebnis mit 90 % Wahrscheinlichkeit liegt.",
+      gl_p: "P(AI lohnt sich)", gl_p_d: "Wahrscheinlichkeit, dass die Nettobilanz größer als null ist."
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -156,7 +182,20 @@
       impact_eyebrow: "Wpływ",
       impact_line: "System, który zamienia oszczędzanie energii przez AI w weryfikowalny bilans węglowy netto.",
       impact_next: "Następny krok: pilotaż z prawdziwym pomiarem na budynku lub sieci.",
-      b_impact: "Dlaczego finansować? Bo bilans węglowy działa tylko wtedy, gdy bilans netto jest mierzalny."
+      b_impact: "Dlaczego finansować? Bo bilans węglowy działa tylko wtedy, gdy bilans netto jest mierzalny.",
+      glossTitle: "Słownik",
+      gl_net: "Bilans węglowy netto", gl_net_d: "Uniknięte CO₂e minus własny ślad AI — wynik bilansu.",
+      gl_co2: "CO₂e", gl_co2_d: "Ekwiwalent CO₂: łączy różne gazy cieplarniane w jedną jednostkę.",
+      gl_ef: "Współczynnik emisji", gl_ef_d: "Gramy CO₂e na kWh — zamienia zużycie energii na emisje.",
+      gl_save: "Stopa oszczędności", gl_save_d: "Część energii oszczędzana przez AI dzięki optymalizacji.",
+      gl_be: "Próg opłacalności", gl_be_d: "Stopa oszczędności, od której bilans netto jest dodatni.",
+      gl_train: "Trenowanie", gl_train_d: "Przetrenowanie modelu — energia GPU/serwera.",
+      gl_infer: "Inferencja", gl_infer_d: "Ciągłe wykonywanie modelu (praca ciągła).",
+      gl_data: "Transfer danych", gl_data_d: "Energia na przesył danych z czujników przez sieć.",
+      gl_hw: "Sprzęt wbudowany", gl_hw_d: "CO₂ z produkcji czujników i bramek, rozłożone na okres życia.",
+      gl_mc: "Symulacja Monte Carlo", gl_mc_d: "Wiele losowych przebiegów (2 000) do oszacowania niepewności bilansu.",
+      gl_ci: "Przedział 90 %", gl_ci_d: "Zakres, w którym wynik leży z prawdopodobieństwem 90 %.",
+      gl_p: "P(AI się opłaca)", gl_p_d: "Prawdopodobieństwo, że bilans netto jest większy od zera."
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -200,7 +239,20 @@
       impact_eyebrow: "Impatto",
       impact_line: "Un sistema che trasforma il risparmio energetico dell'AI in un bilancio carbonio netto verificabile.",
       impact_next: "Prossimo passo: un pilota con metering reale su un edificio o una rete.",
-      b_impact: "Perché finanziarlo? Perché la contabilità del carbonio funziona solo se il saldo netto è misurabile."
+      b_impact: "Perché finanziarlo? Perché la contabilità del carbonio funziona solo se il saldo netto è misurabile.",
+      glossTitle: "Glossario",
+      gl_net: "Bilancio carbonio netto", gl_net_d: "CO₂e evitata meno l'impronta dell'AI — il risultato del bilancio.",
+      gl_co2: "CO₂e", gl_co2_d: "Equivalente CO₂: riunisce diversi gas serra in un'unica unità.",
+      gl_ef: "Fattore di emissione", gl_ef_d: "Grammi di CO₂e per kWh — converte l'energia in emissioni.",
+      gl_save: "Tasso di risparmio", gl_save_d: "Quota di energia risparmiata dall'AI grazie all'ottimizzazione.",
+      gl_be: "Pareggio", gl_be_d: "Tasso di risparmio dal quale il saldo netto diventa positivo.",
+      gl_train: "Addestramento", gl_train_d: "Riaddestramento del modello — energia GPU/server.",
+      gl_infer: "Inferenza", gl_infer_d: "Esecuzione continua del modello (sempre attiva).",
+      gl_data: "Trasferimento dati", gl_data_d: "Energia per trasmettere i dati dei sensori sulla rete.",
+      gl_hw: "Hardware incorporato", gl_hw_d: "CO₂ dalla produzione di sensori e gateway, distribuito sulla vita utile.",
+      gl_mc: "Simulazione Monte Carlo", gl_mc_d: "Molte esecuzioni casuali (2.000) per stimare l'incertezza del bilancio.",
+      gl_ci: "Intervallo 90 %", gl_ci_d: "Intervallo in cui il risultato cade con probabilità del 90 %.",
+      gl_p: "P(l'AI conviene)", gl_p_d: "Probabilità che il saldo netto sia maggiore di zero."
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -244,7 +296,20 @@
       impact_eyebrow: "Impacto",
       impact_line: "Un sistema que convierte el ahorro energético de la IA en un balance neto de carbono verificable.",
       impact_next: "Siguiente paso: un piloto con medición real en un edificio o red.",
-      b_impact: "¿Por qué financiarlo? Porque la contabilidad de carbono solo funciona si el balance neto es medible."
+      b_impact: "¿Por qué financiarlo? Porque la contabilidad de carbono solo funciona si el balance neto es medible.",
+      glossTitle: "Glosario",
+      gl_net: "Balance neto de carbono", gl_net_d: "CO₂e evitado menos la propia huella de la IA — el resultado del balance.",
+      gl_co2: "CO₂e", gl_co2_d: "Equivalente de CO₂: agrupa distintos gases de efecto invernadero en una unidad.",
+      gl_ef: "Factor de emisión", gl_ef_d: "Gramos de CO₂e por kWh — convierte el consumo de energía en emisiones.",
+      gl_save: "Tasa de ahorro", gl_save_d: "Parte de la energía que ahorra la IA mediante la optimización.",
+      gl_be: "Punto de equilibrio", gl_be_d: "Tasa de ahorro a partir de la cual el balance neto es positivo.",
+      gl_train: "Entrenamiento", gl_train_d: "Reentrenamiento del modelo — energía de GPU/servidor.",
+      gl_infer: "Inferencia", gl_infer_d: "Ejecución continua del modelo (siempre activa).",
+      gl_data: "Transferencia de datos", gl_data_d: "Energía para transmitir los datos de los sensores por la red.",
+      gl_hw: "Hardware incorporado", gl_hw_d: "CO₂ de la fabricación de sensores y pasarelas, repartido en su vida útil.",
+      gl_mc: "Simulación de Monte Carlo", gl_mc_d: "Muchas ejecuciones aleatorias (2.000) para estimar la incertidumbre del balance.",
+      gl_ci: "Intervalo del 90 %", gl_ci_d: "Rango en el que cae el resultado con un 90 % de probabilidad.",
+      gl_p: "P(la IA merece la pena)", gl_p_d: "Probabilidad de que el balance neto sea mayor que cero."
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -288,7 +353,20 @@
       impact_eyebrow: "Impact",
       impact_line: "Un système qui transforme les économies d'énergie de l'IA en un bilan carbone net vérifiable.",
       impact_next: "Prochaine étape : un pilote avec un comptage réel sur un bâtiment ou un réseau.",
-      b_impact: "Pourquoi financer ? Parce que la comptabilité carbone ne fonctionne que si le bilan net est mesurable."
+      b_impact: "Pourquoi financer ? Parce que la comptabilité carbone ne fonctionne que si le bilan net est mesurable.",
+      glossTitle: "Glossaire",
+      gl_net: "Bilan carbone net", gl_net_d: "CO₂e évité moins l'empreinte de l'IA — le résultat du bilan.",
+      gl_co2: "CO₂e", gl_co2_d: "Équivalent CO₂ : regroupe différents gaz à effet de serre en une unité.",
+      gl_ef: "Facteur d'émission", gl_ef_d: "Grammes de CO₂e par kWh — convertit l'énergie en émissions.",
+      gl_save: "Taux d'économie", gl_save_d: "Part d'énergie économisée par l'IA grâce à l'optimisation.",
+      gl_be: "Seuil de rentabilité", gl_be_d: "Taux d'économie à partir duquel le bilan net devient positif.",
+      gl_train: "Entraînement", gl_train_d: "Réentraînement du modèle — énergie GPU/serveur.",
+      gl_infer: "Inférence", gl_infer_d: "Exécution continue du modèle (toujours active).",
+      gl_data: "Transfert de données", gl_data_d: "Énergie pour transmettre les données des capteurs sur le réseau.",
+      gl_hw: "Matériel incorporé", gl_hw_d: "CO₂ de la fabrication des capteurs et passerelles, réparti sur leur durée de vie.",
+      gl_mc: "Simulation de Monte-Carlo", gl_mc_d: "De nombreuses exécutions aléatoires (2 000) pour estimer l'incertitude du bilan.",
+      gl_ci: "Intervalle à 90 %", gl_ci_d: "Plage dans laquelle le résultat tombe avec une probabilité de 90 %.",
+      gl_p: "P(l'IA est rentable)", gl_p_d: "Probabilité que le bilan net soit supérieur à zéro."
     }
   };
 
@@ -545,6 +623,32 @@
   }
 
   /* ============================================================
+     Glossar
+     ============================================================ */
+  var GLOSSARY = [
+    { t: "gl_net", d: "gl_net_d" },
+    { t: "gl_co2", d: "gl_co2_d" },
+    { t: "gl_ef", d: "gl_ef_d" },
+    { t: "gl_save", d: "gl_save_d" },
+    { t: "gl_be", d: "gl_be_d" },
+    { t: "gl_train", d: "gl_train_d" },
+    { t: "gl_infer", d: "gl_infer_d" },
+    { t: "gl_data", d: "gl_data_d" },
+    { t: "gl_hw", d: "gl_hw_d" },
+    { t: "gl_mc", d: "gl_mc_d" },
+    { t: "gl_ci", d: "gl_ci_d" },
+    { t: "gl_p", d: "gl_p_d" }
+  ];
+
+  function renderGlossary() {
+    var el = $("glossary");
+    if (!el) return;
+    el.innerHTML = GLOSSARY.map(function (g) {
+      return '<div class="g-item"><dt>' + t(g.t) + '</dt><dd>' + t(g.d) + '</dd></div>';
+    }).join("");
+  }
+
+  /* ============================================================
      Render
      ============================================================ */
   function render() {
@@ -703,6 +807,7 @@
     fillPresets();
     updateLabels();
     render();
+    renderGlossary();
     try { localStorage.setItem("cc-lang", code); } catch (e) {}
   }
   $("langSel").addEventListener("change", function () { setLang(this.value); });
@@ -764,4 +869,5 @@
   fillPresets();
   syncControls();
   render();
+  renderGlossary();
 })();
