@@ -89,7 +89,7 @@ body{
 /* ---------- stage (Companion links, Grafik rechts) ---------- */
 .stage{
   flex:1; display:grid; grid-template-columns:minmax(260px, auto) minmax(0, 1fr);
-  column-gap:clamp(32px, 6vw, 72px); row-gap:30px; align-items:center;
+  column-gap:clamp(32px, 6vw, 72px); row-gap:30px; align-items:center; align-content:center;
   width:100%; max-width:1040px; margin:0 auto;
   padding:28px max(20px, env(safe-area-inset-right,0px)) 44px max(20px, env(safe-area-inset-left,0px));
 }
