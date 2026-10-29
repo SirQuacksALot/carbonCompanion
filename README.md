@@ -1,5 +1,3 @@
-# Carbon Companion
-
 <img src="avatar.svg" width="150" alt="Carbon Companion avatar" align="left" />
 
 ### Hi! I'm your Carbon Companion!
