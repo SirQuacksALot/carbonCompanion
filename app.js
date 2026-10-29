@@ -41,7 +41,7 @@
       introPrompt: "Tap the companion to start.",
       v_great: "Strongly worth it", v_good: "Worth it", v_ok: "Uncertain", v_bad: "Not worth it", v_awful: "Clearly negative",
       worthQ: "Is the AI worth it?", worthP: "P(worth it)", w_yes: "yes", w_mid: "marginal", w_no: "no",
-      topic_result: "Result", topic_footprint: "Footprint", topic_uncertainty: "Uncertainty", topic_breakeven: "Break-even", topic_boundary: "System boundary",
+      topic_result: "The problem", topic_footprint: "Footprint", topic_uncertainty: "Validation & uncertainty", topic_breakeven: "When it's not worth it", topic_boundary: "What we build", topic_impact: "Impact",
       b_result: "Net {net} CO₂e per year — after subtracting the AI's own footprint.",
       b_footprint: "The footprint has four sources — here's which one dominates.",
       b_uncertainty: "Every factor has a spread — I run 2,000 simulations.",
@@ -60,7 +60,14 @@
       be_small: "The site is very small ({m} MWh/yr).",
       sy_eyebrow: "What is accounted for?", sy_sensors: "Sensors & gateways (embodied)", sy_data: "Data transfer (network / IoT)",
       sy_train: "Training (GPU power)", sy_infer: "Inference (always-on)", sy_meta: "Boundary = entire AI system incl. embodied hardware.",
-      tag_meas: "measured", tag_est: "factor"
+      tag_meas: "measured", tag_est: "factor",
+      r_source: "Based on lecture standard values · example assumptions",
+      what_line: "A measurement & accounting system for the net carbon balance of AI energy management.",
+      u_risk: "AI Act: likely minimal risk — documentation and transparency.",
+      impact_eyebrow: "Impact",
+      impact_line: "A system that turns AI saving energy into a verifiable net carbon balance.",
+      impact_next: "Next step: a pilot with real metering on one building or grid.",
+      b_impact: "Why fund it? Because carbon accounting only works if the net balance is measurable."
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -77,7 +84,7 @@
       introPrompt: "Tipp den Companion an, um zu starten.",
       v_great: "Lohnt sich stark", v_good: "Lohnt sich", v_ok: "Knapp / unsicher", v_bad: "Lohnt sich nicht", v_awful: "Deutlich negativ",
       worthQ: "Lohnt sich die AI?", worthP: "P(lohnt sich)", w_yes: "ja", w_mid: "knapp", w_no: "nein",
-      topic_result: "Ergebnis", topic_footprint: "Fußabdruck", topic_uncertainty: "Unsicherheit", topic_breakeven: "Break-even", topic_boundary: "Systemgrenze",
+      topic_result: "Das Problem", topic_footprint: "Fußabdruck", topic_uncertainty: "Validierung & Unsicherheit", topic_breakeven: "Wann es sich nicht lohnt", topic_boundary: "Was wir bauen", topic_impact: "Impact",
       b_result: "Netto {net} CO₂e im Jahr — nach Abzug des eigenen AI-Fußabdrucks.",
       b_footprint: "Der Fußabdruck hat vier Quellen — hier siehst du, welche dominiert.",
       b_uncertainty: "Jeder Faktor hat eine Streuung — ich rechne 2.000 Simulationen.",
@@ -96,7 +103,14 @@
       be_small: "Das Objekt ist sehr klein ({m} MWh/Jahr).",
       sy_eyebrow: "Was wird bilanziert?", sy_sensors: "Sensoren & Gateways (verkörpert)", sy_data: "Datentransfer (Netz / IoT)",
       sy_train: "Training (GPU-Strom)", sy_infer: "Inferenz (Dauerbetrieb)", sy_meta: "Bilanzgrenze = gesamtes AI-System inkl. verkörperter Hardware.",
-      tag_meas: "gemessen", tag_est: "Faktor"
+      tag_meas: "gemessen", tag_est: "Faktor",
+      r_source: "Basierend auf Standardwerten der Vorlesungen · Beispielannahmen",
+      what_line: "Ein Mess- und Bilanzierungssystem für die Netto-CO₂-Bilanz des AI-Energiemanagements.",
+      u_risk: "AI Act: voraussichtlich minimales Risiko — Dokumentation und Transparenz.",
+      impact_eyebrow: "Impact",
+      impact_line: "Ein System, das AI-Energieeinsparungen in eine nachprüfbare Netto-CO₂-Bilanz überführt.",
+      impact_next: "Nächster Schritt: ein Pilot mit echter Messtechnik an einem Gebäude oder Netz.",
+      b_impact: "Warum finanzieren? Weil CO₂-Bilanzierung nur funktioniert, wenn die Nettobilanz messbar ist."
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -113,7 +127,7 @@
       introPrompt: "Dotknij companiona, aby zacząć.",
       v_great: "Bardzo się opłaca", v_good: "Opłaca się", v_ok: "Niepewne", v_bad: "Nie opłaca się", v_awful: "Wyraźnie ujemny",
       worthQ: "Czy AI się opłaca?", worthP: "P(opłacalne)", w_yes: "tak", w_mid: "granicznie", w_no: "nie",
-      topic_result: "Wynik", topic_footprint: "Ślad węglowy", topic_uncertainty: "Niepewność", topic_breakeven: "Próg opłacalności", topic_boundary: "Granica systemu",
+      topic_result: "Problem", topic_footprint: "Ślad węglowy", topic_uncertainty: "Walidacja i niepewność", topic_breakeven: "Kiedy się nie opłaca", topic_boundary: "Co budujemy", topic_impact: "Wpływ",
       b_result: "Netto {net} CO₂e rocznie — po odjęciu własnego śladu AI.",
       b_footprint: "Ślad ma cztery źródła — zobacz, które dominuje.",
       b_uncertainty: "Każdy czynnik ma rozrzut — robię 2 000 symulacji.",
@@ -132,7 +146,14 @@
       be_small: "Obiekt jest bardzo mały ({m} MWh/rok).",
       sy_eyebrow: "Co jest bilansowane?", sy_sensors: "Czujniki i bramki (wbudowane)", sy_data: "Transfer danych (sieć / IoT)",
       sy_train: "Trenowanie (moc GPU)", sy_infer: "Inferencja (praca ciągła)", sy_meta: "Granica = cały system AI, włącznie z wbudowanym sprzętem.",
-      tag_meas: "mierzone", tag_est: "czynnik"
+      tag_meas: "mierzone", tag_est: "czynnik",
+      r_source: "Na podstawie standardowych wartości z wykładów · przykładowe założenia",
+      what_line: "System pomiarowo-rozliczeniowy bilansu węglowego netto zarządzania energią przez AI.",
+      u_risk: "Akt o AI: prawdopodobnie minimalne ryzyko — dokumentacja i przejrzystość.",
+      impact_eyebrow: "Wpływ",
+      impact_line: "System, który zamienia oszczędzanie energii przez AI w weryfikowalny bilans węglowy netto.",
+      impact_next: "Następny krok: pilotaż z prawdziwym pomiarem na budynku lub sieci.",
+      b_impact: "Dlaczego finansować? Bo bilans węglowy działa tylko wtedy, gdy bilans netto jest mierzalny."
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -149,7 +170,7 @@
       introPrompt: "Tocca il companion per iniziare.",
       v_great: "Conviene molto", v_good: "Conviene", v_ok: "Incertamente", v_bad: "Non conviene", v_awful: "Decisamente negativo",
       worthQ: "L'AI conviene?", worthP: "P(conviene)", w_yes: "sì", w_mid: "al limite", w_no: "no",
-      topic_result: "Risultato", topic_footprint: "Impronta", topic_uncertainty: "Incertezza", topic_breakeven: "Pareggio", topic_boundary: "Confine del sistema",
+      topic_result: "Il problema", topic_footprint: "Impronta", topic_uncertainty: "Validazione e incertezza", topic_breakeven: "Quando non conviene", topic_boundary: "Cosa costruiamo", topic_impact: "Impatto",
       b_result: "Netto {net} CO₂e all'anno — dopo aver sottratto l'impronta dell'AI.",
       b_footprint: "L'impronta ha quattro fonti — ecco quale domina.",
       b_uncertainty: "Ogni fattore ha una dispersione — eseguo 2.000 simulazioni.",
@@ -168,7 +189,14 @@
       be_small: "Il sito è molto piccolo ({m} MWh/anno).",
       sy_eyebrow: "Cosa viene bilanciato?", sy_sensors: "Sensori e gateway (incorporati)", sy_data: "Trasferimento dati (rete / IoT)",
       sy_train: "Addestramento (potenza GPU)", sy_infer: "Inferenza (sempre attiva)", sy_meta: "Confine = intero sistema AI incl. hardware incorporato.",
-      tag_meas: "misurato", tag_est: "fattore"
+      tag_meas: "misurato", tag_est: "fattore",
+      r_source: "Basato su valori standard delle lezioni · assunzioni esemplificative",
+      what_line: "Un sistema di misura e contabilizzazione del bilancio carbonio netto della gestione energetica AI.",
+      u_risk: "AI Act: rischio probabilmente minimo — documentazione e trasparenza.",
+      impact_eyebrow: "Impatto",
+      impact_line: "Un sistema che trasforma il risparmio energetico dell'AI in un bilancio carbonio netto verificabile.",
+      impact_next: "Prossimo passo: un pilota con metering reale su un edificio o una rete.",
+      b_impact: "Perché finanziarlo? Perché la contabilità del carbonio funziona solo se il saldo netto è misurabile."
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -185,7 +213,7 @@
       introPrompt: "Toca el companion para empezar.",
       v_great: "Merece mucho la pena", v_good: "Merece la pena", v_ok: "Incierto", v_bad: "No merece la pena", v_awful: "Claramente negativo",
       worthQ: "¿Merece la pena la IA?", worthP: "P(merece la pena)", w_yes: "sí", w_mid: "justo", w_no: "no",
-      topic_result: "Resultado", topic_footprint: "Huella", topic_uncertainty: "Incertidumbre", topic_breakeven: "Punto de equilibrio", topic_boundary: "Límite del sistema",
+      topic_result: "El problema", topic_footprint: "Huella", topic_uncertainty: "Validación e incertidumbre", topic_breakeven: "Cuándo no merece la pena", topic_boundary: "Qué construimos", topic_impact: "Impacto",
       b_result: "Neto {net} CO₂e al año — tras restar la propia huella de la IA.",
       b_footprint: "La huella tiene cuatro fuentes — mira cuál domina.",
       b_uncertainty: "Cada factor tiene dispersión — ejecuto 2.000 simulaciones.",
@@ -204,7 +232,14 @@
       be_small: "El sitio es muy pequeño ({m} MWh/año).",
       sy_eyebrow: "¿Qué se contabiliza?", sy_sensors: "Sensores y gateways (incorporados)", sy_data: "Transferencia de datos (red / IoT)",
       sy_train: "Entrenamiento (potencia GPU)", sy_infer: "Inferencia (siempre activa)", sy_meta: "Límite = todo el sistema de IA incl. hardware incorporado.",
-      tag_meas: "medido", tag_est: "factor"
+      tag_meas: "medido", tag_est: "factor",
+      r_source: "Basado en valores estándar de las clases · supuestos de ejemplo",
+      what_line: "Un sistema de medición y contabilidad del balance neto de carbono de la gestión energética con IA.",
+      u_risk: "Ley de IA: riesgo probablemente mínimo — documentación y transparencia.",
+      impact_eyebrow: "Impacto",
+      impact_line: "Un sistema que convierte el ahorro energético de la IA en un balance neto de carbono verificable.",
+      impact_next: "Siguiente paso: un piloto con medición real en un edificio o red.",
+      b_impact: "¿Por qué financiarlo? Porque la contabilidad de carbono solo funciona si el balance neto es medible."
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -221,7 +256,7 @@
       introPrompt: "Touche le companion pour commencer.",
       v_great: "Très rentable", v_good: "Rentable", v_ok: "Incertain", v_bad: "Pas rentable", v_awful: "Clairement négatif",
       worthQ: "L'IA est-elle rentable ?", worthP: "P(rentable)", w_yes: "oui", w_mid: "limite", w_no: "non",
-      topic_result: "Résultat", topic_footprint: "Empreinte", topic_uncertainty: "Incertitude", topic_breakeven: "Seuil", topic_boundary: "Frontière du système",
+      topic_result: "Le problème", topic_footprint: "Empreinte", topic_uncertainty: "Validation et incertitude", topic_breakeven: "Quand ce n'est pas rentable", topic_boundary: "Ce que nous construisons", topic_impact: "Impact",
       b_result: "Net {net} CO₂e par an — après avoir soustrait l'empreinte de l'IA.",
       b_footprint: "L'empreinte a quatre sources — voici laquelle domine.",
       b_uncertainty: "Chaque facteur a une dispersion — je lance 2 000 simulations.",
@@ -240,7 +275,14 @@
       be_small: "Le site est très petit ({m} MWh/an).",
       sy_eyebrow: "Qu'est-ce qui est comptabilisé ?", sy_sensors: "Capteurs et passerelles (incorporés)", sy_data: "Transfert de données (réseau / IoT)",
       sy_train: "Entraînement (puissance GPU)", sy_infer: "Inférence (toujours active)", sy_meta: "Frontière = tout le système d'IA, matériel incorporé inclus.",
-      tag_meas: "mesuré", tag_est: "facteur"
+      tag_meas: "mesuré", tag_est: "facteur",
+      r_source: "Basé sur des valeurs standard des cours · hypothèses d'exemple",
+      what_line: "Un système de mesure et de comptabilisation du bilan carbone net de la gestion énergétique par IA.",
+      u_risk: "Règlement IA : risque probablement minimal — documentation et transparence.",
+      impact_eyebrow: "Impact",
+      impact_line: "Un système qui transforme les économies d'énergie de l'IA en un bilan carbone net vérifiable.",
+      impact_next: "Prochaine étape : un pilote avec un comptage réel sur un bâtiment ou un réseau.",
+      b_impact: "Pourquoi financer ? Parce que la comptabilité carbone ne fonctionne que si le bilan net est mesurable."
     }
   };
 
@@ -375,15 +417,31 @@
      ============================================================ */
   var TOPICS = [
     {
+      label: "topic_boundary",
+      bubble: function () { return t("b_boundary"); },
+      card: function () {
+        return '<div class="a-eyebrow">' + t("topic_boundary") + '</div>'
+          + '<div class="a-unit">' + t("what_line") + '</div>'
+          + '<ul class="list">'
+          + '<li><span class="mark off"></span><span>' + t("sy_sensors") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_data") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_train") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
+          + '<li><span class="mark off"></span><span>' + t("sy_infer") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
+          + '</ul>'
+          + '<div class="a-meta">' + t("sy_meta") + '</div>';
+      }
+    },
+    {
       label: "topic_result",
       bubble: function (res) { return t("b_result", { net: fmtT(res.net_t) }); },
       card: function (res, mc, mood) {
         var color = (mood === "great" || mood === "good") ? "var(--good)" : mood === "ok" ? "var(--warn-txt)" : "var(--crit)";
-        return '<div class="a-eyebrow">' + t("r_eyebrow") + '</div>'
+        return '<div class="a-eyebrow">' + t("topic_result") + '</div>'
           + '<div class="a-big" style="color:' + color + '">' + fmtTsign(res.net_t) + '</div>'
           + '<div class="a-unit">' + t("r_unit") + '</div>'
           + '<div class="a-meta">' + t("r_meta", { a: fmtTsign(mc.p5), b: fmtTsign(mc.p95) }) + '</div>'
-          + '<div class="verdict ' + mood + '"><span class="dot"></span>' + t("v_" + mood) + '</div>';
+          + '<div class="verdict ' + mood + '"><span class="dot"></span>' + t("v_" + mood) + '</div>'
+          + '<div class="a-meta">' + t("r_source") + '</div>';
       }
     },
     {
@@ -410,20 +468,21 @@
       bubble: function () { return t("b_uncertainty"); },
       card: function (res, mc) {
         var p = mc.pPos >= 0.995 ? "> 99 %" : fmtNum(mc.pPos * 100, 0) + " %";
-        return '<div class="a-eyebrow">' + t("u_eyebrow") + '</div>'
+        return '<div class="a-eyebrow">' + t("topic_uncertainty") + '</div>'
           + sparkSVG(mc)
           + '<div class="stats">'
           + '<div class="stat"><div class="s-l">' + t("u_median") + '</div><div class="s-v">' + fmtTsign(mc.median) + '</div></div>'
           + '<div class="stat"><div class="s-l">' + t("u_ci") + '</div><div class="s-v">' + fmtTsign(mc.p5) + ' … ' + fmtTsign(mc.p95) + '</div></div>'
           + '<div class="stat"><div class="s-l">' + t("u_p") + '</div><div class="s-v">' + p + '</div></div>'
           + '</div>'
-          + '<div class="a-meta">' + t("u_meta") + '</div>';
+          + '<div class="a-meta">' + t("u_meta") + '</div>'
+          + '<div class="a-meta">' + t("u_risk") + '</div>';
       }
     },
     {
       label: "topic_breakeven",
       bubble: function (res) { return t("b_breakeven", { be: fmtNum(res.bePct, 1) + " %" }); },
-      card: function (res, p) {
+      card: function (res, mc, mood, p) {
         var checks = [
           { on: p.savingsPct < res.bePct, text: t("be_savings", { s: fmtPct(p.savingsPct), be: fmtNum(res.bePct, 1) + " %" }) },
           { on: p.gridEF < 100, text: t("be_green", { g: fmtNum(p.gridEF, 0) }) },
@@ -441,17 +500,13 @@
       }
     },
     {
-      label: "topic_boundary",
-      bubble: function () { return t("b_boundary"); },
-      card: function () {
-        return '<div class="a-eyebrow">' + t("sy_eyebrow") + '</div>'
-          + '<ul class="list">'
-          + '<li><span class="mark off"></span><span>' + t("sy_sensors") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_data") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_train") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_infer") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
-          + '</ul>'
-          + '<div class="a-meta">' + t("sy_meta") + '</div>';
+      label: "topic_impact",
+      bubble: function () { return t("b_impact"); },
+      card: function (res, mc, mood) {
+        return '<div class="a-eyebrow">' + t("impact_eyebrow") + '</div>'
+          + '<div class="a-unit" style="font-size:15px;line-height:1.55">' + t("impact_line") + '</div>'
+          + '<div class="verdict ' + mood + '"><span class="dot"></span>' + t("v_" + mood) + '</div>'
+          + '<div class="a-meta">' + t("impact_next") + '</div>';
       }
     }
   ];
