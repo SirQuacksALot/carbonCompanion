@@ -920,6 +920,7 @@
     if (!el) { endTour(); return; }
     _clearTourTarget();
     el.classList.add("tour-target");
+    try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { el.scrollIntoView(); }
     $("tourTitle").textContent = t(step.t);
     $("tourDesc").textContent = t(step.d);
     $("tourCount").textContent = (i + 1) + " / " + TOUR.length;
@@ -947,6 +948,9 @@
   $("tourSkip").addEventListener("click", endTour);
   $("tourHelp").addEventListener("click", startTour);
   window.addEventListener("resize", function () {
+    if (_tourActive && !$("tourTip").hidden) { var el = document.querySelector(TOUR[_tourIdx].sel); if (el) _positionTourTip(el); }
+  });
+  window.addEventListener("scroll", function () {
     if (_tourActive && !$("tourTip").hidden) { var el = document.querySelector(TOUR[_tourIdx].sel); if (el) _positionTourTip(el); }
   });
 
