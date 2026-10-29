@@ -753,7 +753,6 @@
      Interaktion
      ============================================================ */
   $("companion").addEventListener("click", function () {
-    if (!_introDone) endIntro();
     topic = topic < 0 ? 0 : (topic + 1) % TOPICS.length;
     render();
   });
@@ -845,7 +844,9 @@
   var _tourDone = false;
   try { _tourDone = localStorage.getItem("cc-tour") === "done"; } catch (e) {}
 
-  var _introDone = false;
+  var _introSeen = false;
+  try { _introSeen = localStorage.getItem("cc-intro") === "done"; } catch (e) {}
+
   function enterIntro() {
     var stageEl = document.querySelector(".stage");
     var compCol = document.querySelector(".companion-col");
@@ -855,12 +856,11 @@
     compCol.style.transform = "translateX(" + dx.toFixed(1) + "px)";
   }
   function endIntro() {
-    if (_introDone) return;
-    _introDone = true;
     var stageEl = document.querySelector(".stage");
     var compCol = document.querySelector(".companion-col");
     stageEl.classList.remove("intro");
     compCol.style.transform = "translateX(0)";
+    try { localStorage.setItem("cc-intro", "done"); } catch (e) {}
     if (!_tourDone) setTimeout(startTour, 900);
   }
 
@@ -1020,5 +1020,10 @@
   syncControls();
   render();
   renderGlossary();
-  enterIntro();
+  if (!_introSeen) {
+    enterIntro();
+    setTimeout(endIntro, 700);
+  } else {
+    document.querySelector(".stage").classList.remove("intro");
+  }
 })();
