@@ -1114,6 +1114,32 @@
   }
 
   /* ============================================================
+     Theme (Light/Dark)
+     ============================================================ */
+  var _theme = "system";
+  try { _theme = localStorage.getItem("cc-theme") || "system"; } catch (e) {}
+
+  function _resolvedTheme() {
+    if (_theme === "light" || _theme === "dark") return _theme;
+    return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  function _applyTheme() {
+    if (_theme === "light" || _theme === "dark") {
+      document.documentElement.setAttribute("data-theme", _theme);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    var icon = $("themeIcon");
+    if (icon) icon.textContent = _resolvedTheme() === "dark" ? "light_mode" : "dark_mode";
+  }
+  $("themeToggle").addEventListener("click", function () {
+    _theme = _resolvedTheme() === "dark" ? "light" : "dark";
+    try { localStorage.setItem("cc-theme", _theme); } catch (e) {}
+    _applyTheme();
+  });
+  _applyTheme();
+
+  /* ============================================================
      Init
      ============================================================ */
   buildLangSelect();
