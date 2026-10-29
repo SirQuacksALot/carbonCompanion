@@ -1,12 +1,14 @@
 # Carbon Companion
 
-Minimalist, interactive **net carbon balance** for an AI-driven
-energy-management solution (BIP 2026 · group E2 · Energy track).
+<p align="center"><img src="avatar.svg" alt="Carbon Companion avatar" width="140"></p>
 
-The companion avatar is the main interaction element: **tap** to page through
-the results (net balance, footprint, uncertainty, break-even, system boundary).
-It reacts emotionally — colour and face change with the net balance. A
-permanently visible gauge shows whether the AI is worth it. The model
-parameters live in a collapsible **debug menu** (⚙ top right).
+> Hi! I'm your **Carbon Companion**. Tap me and I'll page you through the
+> **net carbon balance** of an AI that manages energy — the CO₂e it saves
+> minus the CO₂e it costs itself (hardware, data transfer, training, inference).
 
-Languages: English, Deutsch, Polski, Italiano, Español, Français.
+Across six topics — net balance, footprint, uncertainty, break-even, system
+boundary and impact — I react emotionally: my face and colour change with the
+result, and a permanently visible gauge shows whether the AI is worth it.
+Every parameter is adjustable in the **debug menu** (⚙, top right).
+
+I speak six languages: English · Deutsch · Polski · Italiano · Español · Français.
