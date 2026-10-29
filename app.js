@@ -61,7 +61,8 @@
       sy_eyebrow: "What is accounted for?", sy_sensors: "Sensors & gateways (embodied)", sy_data: "Data transfer (network / IoT)",
       sy_train: "Training (GPU power)", sy_infer: "Inference (always-on)", sy_meta: "Boundary = entire AI system incl. embodied hardware.",
       tag_meas: "measured", tag_est: "factor",
-      r_source: "Based on lecture standard values · example assumptions",
+      r_source: "Based on: grid losses ≈ 7 %, smart-meter data 96 values/day, energy use kWh/m²/yr",
+      what_hint: "Training runs in the cloud, inference at the edge.",
       what_line: "A measurement & accounting system for the net carbon balance of AI energy management.",
       u_risk: "AI Act: likely minimal risk — documentation and transparency.",
       impact_eyebrow: "Impact",
@@ -104,7 +105,8 @@
       sy_eyebrow: "Was wird bilanziert?", sy_sensors: "Sensoren & Gateways (verkörpert)", sy_data: "Datentransfer (Netz / IoT)",
       sy_train: "Training (GPU-Strom)", sy_infer: "Inferenz (Dauerbetrieb)", sy_meta: "Bilanzgrenze = gesamtes AI-System inkl. verkörperter Hardware.",
       tag_meas: "gemessen", tag_est: "Faktor",
-      r_source: "Basierend auf Standardwerten der Vorlesungen · Beispielannahmen",
+      r_source: "Basierend auf: Netzverluste ≈ 7 %, Smart-Meter-Daten 96 Werte/Tag, Energieverbrauch kWh/m²/Jahr",
+      what_hint: "Training läuft in der Cloud, Inferenz am Edge.",
       what_line: "Ein Mess- und Bilanzierungssystem für die Netto-CO₂-Bilanz des AI-Energiemanagements.",
       u_risk: "AI Act: voraussichtlich minimales Risiko — Dokumentation und Transparenz.",
       impact_eyebrow: "Impact",
@@ -147,7 +149,8 @@
       sy_eyebrow: "Co jest bilansowane?", sy_sensors: "Czujniki i bramki (wbudowane)", sy_data: "Transfer danych (sieć / IoT)",
       sy_train: "Trenowanie (moc GPU)", sy_infer: "Inferencja (praca ciągła)", sy_meta: "Granica = cały system AI, włącznie z wbudowanym sprzętem.",
       tag_meas: "mierzone", tag_est: "czynnik",
-      r_source: "Na podstawie standardowych wartości z wykładów · przykładowe założenia",
+      r_source: "Na podstawie: straty sieci ≈ 7 %, dane liczników 96 wartości/dzień, zużycie energii kWh/m²/rok",
+      what_hint: "Trenowanie w chmurze, inferencja na brzegu sieci (edge).",
       what_line: "System pomiarowo-rozliczeniowy bilansu węglowego netto zarządzania energią przez AI.",
       u_risk: "Akt o AI: prawdopodobnie minimalne ryzyko — dokumentacja i przejrzystość.",
       impact_eyebrow: "Wpływ",
@@ -190,7 +193,8 @@
       sy_eyebrow: "Cosa viene bilanciato?", sy_sensors: "Sensori e gateway (incorporati)", sy_data: "Trasferimento dati (rete / IoT)",
       sy_train: "Addestramento (potenza GPU)", sy_infer: "Inferenza (sempre attiva)", sy_meta: "Confine = intero sistema AI incl. hardware incorporato.",
       tag_meas: "misurato", tag_est: "fattore",
-      r_source: "Basato su valori standard delle lezioni · assunzioni esemplificative",
+      r_source: "Basato su: perdite di rete ≈ 7 %, dati smart meter 96 valori/giorno, consumo kWh/m²/anno",
+      what_hint: "L'addestramento avviene nel cloud, l'inferenza all'edge.",
       what_line: "Un sistema di misura e contabilizzazione del bilancio carbonio netto della gestione energetica AI.",
       u_risk: "AI Act: rischio probabilmente minimo — documentazione e trasparenza.",
       impact_eyebrow: "Impatto",
@@ -233,7 +237,8 @@
       sy_eyebrow: "¿Qué se contabiliza?", sy_sensors: "Sensores y gateways (incorporados)", sy_data: "Transferencia de datos (red / IoT)",
       sy_train: "Entrenamiento (potencia GPU)", sy_infer: "Inferencia (siempre activa)", sy_meta: "Límite = todo el sistema de IA incl. hardware incorporado.",
       tag_meas: "medido", tag_est: "factor",
-      r_source: "Basado en valores estándar de las clases · supuestos de ejemplo",
+      r_source: "Basado en: pérdidas de red ≈ 7 %, datos de contadores 96 valores/día, consumo kWh/m²/año",
+      what_hint: "El entrenamiento se ejecuta en la nube, la inferencia en el borde.",
       what_line: "Un sistema de medición y contabilidad del balance neto de carbono de la gestión energética con IA.",
       u_risk: "Ley de IA: riesgo probablemente mínimo — documentación y transparencia.",
       impact_eyebrow: "Impacto",
@@ -276,7 +281,8 @@
       sy_eyebrow: "Qu'est-ce qui est comptabilisé ?", sy_sensors: "Capteurs et passerelles (incorporés)", sy_data: "Transfert de données (réseau / IoT)",
       sy_train: "Entraînement (puissance GPU)", sy_infer: "Inférence (toujours active)", sy_meta: "Frontière = tout le système d'IA, matériel incorporé inclus.",
       tag_meas: "mesuré", tag_est: "facteur",
-      r_source: "Basé sur des valeurs standard des cours · hypothèses d'exemple",
+      r_source: "Basé sur : pertes réseau ≈ 7 %, données de compteurs 96 valeurs/jour, consommation kWh/m²/an",
+      what_hint: "L'entraînement s'exécute dans le cloud, l'inférence en périphérie (edge).",
       what_line: "Un système de mesure et de comptabilisation du bilan carbone net de la gestion énergétique par IA.",
       u_risk: "Règlement IA : risque probablement minimal — documentation et transparence.",
       impact_eyebrow: "Impact",
@@ -422,6 +428,7 @@
       card: function () {
         return '<div class="a-eyebrow">' + t("topic_boundary") + '</div>'
           + '<div class="a-unit">' + t("what_line") + '</div>'
+          + '<div class="a-meta" style="margin-top:8px">' + t("what_hint") + '</div>'
           + '<ul class="list">'
           + '<li><span class="mark off"></span><span>' + t("sy_sensors") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
           + '<li><span class="mark off"></span><span>' + t("sy_data") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
