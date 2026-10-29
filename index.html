@@ -29,6 +29,9 @@
         <span class="material-icons" aria-hidden="true">menu_book</span>
         <span data-i18n="glossTitle">Glossar</span>
       </button>
+      <button class="debug-toggle" id="tourHelp" aria-label="Tutorial anzeigen" title="Tutorial">
+        <span class="material-icons" aria-hidden="true">help_outline</span>
+      </button>
     </div>
   </header>
 
@@ -146,6 +149,19 @@
       <dl class="glossary-list" id="glossary"></dl>
     </div>
   </aside>
+
+  <div class="tour-tip" id="tourTip" hidden>
+    <div class="tour-head">
+      <span class="tour-title" id="tourTitle"></span>
+      <span class="tour-count" id="tourCount"></span>
+    </div>
+    <p class="tour-desc" id="tourDesc"></p>
+    <div class="tour-actions">
+      <button class="tour-btn tour-skip" id="tourSkip" data-i18n="tour_skip">Überspringen</button>
+      <button class="tour-btn tour-back" id="tourBack" data-i18n="tour_back">Zurück</button>
+      <button class="tour-btn tour-next" id="tourNext" data-i18n="tour_next">Weiter</button>
+    </div>
+  </div>
 
   <div class="backdrop" id="backdrop" hidden></div>
 

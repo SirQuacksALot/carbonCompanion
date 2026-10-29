@@ -240,6 +240,21 @@ body{
 .g-item dt{ font-size:13px; font-weight:700; color:var(--fg) }
 .g-item dd{ margin:3px 0 0; font-size:12.5px; color:var(--fg-2); line-height:1.5 }
 
+/* ---------- tutorial ---------- */
+.tour-target{ position:relative !important; z-index:1001 !important; box-shadow:0 0 0 9999px rgba(8,12,10,0.55) !important }
+.tour-tip{ position:fixed; z-index:1002; max-width:320px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px; box-shadow:var(--shadow) }
+.tour-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:4px }
+.tour-title{ font-size:14px; font-weight:800 }
+.tour-count{ font-family:"Chivo Mono",ui-monospace,monospace; font-size:11px; color:var(--fg-3) }
+.tour-desc{ margin:0 0 12px; font-size:13px; color:var(--fg-2); line-height:1.5 }
+.tour-actions{ display:flex; gap:8px; align-items:center; justify-content:flex-end }
+.tour-btn{ font:inherit; font-size:12.5px; font-weight:600; padding:6px 12px; border-radius:999px; border:1px solid var(--line); background:var(--surface-2); color:var(--fg-2); cursor:pointer }
+.tour-btn:hover{ background:var(--surface-3); color:var(--fg) }
+.tour-next{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink) }
+.tour-next:hover{ background:var(--accent); color:var(--accent-ink) }
+.tour-skip{ margin-right:auto; background:none; border-color:transparent; color:var(--fg-3) }
+.tour-skip:hover{ background:var(--surface-2); color:var(--fg-2) }
+
 :focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
 
 /* ---------- responsive ---------- */

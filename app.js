@@ -81,7 +81,16 @@
       gl_hw: "Embodied hardware", gl_hw_d: "CO₂ from manufacturing sensors and gateways, spread over their lifetime.",
       gl_mc: "Monte-Carlo simulation", gl_mc_d: "Many random runs (2,000) to estimate the balance's uncertainty.",
       gl_ci: "90 % interval", gl_ci_d: "Range the result lies in with 90 % probability.",
-      gl_p: "P(AI is worth it)", gl_p_d: "Probability that the net balance is greater than zero."
+      gl_p: "P(AI is worth it)", gl_p_d: "Probability that the net balance is greater than zero.",
+      tour_help: "Show tutorial",
+      tour_next: "Next", tour_back: "Back", tour_skip: "Skip", tour_done: "Done",
+      tour_1_t: "The companion", tour_1_d: "Tap the avatar to page through the results. It reacts emotionally to the net balance.",
+      tour_2_t: "Worth-it gauge", tour_2_d: "Always shows whether the AI is worth it — and how certain that is.",
+      tour_3_t: "Data view", tour_3_d: "The details of the current topic appear here.",
+      tour_4_t: "Topics", tour_4_d: "The dots show the topics — click one to jump.",
+      tour_5_t: "Language", tour_5_d: "Choose between six languages.",
+      tour_6_t: "Debug menu", tour_6_d: "Adjust parameters and scenarios.",
+      tour_7_t: "Glossary", tour_7_d: "Look up technical terms."
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -138,7 +147,16 @@
       gl_hw: "Verkörperte Hardware", gl_hw_d: "CO₂ aus der Herstellung von Sensoren und Gateways, über die Lebensdauer verteilt.",
       gl_mc: "Monte-Carlo-Simulation", gl_mc_d: "Viele Zufallsläufe (2.000), um die Unsicherheit der Bilanz zu schätzen.",
       gl_ci: "90 %-Intervall", gl_ci_d: "Bereich, in dem das Ergebnis mit 90 % Wahrscheinlichkeit liegt.",
-      gl_p: "P(AI lohnt sich)", gl_p_d: "Wahrscheinlichkeit, dass die Nettobilanz größer als null ist."
+      gl_p: "P(AI lohnt sich)", gl_p_d: "Wahrscheinlichkeit, dass die Nettobilanz größer als null ist.",
+      tour_help: "Tutorial anzeigen",
+      tour_next: "Weiter", tour_back: "Zurück", tour_skip: "Überspringen", tour_done: "Fertig",
+      tour_1_t: "Der Companion", tour_1_d: "Tippe den Avatar an, um durch die Ergebnisse zu blättern. Er reagiert emotional auf die Nettobilanz.",
+      tour_2_t: "Lohnt-sich-Anzeige", tour_2_d: "Zeigt immer, ob sich die AI lohnt — und wie sicher das ist.",
+      tour_3_t: "Datenansicht", tour_3_d: "Hier erscheinen die Details zum aktuellen Thema.",
+      tour_4_t: "Themen", tour_4_d: "Die Punkte zeigen die Themen — Klicken zum Springen.",
+      tour_5_t: "Sprache", tour_5_d: "Wähle zwischen sechs Sprachen.",
+      tour_6_t: "Debug-Menü", tour_6_d: "Passe Parameter und Szenarien an.",
+      tour_7_t: "Glossar", tour_7_d: "Schlage Fachbegriffe nach."
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -195,7 +213,16 @@
       gl_hw: "Sprzęt wbudowany", gl_hw_d: "CO₂ z produkcji czujników i bramek, rozłożone na okres życia.",
       gl_mc: "Symulacja Monte Carlo", gl_mc_d: "Wiele losowych przebiegów (2 000) do oszacowania niepewności bilansu.",
       gl_ci: "Przedział 90 %", gl_ci_d: "Zakres, w którym wynik leży z prawdopodobieństwem 90 %.",
-      gl_p: "P(AI się opłaca)", gl_p_d: "Prawdopodobieństwo, że bilans netto jest większy od zera."
+      gl_p: "P(AI się opłaca)", gl_p_d: "Prawdopodobieństwo, że bilans netto jest większy od zera.",
+      tour_help: "Pokaż samouczek",
+      tour_next: "Dalej", tour_back: "Wstecz", tour_skip: "Pomiń", tour_done: "Gotowe",
+      tour_1_t: "Companion", tour_1_d: "Dotknij awatara, aby przewijać wyniki. Reaguje emocjonalnie na bilans netto.",
+      tour_2_t: "Wskaźnik opłacalności", tour_2_d: "Zawsze pokazuje, czy AI się opłaca — i na ile to pewne.",
+      tour_3_t: "Widok danych", tour_3_d: "Tutaj pojawiają się szczegóły bieżącego tematu.",
+      tour_4_t: "Tematy", tour_4_d: "Kropki pokazują tematy — kliknij, aby przeskoczyć.",
+      tour_5_t: "Język", tour_5_d: "Wybierz jeden z sześciu języków.",
+      tour_6_t: "Menu debug", tour_6_d: "Dostosuj parametry i scenariusze.",
+      tour_7_t: "Słownik", tour_7_d: "Sprawdź pojęcia techniczne."
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -252,7 +279,16 @@
       gl_hw: "Hardware incorporato", gl_hw_d: "CO₂ dalla produzione di sensori e gateway, distribuito sulla vita utile.",
       gl_mc: "Simulazione Monte Carlo", gl_mc_d: "Molte esecuzioni casuali (2.000) per stimare l'incertezza del bilancio.",
       gl_ci: "Intervallo 90 %", gl_ci_d: "Intervallo in cui il risultato cade con probabilità del 90 %.",
-      gl_p: "P(l'AI conviene)", gl_p_d: "Probabilità che il saldo netto sia maggiore di zero."
+      gl_p: "P(l'AI conviene)", gl_p_d: "Probabilità che il saldo netto sia maggiore di zero.",
+      tour_help: "Mostra il tutorial",
+      tour_next: "Avanti", tour_back: "Indietro", tour_skip: "Salta", tour_done: "Fatto",
+      tour_1_t: "Il companion", tour_1_d: "Tocca l'avatar per scorrere i risultati. Reagisce emotivamente al saldo netto.",
+      tour_2_t: "Indicatore di convenienza", tour_2_d: "Mostra sempre se l'AI conviene — e quanto è certo.",
+      tour_3_t: "Vista dati", tour_3_d: "Qui compaiono i dettagli dell'argomento corrente.",
+      tour_4_t: "Argomenti", tour_4_d: "I punti mostrano gli argomenti — clicca per saltare.",
+      tour_5_t: "Lingua", tour_5_d: "Scegli tra sei lingue.",
+      tour_6_t: "Menu debug", tour_6_d: "Regola parametri e scenari.",
+      tour_7_t: "Glossario", tour_7_d: "Consulta i termini tecnici."
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -309,7 +345,16 @@
       gl_hw: "Hardware incorporado", gl_hw_d: "CO₂ de la fabricación de sensores y pasarelas, repartido en su vida útil.",
       gl_mc: "Simulación de Monte Carlo", gl_mc_d: "Muchas ejecuciones aleatorias (2.000) para estimar la incertidumbre del balance.",
       gl_ci: "Intervalo del 90 %", gl_ci_d: "Rango en el que cae el resultado con un 90 % de probabilidad.",
-      gl_p: "P(la IA merece la pena)", gl_p_d: "Probabilidad de que el balance neto sea mayor que cero."
+      gl_p: "P(la IA merece la pena)", gl_p_d: "Probabilidad de que el balance neto sea mayor que cero.",
+      tour_help: "Mostrar tutorial",
+      tour_next: "Siguiente", tour_back: "Atrás", tour_skip: "Saltar", tour_done: "Hecho",
+      tour_1_t: "El compañero", tour_1_d: "Toca el avatar para recorrer los resultados. Reacciona emocionalmente al balance neto.",
+      tour_2_t: "Indicador de rentabilidad", tour_2_d: "Muestra siempre si la IA merece la pena — y con qué certeza.",
+      tour_3_t: "Vista de datos", tour_3_d: "Aquí aparecen los detalles del tema actual.",
+      tour_4_t: "Temas", tour_4_d: "Los puntos muestran los temas — haz clic para saltar.",
+      tour_5_t: "Idioma", tour_5_d: "Elige entre seis idiomas.",
+      tour_6_t: "Menú de depuración", tour_6_d: "Ajusta parámetros y escenarios.",
+      tour_7_t: "Glosario", tour_7_d: "Consulta términos técnicos."
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -366,7 +411,16 @@
       gl_hw: "Matériel incorporé", gl_hw_d: "CO₂ de la fabrication des capteurs et passerelles, réparti sur leur durée de vie.",
       gl_mc: "Simulation de Monte-Carlo", gl_mc_d: "De nombreuses exécutions aléatoires (2 000) pour estimer l'incertitude du bilan.",
       gl_ci: "Intervalle à 90 %", gl_ci_d: "Plage dans laquelle le résultat tombe avec une probabilité de 90 %.",
-      gl_p: "P(l'IA est rentable)", gl_p_d: "Probabilité que le bilan net soit supérieur à zéro."
+      gl_p: "P(l'IA est rentable)", gl_p_d: "Probabilité que le bilan net soit supérieur à zéro.",
+      tour_help: "Afficher le tutoriel",
+      tour_next: "Suivant", tour_back: "Retour", tour_skip: "Passer", tour_done: "Terminé",
+      tour_1_t: "Le compagnon", tour_1_d: "Touche l'avatar pour parcourir les résultats. Il réagit émotionnellement au bilan net.",
+      tour_2_t: "Indicateur de rentabilité", tour_2_d: "Montre toujours si l'IA est rentable — et avec quelle certitude.",
+      tour_3_t: "Vue des données", tour_3_d: "Les détails du sujet actuel apparaissent ici.",
+      tour_4_t: "Sujets", tour_4_d: "Les points montrent les sujets — cliquez pour sauter.",
+      tour_5_t: "Langue", tour_5_d: "Choisissez entre six langues.",
+      tour_6_t: "Menu debug", tour_6_d: "Ajustez les paramètres et les scénarios.",
+      tour_7_t: "Glossaire", tour_7_d: "Consultez les termes techniques."
     }
   };
 
@@ -721,6 +775,77 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeDebug(); closeGloss(); } });
 
   /* ============================================================
+     Tutorial-Intro
+     ============================================================ */
+  var TOUR = [
+    { sel: "#companion", t: "tour_1_t", d: "tour_1_d" },
+    { sel: ".worth", t: "tour_2_t", d: "tour_2_d" },
+    { sel: "#answer", t: "tour_3_t", d: "tour_3_d" },
+    { sel: "#progress", t: "tour_4_t", d: "tour_4_d" },
+    { sel: ".lang-select-wrap", t: "tour_5_t", d: "tour_5_d" },
+    { sel: "#debugToggle", t: "tour_6_t", d: "tour_6_d" },
+    { sel: "#glossToggle", t: "tour_7_t", d: "tour_7_d" }
+  ];
+  var _tourIdx = 0, _tourActive = false;
+
+  function _clearTourTarget() {
+    var nodes = document.querySelectorAll(".tour-target");
+    for (var i = 0; i < nodes.length; i++) nodes[i].classList.remove("tour-target");
+  }
+  function _positionTourTip(el) {
+    var tip = $("tourTip");
+    var r = el.getBoundingClientRect();
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var cx = r.left + r.width / 2;
+    var left = clamp(cx - tw / 2, 12, window.innerWidth - tw - 12);
+    var top;
+    if (r.bottom + 12 + th <= window.innerHeight) top = r.bottom + 12;
+    else top = Math.max(12, r.top - th - 12);
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+  function showTourStep(i) {
+    _tourIdx = i;
+    var step = TOUR[i];
+    var el = document.querySelector(step.sel);
+    if (!el) { endTour(); return; }
+    _clearTourTarget();
+    el.classList.add("tour-target");
+    $("tourTitle").textContent = t(step.t);
+    $("tourDesc").textContent = t(step.d);
+    $("tourCount").textContent = (i + 1) + " / " + TOUR.length;
+    $("tourBack").hidden = (i === 0);
+    $("tourNext").textContent = (i === TOUR.length - 1) ? t("tour_done") : t("tour_next");
+    _positionTourTip(el);
+  }
+  function startTour() {
+    _tourActive = true;
+    $("tourTip").hidden = false;
+    showTourStep(0);
+  }
+  function endTour() {
+    _tourActive = false;
+    $("tourTip").hidden = true;
+    _clearTourTarget();
+    try { localStorage.setItem("cc-tour", "done"); } catch (e) {}
+  }
+
+  $("tourNext").addEventListener("click", function () {
+    if (_tourIdx >= TOUR.length - 1) endTour();
+    else showTourStep(_tourIdx + 1);
+  });
+  $("tourBack").addEventListener("click", function () { if (_tourIdx > 0) showTourStep(_tourIdx - 1); });
+  $("tourSkip").addEventListener("click", endTour);
+  $("tourHelp").addEventListener("click", startTour);
+  window.addEventListener("resize", function () {
+    if (_tourActive && !$("tourTip").hidden) { var el = document.querySelector(TOUR[_tourIdx].sel); if (el) _positionTourTip(el); }
+  });
+
+  var _tourDone = false;
+  try { _tourDone = localStorage.getItem("cc-tour") === "done"; } catch (e) {}
+  if (!_tourDone) setTimeout(startTour, 700);
+
+  /* ============================================================
      Steuerung (Debug)
      ============================================================ */
   var sBase = $("s-baseline");
@@ -802,6 +927,8 @@
     $("progress").setAttribute("aria-label", t("topicsLabel"));
     $("companion").setAttribute("aria-label", t("companionAria"));
     $("debugClose").setAttribute("aria-label", t("debugCloseAria"));
+    $("glossClose").setAttribute("aria-label", t("debugCloseAria"));
+    $("tourHelp").setAttribute("aria-label", t("tour_help"));
   }
   function setLang(code) {
     LANG = code;
