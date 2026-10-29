@@ -255,6 +255,11 @@ body{
 .tour-skip{ margin-right:auto; background:none; border-color:transparent; color:var(--fg-3) }
 .tour-skip:hover{ background:var(--surface-2); color:var(--fg-2) }
 
+/* ---------- intro ---------- */
+.companion-col{ transition: transform .7s cubic-bezier(.22,.61,.36,1) }
+.content-col, .worth{ transition: opacity .55s ease .25s }
+.stage.intro .content-col, .stage.intro .worth{ opacity: 0; pointer-events: none }
+
 :focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
 
 /* ---------- responsive ---------- */

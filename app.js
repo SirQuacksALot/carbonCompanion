@@ -753,6 +753,7 @@
      Interaktion
      ============================================================ */
   $("companion").addEventListener("click", function () {
+    if (!_introDone) endIntro();
     topic = topic < 0 ? 0 : (topic + 1) % TOPICS.length;
     render();
   });
@@ -843,7 +844,25 @@
 
   var _tourDone = false;
   try { _tourDone = localStorage.getItem("cc-tour") === "done"; } catch (e) {}
-  if (!_tourDone) setTimeout(startTour, 700);
+
+  var _introDone = false;
+  function enterIntro() {
+    var stageEl = document.querySelector(".stage");
+    var compCol = document.querySelector(".companion-col");
+    var sr = stageEl.getBoundingClientRect();
+    var cr = compCol.getBoundingClientRect();
+    var dx = (sr.left + sr.width / 2) - (cr.left + cr.width / 2);
+    compCol.style.transform = "translateX(" + dx.toFixed(1) + "px)";
+  }
+  function endIntro() {
+    if (_introDone) return;
+    _introDone = true;
+    var stageEl = document.querySelector(".stage");
+    var compCol = document.querySelector(".companion-col");
+    stageEl.classList.remove("intro");
+    compCol.style.transform = "translateX(0)";
+    if (!_tourDone) setTimeout(startTour, 900);
+  }
 
   /* ============================================================
      Steuerung (Debug)
@@ -1001,4 +1020,5 @@
   syncControls();
   render();
   renderGlossary();
+  enterIntro();
 })();
