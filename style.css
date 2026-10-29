@@ -97,12 +97,9 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 .companion:focus-visible{ outline:2px solid var(--accent); outline-offset:6px }
-.companion:active .avatar{ transform:scale(0.96) }
-.avatar{ width:100%; height:100%; display:block; transition:transform .12s ease }
+.avatar{ width:100%; height:100%; display:block; will-change:transform }
 #av-body{ transition:stroke .5s ease }
 #av-tint{ transition:fill .5s ease }
-@keyframes breathe{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
-@media (prefers-reduced-motion: no-preference){ .avatar{ animation:breathe 4.5s ease-in-out infinite } }
 
 .hint{ margin:0; font-size:12px; color:var(--fg-3); font-family:"Chivo Mono",ui-monospace,monospace; letter-spacing:0.06em }
 

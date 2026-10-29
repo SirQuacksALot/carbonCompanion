@@ -387,15 +387,11 @@
      Companion (emotional: 5 Stimmungen)
      ============================================================ */
   var MOODS = {
-    great: { color: "#0ca30c", eyes: "happy", happyL: "M38 53 Q46 45 54 53", happyR: "M66 53 Q74 45 82 53", mouth: "bigsmile", cheeks: true, brows: false },
-    good:  { color: "#0c7a63", eyes: "happy", happyL: "M39 54 Q46 47 53 54", happyR: "M67 54 Q74 47 81 54", mouth: "smile", cheeks: true, brows: false },
-    ok:    { color: "#fab219", eyes: "dot", mouth: "flat", cheeks: false, brows: false },
-    bad:   { color: "#ec835a", eyes: "dot", mouth: "frown", cheeks: false, brows: true },
-    awful: { color: "#d03b3b", eyes: "dot", mouth: "bigfrown", cheeks: false, brows: true }
-  };
-  var MOUTHS = {
-    bigsmile: "M47 66 Q60 79 73 66", smile: "M50 68 Q60 76 70 68", flat: "M52 71 L68 71",
-    frown: "M50 76 Q60 67 70 76", bigfrown: "M48 79 Q60 66 72 79"
+    great: { color: "#0ca30c", eyes: "happy", happyL: "M37 55 Q46 45 55 55", happyR: "M65 55 Q74 45 83 55" },
+    good:  { color: "#0c7a63", eyes: "happy", happyL: "M39 56 Q46 48 53 56", happyR: "M67 56 Q74 48 81 56" },
+    ok:    { color: "#fab219", eyes: "dot", eyeR: 4 },
+    bad:   { color: "#ec835a", eyes: "dot", eyeR: 3 },
+    awful: { color: "#d03b3b", eyes: "sad", sadL: "M39 61 Q46 71 53 61", sadR: "M67 61 Q74 71 81 61" }
   };
 
   function setMood(mood) {
@@ -403,19 +399,21 @@
     $("av-body").style.stroke = cfg.color;
     $("av-tint").style.fill = cfg.color;
     function show(id, on) { $(id).setAttribute("opacity", on ? "1" : "0"); }
-    var happy = cfg.eyes === "happy";
-    show("av-eyes", !happy);
-    show("av-happy-eyes", happy);
-    show("av-cheeks", cfg.cheeks);
-    show("av-brows", cfg.brows);
-    if (happy) {
+    show("av-eyes-dot", cfg.eyes === "dot");
+    show("av-eyes-happy", cfg.eyes === "happy");
+    show("av-eyes-sad", cfg.eyes === "sad");
+    if (cfg.eyes === "happy") {
       $("av-happyL").setAttribute("d", cfg.happyL);
       $("av-happyR").setAttribute("d", cfg.happyR);
     }
-    $("av-mouth").setAttribute("d", MOUTHS[cfg.mouth]);
-    var r = (mood === "bad" || mood === "awful") ? 3.2 : 4;
-    $("av-eyeL").setAttribute("r", r);
-    $("av-eyeR").setAttribute("r", r);
+    if (cfg.eyes === "sad") {
+      $("av-sadL").setAttribute("d", cfg.sadL);
+      $("av-sadR").setAttribute("d", cfg.sadR);
+    }
+    if (cfg.eyes === "dot") {
+      $("av-eyeL").setAttribute("r", cfg.eyeR);
+      $("av-eyeR").setAttribute("r", cfg.eyeR);
+    }
   }
 
   /* ============================================================
@@ -708,6 +706,47 @@
     try { localStorage.setItem("cc-lang", code); } catch (e) {}
   }
   $("langSel").addEventListener("change", function () { setLang(this.value); });
+
+  /* ============================================================
+     Avatar-Animation: Maus folgen, Idle-Bob, Blinzeln
+     ============================================================ */
+  var avatarEl = document.querySelector(".avatar");
+  var compBtn = $("companion");
+  var _avTX = 0, _avTY = 0, _avCX = 0, _avCY = 0, _avSquash = 0;
+  var _avReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (avatarEl && !_avReduced) {
+    document.addEventListener("mousemove", function (e) {
+      var r = compBtn.getBoundingClientRect();
+      if (!r.width) return;
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      _avTX = clamp((e.clientX - cx) / (r.width / 2), -1.5, 1.5);
+      _avTY = clamp((e.clientY - cy) / (r.height / 2), -1.5, 1.5);
+    });
+    compBtn.addEventListener("click", function () { _avSquash = 1; });
+    var _avT0 = (typeof performance !== "undefined") ? performance.now() : Date.now();
+    function _avAnimate(now) {
+      var t = now - _avT0;
+      var bob = Math.sin(t / 1000) * 3.5;
+      _avCX += (_avTX - _avCX) * 0.08;
+      _avCY += (_avTY - _avCY) * 0.08;
+      _avSquash *= 0.88;
+      var rot = _avCX * 7;
+      var tx = _avCX * 5, ty = _avCY * 4 + bob;
+      var s = 1 - _avSquash * 0.08;
+      avatarEl.style.transform = "rotate(" + rot.toFixed(2) + "deg) translate(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px) scale(" + s.toFixed(3) + ")";
+      requestAnimationFrame(_avAnimate);
+    }
+    requestAnimationFrame(_avAnimate);
+    function _avBlink() {
+      $("av-eyes").setAttribute("opacity", "0");
+      setTimeout(function () {
+        $("av-eyes").setAttribute("opacity", "1");
+        setTimeout(_avBlink, 2800 + Math.random() * 2500);
+      }, 110);
+    }
+    setTimeout(_avBlink, 2800);
+  }
 
   /* ============================================================
      Init
