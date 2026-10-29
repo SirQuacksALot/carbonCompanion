@@ -97,7 +97,10 @@
       days_meta: "After {d} days, more carbon is saved than created.",
       days_created: "created",
       days_saved: "saved",
-      b_days: "Here's how many days until the AI has paid off its carbon footprint."
+      b_days: "Here's how many days until the AI has paid off its carbon footprint.",
+      tour_8_t: "Teammate's dashboard", tour_8_d: "Open Marija's version of the same tool.",
+      tour_9_t: "Theme", tour_9_d: "Switch between light and dark mode.",
+      tour_10_t: "Tutorial", tour_10_d: "Replay this guide anytime."
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -170,7 +173,10 @@
       days_meta: "Nach {d} Tagen wird mehr CO₂ eingespart als erzeugt.",
       days_created: "erzeugt",
       days_saved: "eingespart",
-      b_days: "Hier siehst du, nach wie vielen Tagen die AI ihren CO₂-Fußabdruck eingespielt hat."
+      b_days: "Hier siehst du, nach wie vielen Tagen die AI ihren CO₂-Fußabdruck eingespielt hat.",
+      tour_8_t: "Dashboard der Teamkollegin", tour_8_d: "Öffnet Marijas Version desselben Tools.",
+      tour_9_t: "Theme", tour_9_d: "Wechsle zwischen hellem und dunklem Modus.",
+      tour_10_t: "Tutorial", tour_10_d: "Spiele diese Führung jederzeit erneut ab."
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -243,7 +249,10 @@
       days_meta: "Po {d} dniach oszczędza się więcej CO₂, niż się wytwarza.",
       days_created: "wytworzone",
       days_saved: "zaoszczędzone",
-      b_days: "To pokazuje, po ilu dniach AI odpracuje swój ślad węglowy."
+      b_days: "To pokazuje, po ilu dniach AI odpracuje swój ślad węglowy.",
+      tour_8_t: "Panel koleżanki z zespołu", tour_8_d: "Otwiera wersję Mariji tego samego narzędzia.",
+      tour_9_t: "Motyw", tour_9_d: "Przełącz między trybem jasnym a ciemnym.",
+      tour_10_t: "Samouczek", tour_10_d: "Odtwórz ten przewodnik w dowolnym momencie."
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -316,7 +325,10 @@
       days_meta: "Dopo {d} giorni si risparmia più CO₂ di quanta se ne crea.",
       days_created: "creato",
       days_saved: "risparmiato",
-      b_days: "Mostra dopo quanti giorni l'AI ripaga la propria impronta di carbonio."
+      b_days: "Mostra dopo quanti giorni l'AI ripaga la propria impronta di carbonio.",
+      tour_8_t: "Dashboard della compagna", tour_8_d: "Apre la versione di Marija dello stesso strumento.",
+      tour_9_t: "Tema", tour_9_d: "Passa tra modalità chiara e scura.",
+      tour_10_t: "Tutorial", tour_10_d: "Riproduci questa guida in qualsiasi momento."
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -389,7 +401,10 @@
       days_meta: "Después de {d} días se ahorra más CO₂ del que se crea.",
       days_created: "creado",
       days_saved: "ahorrado",
-      b_days: "Muestra en cuántos días la IA compensa su propia huella de carbono."
+      b_days: "Muestra en cuántos días la IA compensa su propia huella de carbono.",
+      tour_8_t: "Panel de la compañera", tour_8_d: "Abre la versión de Marija de la misma herramienta.",
+      tour_9_t: "Tema", tour_9_d: "Cambia entre modo claro y oscuro.",
+      tour_10_t: "Tutorial", tour_10_d: "Reproduce esta guía cuando quieras."
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -462,7 +477,10 @@
       days_meta: "Après {d} jours, on économise plus de CO₂ qu'on n'en crée.",
       days_created: "créé",
       days_saved: "économisé",
-      b_days: "Montre après combien de jours l'IA rembourse sa propre empreinte carbone."
+      b_days: "Montre après combien de jours l'IA rembourse sa propre empreinte carbone.",
+      tour_8_t: "Tableau de bord de la coéquipière", tour_8_d: "Ouvre la version de Marija du même outil.",
+      tour_9_t: "Thème", tour_9_d: "Bascule entre mode clair et sombre.",
+      tour_10_t: "Tutoriel", tour_10_d: "Rejoue ce guide à tout moment."
     }
   };
 
@@ -893,7 +911,10 @@
     { sel: "#progress", t: "tour_4_t", d: "tour_4_d" },
     { sel: ".lang-select-wrap", t: "tour_5_t", d: "tour_5_d" },
     { sel: "#debugToggle", t: "tour_6_t", d: "tour_6_d" },
-    { sel: "#glossToggle", t: "tour_7_t", d: "tour_7_d" }
+    { sel: "#glossToggle", t: "tour_7_t", d: "tour_7_d" },
+    { sel: "a.debug-toggle[href]", t: "tour_8_t", d: "tour_8_d" },
+    { sel: "#themeToggle", t: "tour_9_t", d: "tour_9_d" },
+    { sel: "#tourHelp", t: "tour_10_t", d: "tour_10_d" }
   ];
   var _tourIdx = 0, _tourActive = false;
 
