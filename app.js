@@ -108,7 +108,13 @@
       calc_3: "Monte Carlo: 2,000 runs · normal distributions\n90 % interval = P5 … P95\nP(worth it) = share of runs with Net > 0",
       calc_4: "Break-even rate = Footprint / (Baseline × GridEF) × 100",
       calc_5: "One-time = Hardware(embodied) + Training(1 run)\nDaily saved = Baseline × SavingsRate × GridEF / 365\nDaily ongoing = Data(daily) + Inference(daily)\nDays = One-time / (Daily saved − Daily ongoing)",
-      calc_6: "Impact = qualitative summary of the net balance\n(worth-it gauge + verdict)"
+      calc_6: "Impact = qualitative summary of the net balance\n(worth-it gauge + verdict)",
+      f_net: "Net = Savings − Footprint", f_sav: "Savings = Baseline × SavingsRate × GridEF", f_foot: "Footprint = Hardware + Data + Training + Inference",
+      f_hw: "Hardware = (Sensors × 2 kg + 80 kg) / 5 yr", f_data: "Data = GB/day × 365 × 0.06 kWh/GB × GridEF",
+      f_train: "Training = Runs × 30 kWh × DC_EF", f_infer: "Inference = W × 8760 h × DC_EF",
+      f_mc: "Monte Carlo: 2,000 runs", f_ci: "90 % interval = P5 … P95", f_p: "P(worth it) = share of runs with Net > 0",
+      f_be: "Break-even rate = Footprint / (Baseline × GridEF) × 100",
+      f_once: "One-time = Hardware(embodied) + Training(1 run)", f_dsaved: "Daily saved = Baseline × SavingsRate × GridEF / 365", f_dongoing: "Daily ongoing = Data(daily) + Inference(daily)", f_days: "Days = One-time / (Daily saved − Daily ongoing)"
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -192,7 +198,13 @@
       calc_3: "Monte-Carlo: 2.000 Läufe · Normalverteilungen\n90 %-Intervall = P5 … P95\nP(lohnt sich) = Anteil der Läufe mit Netto > 0",
       calc_4: "Break-even-Rate = Fußabdruck / (Baseline × Strommix) × 100",
       calc_5: "Einmalig = Hardware(verkörpert) + Training(1 Lauf)\nTäglich gespart = Baseline × Einsparrate × Strommix / 365\nTäglich laufend = Daten(täglich) + Inferenz(täglich)\nTage = Einmalig / (Täglich gespart − Täglich laufend)",
-      calc_6: "Impact = qualitative Zusammenfassung der Nettobilanz\n(Lohnt-sich-Anzeige + Verdict)"
+      calc_6: "Impact = qualitative Zusammenfassung der Nettobilanz\n(Lohnt-sich-Anzeige + Verdict)",
+      f_net: "Netto = Einsparung − Fußabdruck", f_sav: "Einsparung = Baseline × Einsparrate × Strommix", f_foot: "Fußabdruck = Hardware + Daten + Training + Inferenz",
+      f_hw: "Hardware = (Sensoren × 2 kg + 80 kg) / 5 Jahre", f_data: "Daten = GB/Tag × 365 × 0,06 kWh/GB × Strommix",
+      f_train: "Training = Läufe × 30 kWh × RZ-EF", f_infer: "Inferenz = W × 8760 h × RZ-EF",
+      f_mc: "Monte-Carlo: 2.000 Läufe", f_ci: "90 %-Intervall = P5 … P95", f_p: "P(lohnt sich) = Anteil der Läufe mit Netto > 0",
+      f_be: "Break-even-Rate = Fußabdruck / (Baseline × Strommix) × 100",
+      f_once: "Einmalig = Hardware(verkörpert) + Training(1 Lauf)", f_dsaved: "Täglich gespart = Baseline × Einsparrate × Strommix / 365", f_dongoing: "Täglich laufend = Daten(täglich) + Inferenz(täglich)", f_days: "Tage = Einmalig / (Täglich gespart − Täglich laufend)"
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -276,7 +288,13 @@
       calc_3: "Monte Carlo: 2 000 przebiegów · rozkłady normalne\nPrzedział 90 % = P5 … P95\nP(opłacalne) = udział przebiegów z Netto > 0",
       calc_4: "Próg = ślad / (baseline × miks sieci) × 100",
       calc_5: "Jednorazowo = sprzęt(wbudowany) + trenowanie(1 przebieg)\nDziennie oszczędzane = baseline × stopa × miks sieci / 365\nDziennie bieżące = dane(dzienne) + inferencja(dzienna)\nDni = jednorazowo / (dziennie oszczędzane − dziennie bieżące)",
-      calc_6: "Wpływ = jakościowe podsumowanie bilansu netto\n(wskaźnik opłacalności + werdykt)"
+      calc_6: "Wpływ = jakościowe podsumowanie bilansu netto\n(wskaźnik opłacalności + werdykt)",
+      f_net: "Netto = oszczędność − ślad", f_sav: "Oszczędność = baseline × stopa oszczędności × miks sieci", f_foot: "Ślad = sprzęt + dane + trenowanie + inferencja",
+      f_hw: "Sprzęt = (czujniki × 2 kg + 80 kg) / 5 lat", f_data: "Dane = GB/dzień × 365 × 0,06 kWh/GB × miks sieci",
+      f_train: "Trenowanie = przebiegi × 30 kWh × EF_DC", f_infer: "Inferencja = W × 8760 h × EF_DC",
+      f_mc: "Monte Carlo: 2 000 przebiegów", f_ci: "Przedział 90 % = P5 … P95", f_p: "P(opłacalne) = udział przebiegów z Netto > 0",
+      f_be: "Próg = ślad / (baseline × miks sieci) × 100",
+      f_once: "Jednorazowo = sprzęt(wbudowany) + trenowanie(1 przebieg)", f_dsaved: "Dziennie oszczędzane = baseline × stopa × miks sieci / 365", f_dongoing: "Dziennie bieżące = dane(dzienne) + inferencja(dzienna)", f_days: "Dni = jednorazowo / (dziennie oszczędzane − dziennie bieżące)"
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -360,7 +378,13 @@
       calc_3: "Monte Carlo: 2.000 esecuzioni · distribuzioni normali\nIntervallo 90 % = P5 … P95\nP(conviene) = quota di esecuzioni con Netto > 0",
       calc_4: "Pareggio = impronta / (baseline × mix di rete) × 100",
       calc_5: "Una tantum = hardware(incorporato) + addestramento(1 esecuzione)\nRisparmio giornaliero = baseline × tasso × mix di rete / 365\nImpronta giornaliera = dati(giornalieri) + inferenza(giornaliera)\nGiorni = una tantum / (risparmio − impronta giornaliera)",
-      calc_6: "Impatto = riepilogo qualitativo del saldo netto\n(indicatore di convenienza + verdetto)"
+      calc_6: "Impatto = riepilogo qualitativo del saldo netto\n(indicatore di convenienza + verdetto)",
+      f_net: "Netto = risparmio − impronta", f_sav: "Risparmio = baseline × tasso di risparmio × mix di rete", f_foot: "Impronta = hardware + dati + addestramento + inferenza",
+      f_hw: "Hardware = (sensori × 2 kg + 80 kg) / 5 anni", f_data: "Dati = GB/giorno × 365 × 0,06 kWh/GB × mix di rete",
+      f_train: "Addestramento = esecuzioni × 30 kWh × EF_DC", f_infer: "Inferenza = W × 8760 h × EF_DC",
+      f_mc: "Monte Carlo: 2.000 esecuzioni", f_ci: "Intervallo 90 % = P5 … P95", f_p: "P(conviene) = quota di esecuzioni con Netto > 0",
+      f_be: "Pareggio = impronta / (baseline × mix di rete) × 100",
+      f_once: "Una tantum = hardware(incorporato) + addestramento(1 esecuzione)", f_dsaved: "Risparmio giornaliero = baseline × tasso × mix di rete / 365", f_dongoing: "Impronta giornaliera = dati(giornalieri) + inferenza(giornaliera)", f_days: "Giorni = una tantum / (risparmio − impronta giornaliera)"
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -444,7 +468,13 @@
       calc_3: "Monte Carlo: 2.000 ejecuciones · distribuciones normales\nIntervalo 90 % = P5 … P95\nP(merece la pena) = fracción de ejecuciones con Neto > 0",
       calc_4: "Equilibrio = huella / (base × mix de red) × 100",
       calc_5: "Único = hardware(incorporado) + entrenamiento(1 ejecución)\nAhorro diario = base × tasa × mix de red / 365\nHuella diaria = datos(diarios) + inferencia(diaria)\nDías = único / (ahorro diario − huella diaria)",
-      calc_6: "Impacto = resumen cualitativo del balance neto\n(indicador de rentabilidad + veredicto)"
+      calc_6: "Impacto = resumen cualitativo del balance neto\n(indicador de rentabilidad + veredicto)",
+      f_net: "Neto = ahorro − huella", f_sav: "Ahorro = base × tasa de ahorro × mix de red", f_foot: "Huella = hardware + datos + entrenamiento + inferencia",
+      f_hw: "Hardware = (sensores × 2 kg + 80 kg) / 5 años", f_data: "Datos = GB/día × 365 × 0,06 kWh/GB × mix de red",
+      f_train: "Entrenamiento = ejecuciones × 30 kWh × EF_DC", f_infer: "Inferencia = W × 8760 h × EF_DC",
+      f_mc: "Monte Carlo: 2.000 ejecuciones", f_ci: "Intervalo 90 % = P5 … P95", f_p: "P(merece la pena) = fracción de ejecuciones con Neto > 0",
+      f_be: "Equilibrio = huella / (base × mix de red) × 100",
+      f_once: "Único = hardware(incorporado) + entrenamiento(1 ejecución)", f_dsaved: "Ahorro diario = base × tasa × mix de red / 365", f_dongoing: "Huella diaria = datos(diarios) + inferencia(diaria)", f_days: "Días = único / (ahorro diario − huella diaria)"
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -528,7 +558,13 @@
       calc_3: "Monte-Carlo : 2 000 exécutions · lois normales\nIntervalle 90 % = P5 … P95\nP(rentable) = part des exécutions avec Net > 0",
       calc_4: "Seuil = empreinte / (base × mix réseau) × 100",
       calc_5: "Unique = matériel(incorporé) + entraînement(1 exécution)\nÉconomie/jour = base × taux × mix réseau / 365\nEmpreinte/jour = données(quot.) + inférence(quot.)\nJours = unique / (économie/jour − empreinte/jour)",
-      calc_6: "Impact = résumé qualitatif du bilan net\n(indicateur de rentabilité + verdict)"
+      calc_6: "Impact = résumé qualitatif du bilan net\n(indicateur de rentabilité + verdict)",
+      f_net: "Net = économie − empreinte", f_sav: "Économie = base × taux d'économie × mix réseau", f_foot: "Empreinte = matériel + données + entraînement + inférence",
+      f_hw: "Matériel = (capteurs × 2 kg + 80 kg) / 5 ans", f_data: "Données = Go/jour × 365 × 0,06 kWh/Go × mix réseau",
+      f_train: "Entraînement = exécutions × 30 kWh × EF_DC", f_infer: "Inférence = W × 8760 h × EF_DC",
+      f_mc: "Monte-Carlo : 2 000 exécutions", f_ci: "Intervalle 90 % = P5 … P95", f_p: "P(rentable) = part des exécutions avec Net > 0",
+      f_be: "Seuil = empreinte / (base × mix réseau) × 100",
+      f_once: "Unique = matériel(incorporé) + entraînement(1 exécution)", f_dsaved: "Économie/jour = base × taux × mix réseau / 365", f_dongoing: "Empreinte/jour = données(quot.) + inférence(quot.)", f_days: "Jours = unique / (économie/jour − empreinte/jour)"
     }
   };
 
@@ -558,6 +594,11 @@
   }
   function fmtTsign(v) { return (v >= 0 ? "+" : "−") + fmtT(Math.abs(v)); }
   function fmtPct(v) { return fmtNum(v, 1).replace(/([.,])0$/, "") + " %"; }
+  function fmtKg(v) {
+    var a = Math.abs(v);
+    if (a >= 1000) return fmtNum(v / 1000, 1) + " t";
+    return fmtNum(v, 0) + " kg";
+  }
 
   function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
@@ -575,6 +616,7 @@
     var bePct = cost_t / (p.baselineMWh * 1000 * p.gridEF / 1e6) * 100;
     return {
       savings_t: savings_t, cost_t: cost_t, net_t: net_t, bePct: bePct,
+      hw_t: hw_t, data_t: data_t, train_t: train_t, inf_t: inf_t,
       components: [
         { lk: "c_hw", value: hw_t, color: "var(--series-2)" },
         { lk: "c_data", value: data_t, color: "var(--series-1)" },
@@ -970,12 +1012,54 @@
   _backdrop.addEventListener("click", closeAllDrawers);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAllDrawers(); });
 
-  var CALC_KEYS = ["calc_0", "calc_1", "calc_2", "calc_3", "calc_4", "calc_5", "calc_6"];
+  function buildCalc(idx) {
+    var res = compute(params);
+    var mc = montecarlo(params, 2000);
+    var days = computeDays(params);
+
+    function row(fkey, vtext) {
+      var f = '<div class="calc-line">' + t(fkey) + '</div>';
+      var v = vtext ? '<div class="calc-values">= ' + vtext + '</div>' : '';
+      return '<div class="calc-entry">' + f + v + '</div>';
+    }
+    function note(key) {
+      return '<div class="calc-entry"><div class="calc-line">' + t(key).split("\n").join('</div><div class="calc-line">') + '</div></div>';
+    }
+
+    if (idx === 0) return note("calc_0");
+    if (idx === 1) {
+      return row("f_net", fmtT(res.savings_t) + " − " + fmtT(res.cost_t) + " = " + fmtT(res.net_t))
+        + row("f_sav", fmtNum(params.baselineMWh, 0) + " MWh × " + fmtPct(params.savingsPct) + " × " + params.gridEF + " g/kWh = " + fmtT(res.savings_t))
+        + row("f_foot", fmtT(res.hw_t) + " + " + fmtT(res.data_t) + " + " + fmtT(res.train_t) + " + " + fmtT(res.inf_t) + " = " + fmtT(res.cost_t));
+    }
+    if (idx === 2) {
+      return row("f_hw", "(" + fmtNum(params.numSensors, 0) + " × 2 kg + 80 kg) / 5 = " + fmtT(res.hw_t))
+        + row("f_data", fmtNum(params.dataGBday, 0) + " GB × 365 × 0.06 kWh/GB × " + params.gridEF + " g/kWh = " + fmtT(res.data_t))
+        + row("f_train", fmtNum(params.trainingsPerYear, 0) + " × 30 kWh × " + params.dcEF + " g/kWh = " + fmtT(res.train_t))
+        + row("f_infer", fmtNum(params.inferenceW, 0) + " W × 8760 h × " + params.dcEF + " g/kWh = " + fmtT(res.inf_t));
+    }
+    if (idx === 3) {
+      return row("f_mc", "2.000")
+        + row("f_ci", fmtT(mc.p5) + " … " + fmtT(mc.p95))
+        + row("f_p", fmtNum(mc.pPos * 100, 0) + " %");
+    }
+    if (idx === 4) {
+      return row("f_be", fmtT(res.cost_t) + " / (" + fmtNum(params.baselineMWh, 0) + " MWh × " + params.gridEF + " g/kWh) × 100 = " + fmtNum(res.bePct, 1) + " %");
+    }
+    if (idx === 5) {
+      var be = isFinite(days.beDays) ? fmtNum(Math.round(days.beDays), 0) : "∞";
+      return row("f_once", fmtKg(days.oneTime))
+        + row("f_dsaved", fmtKg(days.dailySaved))
+        + row("f_dongoing", fmtKg(days.dailyOngoing))
+        + row("f_days", be);
+    }
+    if (idx === 6) return note("calc_6");
+    return "";
+  }
+
   function openCalc(idx) {
-    if (idx < 0 || idx >= CALC_KEYS.length) return;
-    $("calcBody").innerHTML = t(CALC_KEYS[idx]).split("\n").map(function (line) {
-      return '<div class="calc-line">' + line + '</div>';
-    }).join("");
+    if (idx < 0) return;
+    $("calcBody").innerHTML = buildCalc(idx);
     openDrawer("calc");
   }
   $("calcBtn").addEventListener("click", function () { openCalc(topic); });
