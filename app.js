@@ -90,7 +90,14 @@
       tour_4_t: "Topics", tour_4_d: "The dots show the topics — click one to jump.",
       tour_5_t: "Language", tour_5_d: "Choose between six languages.",
       tour_6_t: "Debug menu", tour_6_d: "Adjust parameters and scenarios.",
-      tour_7_t: "Glossary", tour_7_d: "Look up technical terms."
+      tour_7_t: "Glossary", tour_7_d: "Look up technical terms.",
+      topic_days: "Break-even over time",
+      days_unit: "days until the AI pays off its carbon cost",
+      days_never: "never — daily savings don't cover the daily footprint",
+      days_meta: "After {d} days, more carbon is saved than created.",
+      days_created: "created",
+      days_saved: "saved",
+      b_days: "Here's how many days until the AI has paid off its carbon footprint."
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -156,7 +163,14 @@
       tour_4_t: "Themen", tour_4_d: "Die Punkte zeigen die Themen — Klicken zum Springen.",
       tour_5_t: "Sprache", tour_5_d: "Wähle zwischen sechs Sprachen.",
       tour_6_t: "Debug-Menü", tour_6_d: "Passe Parameter und Szenarien an.",
-      tour_7_t: "Glossar", tour_7_d: "Schlage Fachbegriffe nach."
+      tour_7_t: "Glossar", tour_7_d: "Schlage Fachbegriffe nach.",
+      topic_days: "Break-even über die Zeit",
+      days_unit: "Tage, bis die AI ihre CO₂-Kosten eingespielt hat",
+      days_never: "nie — die tägliche Einsparung deckt den täglichen Fußabdruck nicht",
+      days_meta: "Nach {d} Tagen wird mehr CO₂ eingespart als erzeugt.",
+      days_created: "erzeugt",
+      days_saved: "eingespart",
+      b_days: "Hier siehst du, nach wie vielen Tagen die AI ihren CO₂-Fußabdruck eingespielt hat."
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -222,7 +236,14 @@
       tour_4_t: "Tematy", tour_4_d: "Kropki pokazują tematy — kliknij, aby przeskoczyć.",
       tour_5_t: "Język", tour_5_d: "Wybierz jeden z sześciu języków.",
       tour_6_t: "Menu debug", tour_6_d: "Dostosuj parametry i scenariusze.",
-      tour_7_t: "Słownik", tour_7_d: "Sprawdź pojęcia techniczne."
+      tour_7_t: "Słownik", tour_7_d: "Sprawdź pojęcia techniczne.",
+      topic_days: "Próg opłacalności w czasie",
+      days_unit: "dni, aż AI odpracuje swój koszt węglowy",
+      days_never: "nigdy — dzienne oszczędności nie pokrywają dziennego śladu",
+      days_meta: "Po {d} dniach oszczędza się więcej CO₂, niż się wytwarza.",
+      days_created: "wytworzone",
+      days_saved: "zaoszczędzone",
+      b_days: "To pokazuje, po ilu dniach AI odpracuje swój ślad węglowy."
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -288,7 +309,14 @@
       tour_4_t: "Argomenti", tour_4_d: "I punti mostrano gli argomenti — clicca per saltare.",
       tour_5_t: "Lingua", tour_5_d: "Scegli tra sei lingue.",
       tour_6_t: "Menu debug", tour_6_d: "Regola parametri e scenari.",
-      tour_7_t: "Glossario", tour_7_d: "Consulta i termini tecnici."
+      tour_7_t: "Glossario", tour_7_d: "Consulta i termini tecnici.",
+      topic_days: "Pareggio nel tempo",
+      days_unit: "giorni finché l'AI ripaga il suo costo di carbonio",
+      days_never: "mai — i risparmi giornalieri non coprono l'impronta giornaliera",
+      days_meta: "Dopo {d} giorni si risparmia più CO₂ di quanta se ne crea.",
+      days_created: "creato",
+      days_saved: "risparmiato",
+      b_days: "Mostra dopo quanti giorni l'AI ripaga la propria impronta di carbonio."
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -354,7 +382,14 @@
       tour_4_t: "Temas", tour_4_d: "Los puntos muestran los temas — haz clic para saltar.",
       tour_5_t: "Idioma", tour_5_d: "Elige entre seis idiomas.",
       tour_6_t: "Menú de depuración", tour_6_d: "Ajusta parámetros y escenarios.",
-      tour_7_t: "Glosario", tour_7_d: "Consulta términos técnicos."
+      tour_7_t: "Glosario", tour_7_d: "Consulta términos técnicos.",
+      topic_days: "Punto de equilibrio en el tiempo",
+      days_unit: "días hasta que la IA compensa su coste de carbono",
+      days_never: "nunca — el ahorro diario no cubre la huella diaria",
+      days_meta: "Después de {d} días se ahorra más CO₂ del que se crea.",
+      days_created: "creado",
+      days_saved: "ahorrado",
+      b_days: "Muestra en cuántos días la IA compensa su propia huella de carbono."
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -420,7 +455,14 @@
       tour_4_t: "Sujets", tour_4_d: "Les points montrent les sujets — cliquez pour sauter.",
       tour_5_t: "Langue", tour_5_d: "Choisissez entre six langues.",
       tour_6_t: "Menu debug", tour_6_d: "Ajustez les paramètres et les scénarios.",
-      tour_7_t: "Glossaire", tour_7_d: "Consultez les termes techniques."
+      tour_7_t: "Glossaire", tour_7_d: "Consultez les termes techniques.",
+      topic_days: "Seuil de rentabilité dans le temps",
+      days_unit: "jours jusqu'à ce que l'IA rembourse son coût carbone",
+      days_never: "jamais — les économies quotidiennes ne couvrent pas l'empreinte quotidienne",
+      days_meta: "Après {d} jours, on économise plus de CO₂ qu'on n'en crée.",
+      days_created: "créé",
+      days_saved: "économisé",
+      b_days: "Montre après combien de jours l'IA rembourse sa propre empreinte carbone."
     }
   };
 
@@ -637,6 +679,26 @@
       }
     },
     {
+      label: "topic_days",
+      bubble: function () { return t("b_days"); },
+      card: function () {
+        var d = computeDays(params);
+        var finite = isFinite(d.beDays);
+        var big = finite ? fmtNum(Math.round(d.beDays), 0) : "∞";
+        var unit = finite ? t("days_unit") : t("days_never");
+        var meta = finite ? '<div class="a-meta">' + t("days_meta", { d: fmtNum(Math.round(d.beDays), 0) }) + '</div>' : '';
+        return '<div class="a-eyebrow">' + t("topic_days") + '</div>'
+          + '<div class="a-big" style="color:var(--accent)">' + big + '</div>'
+          + '<div class="a-unit">' + unit + '</div>'
+          + drawDaysSVG(d)
+          + '<div class="legend">'
+          + '<span class="lk"><span class="sw" style="background:var(--series-2)"></span>' + t("days_created") + '</span>'
+          + '<span class="lk"><span class="sw" style="background:var(--series-3)"></span>' + t("days_saved") + '</span>'
+          + '</div>'
+          + meta;
+      }
+    },
+    {
       label: "topic_impact",
       bubble: function () { return t("b_impact"); },
       card: function (res, mc, mood) {
@@ -674,6 +736,53 @@
     s += '<path d="' + line + '" class="spark-line"/>';
     s += '<circle cx="' + midX.toFixed(1) + '" cy="' + ys(counts[Math.floor((mc.median - lo) / span * bins)] || 0).toFixed(1) + '" r="4" class="dot-bk"/>';
     return '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Distribution">' + s + '</svg>';
+  }
+
+  /* ============================================================
+     30-Tage-Verlauf & Break-even in Tagen
+     ============================================================ */
+  function computeDays(p) {
+    var hwKg = p.numSensors * FIXED.sensorEmbodied + FIXED.gatewayEmbodied;
+    var trainKg = FIXED.kWhPerTraining * p.dcEF / 1000;
+    var oneTime = hwKg + trainKg;
+    var dailySaved = (p.baselineMWh * 1000 * p.savingsPct / 100 / 365) * p.gridEF / 1000;
+    var dailyOngoing = p.dataGBday * FIXED.networkKWhPerGB * p.gridEF / 1000
+      + (p.inferenceW / 1000 * 24) * p.dcEF / 1000;
+    var netDaily = dailySaved - dailyOngoing;
+    var beDays = netDaily > 0 ? oneTime / netDaily : Infinity;
+    return { oneTime: oneTime, dailySaved: dailySaved, dailyOngoing: dailyOngoing, netDaily: netDaily, beDays: beDays };
+  }
+
+  function drawDaysSVG(d) {
+    var W = 480, H = 170, padL = 8, padR = 8, padT = 10, padB = 22;
+    var iw = W - padL - padR, ih = H - padT - padB;
+    var D = 30;
+    var maxY = Math.max(d.oneTime + d.dailyOngoing * D, d.dailySaved * D, 1);
+    var x = function (day) { return padL + day / D * iw; };
+    var y = function (v) { return padT + ih - v / maxY * ih; };
+
+    var created = "", saved = "";
+    for (var i = 0; i <= D; i++) {
+      created += (i ? "L" : "M") + x(i).toFixed(1) + "," + y(d.oneTime + d.dailyOngoing * i).toFixed(1) + " ";
+      saved += (i ? "L" : "M") + x(i).toFixed(1) + "," + y(d.dailySaved * i).toFixed(1) + " ";
+    }
+
+    var s = "";
+    s += '<line x1="' + padL + '" y1="' + (padT + ih) + '" x2="' + (padL + iw) + '" y2="' + (padT + ih) + '" class="days-axis"/>';
+    for (var k = 0; k <= D; k += 10) {
+      s += '<line x1="' + x(k).toFixed(1) + '" y1="' + (padT + ih) + '" x2="' + x(k).toFixed(1) + '" y2="' + (padT + ih + 4) + '" class="days-axis"/>';
+      s += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 5) + '" text-anchor="middle">' + k + '</text>';
+    }
+    s += '<path d="' + created + '" class="days-created"/>';
+    s += '<path d="' + saved + '" class="days-saved"/>';
+
+    if (isFinite(d.beDays) && d.beDays >= 0 && d.beDays <= D) {
+      var bx = x(d.beDays);
+      var by = y(d.dailySaved * d.beDays);
+      s += '<line x1="' + bx.toFixed(1) + '" y1="' + padT + '" x2="' + bx.toFixed(1) + '" y2="' + (padT + ih) + '" class="zero-line"/>';
+      s += '<circle cx="' + bx.toFixed(1) + '" cy="' + by.toFixed(1) + '" r="4" class="dot-bk"/>';
+    }
+    return '<svg class="days" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="30-day carbon balance">' + s + '</svg>';
   }
 
   /* ============================================================
