@@ -89,7 +89,7 @@ body{
 /* ---------- stage (Companion links, Grafik rechts) ---------- */
 .stage{
   flex:1; display:grid; grid-template-columns:minmax(260px, auto) minmax(0, 1fr);
-  gap:clamp(32px, 6vw, 72px); align-items:center;
+  column-gap:clamp(32px, 6vw, 72px); row-gap:30px; align-items:center;
   width:100%; max-width:1040px; margin:0 auto;
   padding:28px max(20px, env(safe-area-inset-right,0px)) 44px max(20px, env(safe-area-inset-left,0px));
 }
@@ -121,7 +121,7 @@ body{
 .hint{ margin:0; font-size:12px; color:var(--fg-3); font-family:"Chivo Mono",ui-monospace,monospace; letter-spacing:0.06em }
 
 /* ---------- worth meter ---------- */
-.worth{ width:100%; text-align:left }
+.worth{ width:100%; text-align:left; grid-column:1 / -1 }
 .worth-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px }
 .worth-q{ font-size:15px; font-weight:700 }
 .worth-v{ font-size:14px; font-weight:800; text-transform:lowercase }
