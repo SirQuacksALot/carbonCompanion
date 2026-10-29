@@ -249,7 +249,7 @@
      ============================================================ */
   var params = Object.assign({}, PRESETS.buero);
   var topic = -1;
-  var LANG = "de";
+  var LANG = "en";
   try { var s = localStorage.getItem("cc-params"); if (s) params = Object.assign({}, PRESETS.buero, JSON.parse(s)); } catch (e) {}
   try { var lg = localStorage.getItem("cc-lang"); if (lg && I18N[lg]) LANG = lg; } catch (e) {}
 
