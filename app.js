@@ -1165,6 +1165,26 @@
   _applyTheme();
 
   /* ============================================================
+     Loader
+     ============================================================ */
+  var _loaderHidden = false;
+  function hideLoader() {
+    if (_loaderHidden) return;
+    _loaderHidden = true;
+    var l = $("loader");
+    if (l) l.classList.add("hidden");
+    setTimeout(endIntro, 450);
+  }
+  function hideLoaderWhenReady() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { setTimeout(hideLoader, 150); });
+    } else {
+      setTimeout(hideLoader, 350);
+    }
+    setTimeout(hideLoader, 3500);
+  }
+
+  /* ============================================================
      Init
      ============================================================ */
   buildLangSelect();
@@ -1177,5 +1197,5 @@
   render();
   renderGlossary();
   enterIntro();
-  setTimeout(endIntro, 700);
+  hideLoaderWhenReady();
 })();
