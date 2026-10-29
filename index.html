@@ -18,26 +18,32 @@
       <span class="brand-sub" data-i18n="brandSub">Netto-Carbon-Balance · BIP 2026 · E2</span>
     </div>
     <div class="topbar-right">
-      <div class="lang-select-wrap">
-        <span class="material-icons" aria-hidden="true">translate</span>
-        <select class="lang-select" id="langSel" aria-label="Language / Sprache"></select>
+      <div class="ctrl-group">
+        <div class="lang-select-wrap">
+          <span class="material-icons" aria-hidden="true">translate</span>
+          <select class="lang-select" id="langSel" aria-label="Language / Sprache"></select>
+        </div>
+        <button class="debug-toggle" id="debugToggle" aria-controls="debug" aria-expanded="false">
+          <span class="material-icons" aria-hidden="true">settings</span> Debug
+        </button>
+        <button class="debug-toggle" id="glossToggle" aria-controls="gloss" aria-expanded="false">
+          <span class="material-icons" aria-hidden="true">menu_book</span>
+          <span data-i18n="glossTitle">Glossar</span>
+        </button>
+        <a class="debug-toggle" href="https://marija-risteska.github.io/ai-carbon-dashboard/" target="_blank" rel="noopener noreferrer" title="AI Energy &amp; Carbon Tool">
+          <span class="material-icons" aria-hidden="true">open_in_new</span>
+          <span>AI Energy &amp; Carbon Tool</span>
+        </a>
       </div>
-      <button class="debug-toggle" id="themeToggle" aria-label="Theme umschalten" title="Theme">
-        <span class="material-icons" aria-hidden="true" id="themeIcon">dark_mode</span>
-      </button>
-      <button class="debug-toggle" id="debugToggle" aria-controls="debug" aria-expanded="false">
-        <span class="material-icons" aria-hidden="true">settings</span> Debug
-      </button>
-      <button class="debug-toggle" id="glossToggle" aria-controls="gloss" aria-expanded="false">
-        <span class="material-icons" aria-hidden="true">menu_book</span>
-        <span data-i18n="glossTitle">Glossar</span>
-      </button>
-      <button class="debug-toggle" id="tourHelp" aria-label="Tutorial anzeigen" title="Tutorial">
-        <span class="material-icons" aria-hidden="true">help_outline</span>
-      </button>
-      <a class="debug-toggle" href="https://marija-risteska.github.io/ai-carbon-dashboard/" target="_blank" rel="noopener noreferrer" aria-label="Marija Risteska's Dashboard" title="Marija Risteska's Dashboard">
-        <span class="material-icons" aria-hidden="true">open_in_new</span>
-      </a>
+      <span class="ctrl-divider" aria-hidden="true"></span>
+      <div class="ctrl-group">
+        <button class="debug-toggle" id="themeToggle" aria-label="Theme umschalten" title="Theme">
+          <span class="material-icons" aria-hidden="true" id="themeIcon">dark_mode</span>
+        </button>
+        <button class="debug-toggle" id="tourHelp" aria-label="Tutorial anzeigen" title="Tutorial">
+          <span class="material-icons" aria-hidden="true">help_outline</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -96,6 +102,10 @@
       <div class="worth-meta" id="worthMeta"></div>
     </section>
   </main>
+
+  <footer class="footer">
+    <span>E2 · Myśliwiec · Szyma · Glaß · Risteska</span>
+  </footer>
 
   <aside class="debug" id="debug" hidden aria-label="Debug-Menü Parameter">
     <div class="debug-head">
