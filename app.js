@@ -708,11 +708,13 @@
   $("langSel").addEventListener("change", function () { setLang(this.value); });
 
   /* ============================================================
-     Avatar-Animation: Maus folgen, Idle-Bob, Blinzeln
+     Avatar-Animation: Körper neigt sich, Augen folgen separat & stärker
      ============================================================ */
   var avatarEl = document.querySelector(".avatar");
+  var eyesEl = $("av-eyes");
   var compBtn = $("companion");
   var _avTX = 0, _avTY = 0, _avCX = 0, _avCY = 0, _avSquash = 0;
+  var _avEX = 0, _avEY = 0, _avBlink = 0;
   var _avReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (avatarEl && !_avReduced) {
@@ -728,24 +730,27 @@
     function _avAnimate(now) {
       var t = now - _avT0;
       var bob = Math.sin(t / 1000) * 3.5;
+      var wander = Math.sin(t / 1600) * 2.5;
       _avCX += (_avTX - _avCX) * 0.08;
       _avCY += (_avTY - _avCY) * 0.08;
+      _avEX += (_avTX * 14 + wander - _avEX) * 0.14;
+      _avEY += (_avTY * 10 - _avEY) * 0.14;
       _avSquash *= 0.88;
+      _avBlink *= 0.85;
       var rot = _avCX * 7;
       var tx = _avCX * 5, ty = _avCY * 4 + bob;
       var s = 1 - _avSquash * 0.08;
       avatarEl.style.transform = "rotate(" + rot.toFixed(2) + "deg) translate(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px) scale(" + s.toFixed(3) + ")";
+      eyesEl.setAttribute("transform", "translate(" + _avEX.toFixed(2) + " " + _avEY.toFixed(2) + ")");
+      eyesEl.setAttribute("opacity", (1 - _avBlink * 0.85).toFixed(2));
       requestAnimationFrame(_avAnimate);
     }
     requestAnimationFrame(_avAnimate);
-    function _avBlink() {
-      $("av-eyes").setAttribute("opacity", "0");
-      setTimeout(function () {
-        $("av-eyes").setAttribute("opacity", "1");
-        setTimeout(_avBlink, 2800 + Math.random() * 2500);
-      }, 110);
+    function _doBlink() {
+      _avBlink = 1;
+      setTimeout(_doBlink, 2800 + Math.random() * 2500);
     }
-    setTimeout(_avBlink, 2800);
+    setTimeout(_doBlink, 2800);
   }
 
   /* ============================================================
