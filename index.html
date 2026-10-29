@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700;800;900&family=Chivo+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons&display=block">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,9 +18,12 @@
       <span class="brand-sub" data-i18n="brandSub">Netto-Carbon-Balance · BIP 2026 · E2</span>
     </div>
     <div class="topbar-right">
-      <select class="lang-select" id="langSel" aria-label="Language / Sprache"></select>
+      <div class="lang-select-wrap">
+        <span class="material-icons" aria-hidden="true">translate</span>
+        <select class="lang-select" id="langSel" aria-label="Language / Sprache"></select>
+      </div>
       <button class="debug-toggle" id="debugToggle" aria-controls="debug" aria-expanded="false">
-        <span aria-hidden="true">⚙</span> Debug
+        <span class="material-icons" aria-hidden="true">settings</span> Debug
       </button>
     </div>
   </header>
@@ -83,7 +87,7 @@
   <aside class="debug" id="debug" hidden aria-label="Debug-Menü Parameter">
     <div class="debug-head">
       <span class="eyebrow" data-i18n="grpTitle">Parameter</span>
-      <button class="icon-btn" id="debugClose" aria-label="Schließen">✕</button>
+      <button class="icon-btn" id="debugClose" aria-label="Schließen"><span class="material-icons" aria-hidden="true">close</span></button>
     </div>
 
     <div class="debug-body">
