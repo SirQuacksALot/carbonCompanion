@@ -854,11 +854,16 @@
     var trainKg = FIXED.kWhPerTraining * p.dcEF / 1000;
     var oneTime = hwKg + trainKg;
     var dailySaved = (p.baselineMWh * 1000 * p.savingsPct / 100 / 365) * p.gridEF / 1000;
-    var dailyOngoing = p.dataGBday * FIXED.networkKWhPerGB * p.gridEF / 1000
-      + (p.inferenceW / 1000 * 24) * p.dcEF / 1000;
+    var dailyData = p.dataGBday * FIXED.networkKWhPerGB * p.gridEF / 1000;
+    var dailyInference = (p.inferenceW / 1000 * 24) * p.dcEF / 1000;
+    var dailyOngoing = dailyData + dailyInference;
     var netDaily = dailySaved - dailyOngoing;
     var beDays = netDaily > 0 ? oneTime / netDaily : Infinity;
-    return { oneTime: oneTime, dailySaved: dailySaved, dailyOngoing: dailyOngoing, netDaily: netDaily, beDays: beDays };
+    return {
+      oneTime: oneTime, hwKg: hwKg, trainKg: trainKg,
+      dailySaved: dailySaved, dailyData: dailyData, dailyInference: dailyInference,
+      dailyOngoing: dailyOngoing, netDaily: netDaily, beDays: beDays
+    };
   }
 
   function drawDaysSVG(d) {
@@ -1019,7 +1024,7 @@
 
     function row(fkey, vtext) {
       var f = '<div class="calc-line">' + t(fkey) + '</div>';
-      var v = vtext ? '<div class="calc-values">= ' + vtext + '</div>' : '';
+      var v = vtext ? '<hr class="calc-sep"><div class="calc-values">' + vtext + '</div>' : '';
       return '<div class="calc-entry">' + f + v + '</div>';
     }
     function note(key) {
@@ -1028,29 +1033,29 @@
 
     if (idx === 0) return note("calc_0");
     if (idx === 1) {
-      return row("f_net", fmtT(res.savings_t) + " − " + fmtT(res.cost_t) + " = " + fmtT(res.net_t))
-        + row("f_sav", fmtNum(params.baselineMWh, 0) + " MWh × " + fmtPct(params.savingsPct) + " × " + params.gridEF + " g/kWh = " + fmtT(res.savings_t))
-        + row("f_foot", fmtT(res.hw_t) + " + " + fmtT(res.data_t) + " + " + fmtT(res.train_t) + " + " + fmtT(res.inf_t) + " = " + fmtT(res.cost_t));
+      return row("f_net", fmtNum(res.net_t, 1) + " t = " + fmtNum(res.savings_t, 1) + " t − " + fmtNum(res.cost_t, 2) + " t")
+        + row("f_sav", fmtT(res.savings_t) + " = " + fmtNum(params.baselineMWh, 0) + " MWh × " + fmtPct(params.savingsPct) + " × " + params.gridEF + " g/kWh")
+        + row("f_foot", fmtT(res.cost_t) + " = " + fmtT(res.hw_t) + " + " + fmtT(res.data_t) + " + " + fmtT(res.train_t) + " + " + fmtT(res.inf_t));
     }
     if (idx === 2) {
-      return row("f_hw", "(" + fmtNum(params.numSensors, 0) + " × 2 kg + 80 kg) / 5 = " + fmtT(res.hw_t))
-        + row("f_data", fmtNum(params.dataGBday, 0) + " GB × 365 × 0.06 kWh/GB × " + params.gridEF + " g/kWh = " + fmtT(res.data_t))
-        + row("f_train", fmtNum(params.trainingsPerYear, 0) + " × 30 kWh × " + params.dcEF + " g/kWh = " + fmtT(res.train_t))
-        + row("f_infer", fmtNum(params.inferenceW, 0) + " W × 8760 h × " + params.dcEF + " g/kWh = " + fmtT(res.inf_t));
+      return row("f_hw", fmtT(res.hw_t) + " = (" + fmtNum(params.numSensors, 0) + " × 2 kg + 80 kg) / 5")
+        + row("f_data", fmtT(res.data_t) + " = " + fmtNum(params.dataGBday, 0) + " GB × 365 × 0.06 kWh/GB × " + params.gridEF + " g/kWh")
+        + row("f_train", fmtT(res.train_t) + " = " + fmtNum(params.trainingsPerYear, 0) + " × 30 kWh × " + params.dcEF + " g/kWh")
+        + row("f_infer", fmtT(res.inf_t) + " = " + fmtNum(params.inferenceW, 0) + " W × 8760 h × " + params.dcEF + " g/kWh");
     }
     if (idx === 3) {
-      return row("f_mc", "2.000")
+      return row("f_mc", "")
         + row("f_ci", fmtT(mc.p5) + " … " + fmtT(mc.p95))
         + row("f_p", fmtNum(mc.pPos * 100, 0) + " %");
     }
     if (idx === 4) {
-      return row("f_be", fmtT(res.cost_t) + " / (" + fmtNum(params.baselineMWh, 0) + " MWh × " + params.gridEF + " g/kWh) × 100 = " + fmtNum(res.bePct, 1) + " %");
+      return row("f_be", fmtNum(res.bePct, 1) + " % = " + fmtT(res.cost_t) + " / (" + fmtNum(params.baselineMWh, 0) + " MWh × " + params.gridEF + " g/kWh) × 100");
     }
     if (idx === 5) {
       var be = isFinite(days.beDays) ? fmtNum(Math.round(days.beDays), 0) : "∞";
-      return row("f_once", fmtKg(days.oneTime))
-        + row("f_dsaved", fmtKg(days.dailySaved))
-        + row("f_dongoing", fmtKg(days.dailyOngoing))
+      return row("f_once", fmtKg(days.oneTime) + " = " + fmtKg(days.hwKg) + " + " + fmtKg(days.trainKg))
+        + row("f_dsaved", fmtKg(days.dailySaved) + " = " + fmtNum(params.baselineMWh, 0) + " MWh × " + fmtPct(params.savingsPct) + " × " + params.gridEF + " g/kWh / 365")
+        + row("f_dongoing", fmtKg(days.dailyOngoing) + " = " + fmtKg(days.dailyData) + " + " + fmtKg(days.dailyInference))
         + row("f_days", be);
     }
     if (idx === 6) return note("calc_6");
