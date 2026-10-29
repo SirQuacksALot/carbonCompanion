@@ -1,7 +1,7 @@
 # Carbon Companion
 
 Minimalist, interactive **net carbon balance** for an AI-driven
-energy-management solution (BIP 2026 · E2 Energy · group project 11).
+energy-management solution (BIP 2026 · group E2 · Energy track).
 
 The companion avatar is the main interaction element: **tap** to page through
 the results (net balance, footprint, uncertainty, break-even, system boundary).
