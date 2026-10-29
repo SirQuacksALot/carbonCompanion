@@ -844,9 +844,6 @@
   var _tourDone = false;
   try { _tourDone = localStorage.getItem("cc-tour") === "done"; } catch (e) {}
 
-  var _introSeen = false;
-  try { _introSeen = localStorage.getItem("cc-intro") === "done"; } catch (e) {}
-
   function enterIntro() {
     var stageEl = document.querySelector(".stage");
     var compCol = document.querySelector(".companion-col");
@@ -860,7 +857,6 @@
     var compCol = document.querySelector(".companion-col");
     stageEl.classList.remove("intro");
     compCol.style.transform = "translateX(0)";
-    try { localStorage.setItem("cc-intro", "done"); } catch (e) {}
     if (!_tourDone) setTimeout(startTour, 900);
   }
 
@@ -1020,10 +1016,6 @@
   syncControls();
   render();
   renderGlossary();
-  if (!_introSeen) {
-    enterIntro();
-    setTimeout(endIntro, 700);
-  } else {
-    document.querySelector(".stage").classList.remove("intro");
-  }
+  enterIntro();
+  setTimeout(endIntro, 700);
 })();
