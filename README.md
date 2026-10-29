@@ -1,12 +1,12 @@
 # Carbon Companion
 
-Minimalistische, interaktive **Netto-Carbon-Balance** für eine AI-gesteuerte
-Energiemanagement-Lösung (BIP 2026 · E2 Energy · Gruppenprojekt 11).
+Minimalist, interactive **net carbon balance** for an AI-driven
+energy-management solution (BIP 2026 · E2 Energy · group project 11).
 
-Der Companion-Avatar ist das Haupt-Interaktionselement: **antippen** blättert
-durch die Ergebnisse (Nettobilanz, Fußabdruck, Unsicherheit, Break-even,
-Systemgrenze). Er reagiert „emotional" — Farbe und Gesicht ändern sich je nach
-Nettobilanz. Eine dauerhaft sichtbare Anzeige zeigt, ob sich die AI lohnt.
-Die Modellparameter liegen in einem aufklappbaren **Debug-Menü** (⚙ oben rechts).
+The companion avatar is the main interaction element: **tap** to page through
+the results (net balance, footprint, uncertainty, break-even, system boundary).
+It reacts emotionally — colour and face change with the net balance. A
+permanently visible gauge shows whether the AI is worth it. The model
+parameters live in a collapsible **debug menu** (⚙ top right).
 
-Sprachen: English, Deutsch, Polski, Italiano, Español, Français.
+Languages: English, Deutsch, Polski, Italiano, Español, Français.
