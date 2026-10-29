@@ -100,7 +100,15 @@
       b_days: "Here's how many days until the AI has paid off its carbon footprint.",
       tour_8_t: "Teammate's dashboard", tour_8_d: "Open Marija's version of the same tool.",
       tour_9_t: "Theme", tour_9_d: "Switch between light and dark mode.",
-      tour_10_t: "Tutorial", tour_10_d: "Replay this guide anytime."
+      tour_10_t: "Tutorial", tour_10_d: "Replay this guide anytime.",
+      calcTitle: "Calculation", calcButton: "Calculation",
+      calc_0: "Boundary = Sensors + Network + Training + Inference\n(whole AI system, incl. embodied hardware)",
+      calc_1: "Net = Savings − Footprint\nSavings = Baseline × SavingsRate × GridEF\nFootprint = Hardware + Data + Training + Inference",
+      calc_2: "Hardware = (Sensors × 2 kg + 80 kg) / 5 yr\nData = GB/day × 365 × 0.06 kWh/GB × GridEF\nTraining = Runs × 30 kWh × DC_EF\nInference = W × 8760 h × DC_EF",
+      calc_3: "Monte Carlo: 2,000 runs · normal distributions\n90 % interval = P5 … P95\nP(worth it) = share of runs with Net > 0",
+      calc_4: "Break-even rate = Footprint / (Baseline × GridEF) × 100",
+      calc_5: "One-time = Hardware(embodied) + Training(1 run)\nDaily saved = Baseline × SavingsRate × GridEF / 365\nDaily ongoing = Data(daily) + Inference(daily)\nDays = One-time / (Daily saved − Daily ongoing)",
+      calc_6: "Impact = qualitative summary of the net balance\n(worth-it gauge + verdict)"
     },
     de: {
       brandSub: "Netto-Carbon-Balance · BIP 2026 · E2", hintTap: "antippen", hintMore: "nochmal antippen",
@@ -176,7 +184,15 @@
       b_days: "Hier siehst du, nach wie vielen Tagen die AI ihren CO₂-Fußabdruck eingespielt hat.",
       tour_8_t: "Dashboard der Teamkollegin", tour_8_d: "Öffnet Marijas Version desselben Tools.",
       tour_9_t: "Theme", tour_9_d: "Wechsle zwischen hellem und dunklem Modus.",
-      tour_10_t: "Tutorial", tour_10_d: "Spiele diese Führung jederzeit erneut ab."
+      tour_10_t: "Tutorial", tour_10_d: "Spiele diese Führung jederzeit erneut ab.",
+      calcTitle: "Berechnung", calcButton: "Berechnung",
+      calc_0: "Grenze = Sensoren + Netz + Training + Inferenz\n(gesamtes AI-System, inkl. verkörperter Hardware)",
+      calc_1: "Netto = Einsparung − Fußabdruck\nEinsparung = Baseline × Einsparrate × Strommix\nFußabdruck = Hardware + Daten + Training + Inferenz",
+      calc_2: "Hardware = (Sensoren × 2 kg + 80 kg) / 5 Jahre\nDaten = GB/Tag × 365 × 0,06 kWh/GB × Strommix\nTraining = Läufe × 30 kWh × RZ-EF\nInferenz = W × 8760 h × RZ-EF",
+      calc_3: "Monte-Carlo: 2.000 Läufe · Normalverteilungen\n90 %-Intervall = P5 … P95\nP(lohnt sich) = Anteil der Läufe mit Netto > 0",
+      calc_4: "Break-even-Rate = Fußabdruck / (Baseline × Strommix) × 100",
+      calc_5: "Einmalig = Hardware(verkörpert) + Training(1 Lauf)\nTäglich gespart = Baseline × Einsparrate × Strommix / 365\nTäglich laufend = Daten(täglich) + Inferenz(täglich)\nTage = Einmalig / (Täglich gespart − Täglich laufend)",
+      calc_6: "Impact = qualitative Zusammenfassung der Nettobilanz\n(Lohnt-sich-Anzeige + Verdict)"
     },
     pl: {
       brandSub: "Bilans węglowy netto · BIP 2026 · E2", hintTap: "dotknij mnie", hintMore: "dotknij ponownie",
@@ -252,7 +268,15 @@
       b_days: "To pokazuje, po ilu dniach AI odpracuje swój ślad węglowy.",
       tour_8_t: "Panel koleżanki z zespołu", tour_8_d: "Otwiera wersję Mariji tego samego narzędzia.",
       tour_9_t: "Motyw", tour_9_d: "Przełącz między trybem jasnym a ciemnym.",
-      tour_10_t: "Samouczek", tour_10_d: "Odtwórz ten przewodnik w dowolnym momencie."
+      tour_10_t: "Samouczek", tour_10_d: "Odtwórz ten przewodnik w dowolnym momencie.",
+      calcTitle: "Obliczenia", calcButton: "Obliczenia",
+      calc_0: "Granica = czujniki + sieć + trenowanie + inferencja\n(cały system AI, z wbudowanym sprzętem)",
+      calc_1: "Netto = oszczędność − ślad\nOszczędność = baseline × stopa oszczędności × miks sieci\nŚlad = sprzęt + dane + trenowanie + inferencja",
+      calc_2: "Sprzęt = (czujniki × 2 kg + 80 kg) / 5 lat\nDane = GB/dzień × 365 × 0,06 kWh/GB × miks sieci\nTrenowanie = przebiegi × 30 kWh × EF_DC\nInferencja = W × 8760 h × EF_DC",
+      calc_3: "Monte Carlo: 2 000 przebiegów · rozkłady normalne\nPrzedział 90 % = P5 … P95\nP(opłacalne) = udział przebiegów z Netto > 0",
+      calc_4: "Próg = ślad / (baseline × miks sieci) × 100",
+      calc_5: "Jednorazowo = sprzęt(wbudowany) + trenowanie(1 przebieg)\nDziennie oszczędzane = baseline × stopa × miks sieci / 365\nDziennie bieżące = dane(dzienne) + inferencja(dzienna)\nDni = jednorazowo / (dziennie oszczędzane − dziennie bieżące)",
+      calc_6: "Wpływ = jakościowe podsumowanie bilansu netto\n(wskaźnik opłacalności + werdykt)"
     },
     it: {
       brandSub: "Bilancio carbonio netto · BIP 2026 · E2", hintTap: "toccami", hintMore: "tocca di nuovo",
@@ -328,7 +352,15 @@
       b_days: "Mostra dopo quanti giorni l'AI ripaga la propria impronta di carbonio.",
       tour_8_t: "Dashboard della compagna", tour_8_d: "Apre la versione di Marija dello stesso strumento.",
       tour_9_t: "Tema", tour_9_d: "Passa tra modalità chiara e scura.",
-      tour_10_t: "Tutorial", tour_10_d: "Riproduci questa guida in qualsiasi momento."
+      tour_10_t: "Tutorial", tour_10_d: "Riproduci questa guida in qualsiasi momento.",
+      calcTitle: "Calcolo", calcButton: "Calcolo",
+      calc_0: "Confine = sensori + rete + addestramento + inferenza\n(intero sistema AI, incl. hardware incorporato)",
+      calc_1: "Netto = risparmio − impronta\nRisparmio = baseline × tasso di risparmio × mix di rete\nImpronta = hardware + dati + addestramento + inferenza",
+      calc_2: "Hardware = (sensori × 2 kg + 80 kg) / 5 anni\nDati = GB/giorno × 365 × 0,06 kWh/GB × mix di rete\nAddestramento = esecuzioni × 30 kWh × EF_DC\nInferenza = W × 8760 h × EF_DC",
+      calc_3: "Monte Carlo: 2.000 esecuzioni · distribuzioni normali\nIntervallo 90 % = P5 … P95\nP(conviene) = quota di esecuzioni con Netto > 0",
+      calc_4: "Pareggio = impronta / (baseline × mix di rete) × 100",
+      calc_5: "Una tantum = hardware(incorporato) + addestramento(1 esecuzione)\nRisparmio giornaliero = baseline × tasso × mix di rete / 365\nImpronta giornaliera = dati(giornalieri) + inferenza(giornaliera)\nGiorni = una tantum / (risparmio − impronta giornaliera)",
+      calc_6: "Impatto = riepilogo qualitativo del saldo netto\n(indicatore di convenienza + verdetto)"
     },
     es: {
       brandSub: "Balance neto de carbono · BIP 2026 · E2", hintTap: "tócame", hintMore: "toca de nuevo",
@@ -404,7 +436,15 @@
       b_days: "Muestra en cuántos días la IA compensa su propia huella de carbono.",
       tour_8_t: "Panel de la compañera", tour_8_d: "Abre la versión de Marija de la misma herramienta.",
       tour_9_t: "Tema", tour_9_d: "Cambia entre modo claro y oscuro.",
-      tour_10_t: "Tutorial", tour_10_d: "Reproduce esta guía cuando quieras."
+      tour_10_t: "Tutorial", tour_10_d: "Reproduce esta guía cuando quieras.",
+      calcTitle: "Cálculo", calcButton: "Cálculo",
+      calc_0: "Límite = sensores + red + entrenamiento + inferencia\n(todo el sistema de IA, incl. hardware incorporado)",
+      calc_1: "Neto = ahorro − huella\nAhorro = base × tasa de ahorro × mix de red\nHuella = hardware + datos + entrenamiento + inferencia",
+      calc_2: "Hardware = (sensores × 2 kg + 80 kg) / 5 años\nDatos = GB/día × 365 × 0,06 kWh/GB × mix de red\nEntrenamiento = ejecuciones × 30 kWh × EF_DC\nInferencia = W × 8760 h × EF_DC",
+      calc_3: "Monte Carlo: 2.000 ejecuciones · distribuciones normales\nIntervalo 90 % = P5 … P95\nP(merece la pena) = fracción de ejecuciones con Neto > 0",
+      calc_4: "Equilibrio = huella / (base × mix de red) × 100",
+      calc_5: "Único = hardware(incorporado) + entrenamiento(1 ejecución)\nAhorro diario = base × tasa × mix de red / 365\nHuella diaria = datos(diarios) + inferencia(diaria)\nDías = único / (ahorro diario − huella diaria)",
+      calc_6: "Impacto = resumen cualitativo del balance neto\n(indicador de rentabilidad + veredicto)"
     },
     fr: {
       brandSub: "Bilan carbone net · BIP 2026 · E2", hintTap: "touche-moi", hintMore: "touche à nouveau",
@@ -480,7 +520,15 @@
       b_days: "Montre après combien de jours l'IA rembourse sa propre empreinte carbone.",
       tour_8_t: "Tableau de bord de la coéquipière", tour_8_d: "Ouvre la version de Marija du même outil.",
       tour_9_t: "Thème", tour_9_d: "Bascule entre mode clair et sombre.",
-      tour_10_t: "Tutoriel", tour_10_d: "Rejoue ce guide à tout moment."
+      tour_10_t: "Tutoriel", tour_10_d: "Rejoue ce guide à tout moment.",
+      calcTitle: "Calcul", calcButton: "Calcul",
+      calc_0: "Frontière = capteurs + réseau + entraînement + inférence\n(tout le système d'IA, matériel incorporé inclus)",
+      calc_1: "Net = économie − empreinte\nÉconomie = base × taux d'économie × mix réseau\nEmpreinte = matériel + données + entraînement + inférence",
+      calc_2: "Matériel = (capteurs × 2 kg + 80 kg) / 5 ans\nDonnées = Go/jour × 365 × 0,06 kWh/Go × mix réseau\nEntraînement = exécutions × 30 kWh × EF_DC\nInférence = W × 8760 h × EF_DC",
+      calc_3: "Monte-Carlo : 2 000 exécutions · lois normales\nIntervalle 90 % = P5 … P95\nP(rentable) = part des exécutions avec Net > 0",
+      calc_4: "Seuil = empreinte / (base × mix réseau) × 100",
+      calc_5: "Unique = matériel(incorporé) + entraînement(1 exécution)\nÉconomie/jour = base × taux × mix réseau / 365\nEmpreinte/jour = données(quot.) + inférence(quot.)\nJours = unique / (économie/jour − empreinte/jour)",
+      calc_6: "Impact = résumé qualitatif du bilan net\n(indicateur de rentabilité + verdict)"
     }
   };
 
@@ -854,6 +902,7 @@
 
     renderWorth(mc, mood);
     renderProgress();
+    $("calcBtn").hidden = (topic < 0);
   }
 
   function renderWorth(mc, mood) {
@@ -889,17 +938,47 @@
     render();
   });
 
-  var debug = $("debug"), gloss = $("gloss"), backdrop = $("backdrop"), toggle = $("debugToggle"), glossToggleBtn = $("glossToggle");
-  function closeDebug() { debug.hidden = true; toggle.setAttribute("aria-expanded", "false"); if (gloss.hidden) backdrop.hidden = true; }
-  function openDebug() { closeGloss(); debug.hidden = false; backdrop.hidden = false; toggle.setAttribute("aria-expanded", "true"); }
-  function closeGloss() { gloss.hidden = true; glossToggleBtn.setAttribute("aria-expanded", "false"); if (debug.hidden) backdrop.hidden = true; }
-  function openGloss() { closeDebug(); gloss.hidden = false; backdrop.hidden = false; glossToggleBtn.setAttribute("aria-expanded", "true"); }
-  toggle.addEventListener("click", function () { debug.hidden ? openDebug() : closeDebug(); });
-  glossToggleBtn.addEventListener("click", function () { gloss.hidden ? openGloss() : closeGloss(); });
-  $("debugClose").addEventListener("click", closeDebug);
-  $("glossClose").addEventListener("click", closeGloss);
-  backdrop.addEventListener("click", function () { closeDebug(); closeGloss(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeDebug(); closeGloss(); } });
+  var _drawers = {
+    debug: { el: $("debug"), toggle: $("debugToggle"), close: $("debugClose") },
+    gloss: { el: $("gloss"), toggle: $("glossToggle"), close: $("glossClose") },
+    calc: { el: $("calc"), close: $("calcClose") }
+  };
+  var _backdrop = $("backdrop");
+
+  function closeAllDrawers() {
+    for (var k in _drawers) {
+      var d = _drawers[k];
+      d.el.hidden = true;
+      if (d.toggle) d.toggle.setAttribute("aria-expanded", "false");
+    }
+    _backdrop.hidden = true;
+  }
+  function openDrawer(name) {
+    closeAllDrawers();
+    var d = _drawers[name];
+    d.el.hidden = false;
+    _backdrop.hidden = false;
+    if (d.toggle) d.toggle.setAttribute("aria-expanded", "true");
+  }
+  for (var k in _drawers) {
+    (function (name) {
+      var d = _drawers[name];
+      if (d.toggle) d.toggle.addEventListener("click", function () { d.el.hidden ? openDrawer(name) : closeAllDrawers(); });
+      if (d.close) d.close.addEventListener("click", closeAllDrawers);
+    })(k);
+  }
+  _backdrop.addEventListener("click", closeAllDrawers);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAllDrawers(); });
+
+  var CALC_KEYS = ["calc_0", "calc_1", "calc_2", "calc_3", "calc_4", "calc_5", "calc_6"];
+  function openCalc(idx) {
+    if (idx < 0 || idx >= CALC_KEYS.length) return;
+    $("calcBody").innerHTML = t(CALC_KEYS[idx]).split("\n").map(function (line) {
+      return '<div class="calc-line">' + line + '</div>';
+    }).join("");
+    openDrawer("calc");
+  }
+  $("calcBtn").addEventListener("click", function () { openCalc(topic); });
 
   /* ============================================================
      Tutorial-Intro

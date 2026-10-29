@@ -93,6 +93,11 @@
     <div class="content-col">
       <section class="answer" id="answer" aria-live="polite"></section>
 
+      <button class="calc-btn" id="calcBtn" hidden>
+        <span class="material-icons" aria-hidden="true">functions</span>
+        <span data-i18n="calcButton">Berechnung</span>
+      </button>
+
       <nav class="progress" id="progress" aria-label="Themen"></nav>
     </div>
 
@@ -178,6 +183,16 @@
     </div>
     <div class="debug-body">
       <dl class="glossary-list" id="glossary"></dl>
+    </div>
+  </aside>
+
+  <aside class="debug" id="calc" hidden aria-label="Berechnung">
+    <div class="debug-head">
+      <span class="eyebrow" data-i18n="calcTitle">Berechnung</span>
+      <button class="icon-btn" id="calcClose" aria-label="Schließen"><span class="material-icons" aria-hidden="true">close</span></button>
+    </div>
+    <div class="debug-body">
+      <div class="calc-body" id="calcBody"></div>
     </div>
   </aside>
 
