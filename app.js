@@ -708,13 +708,17 @@
     render();
   });
 
-  var debug = $("debug"), backdrop = $("backdrop"), toggle = $("debugToggle");
-  function openDebug() { debug.hidden = false; backdrop.hidden = false; toggle.setAttribute("aria-expanded", "true"); }
-  function closeDebug() { debug.hidden = true; backdrop.hidden = true; toggle.setAttribute("aria-expanded", "false"); }
+  var debug = $("debug"), gloss = $("gloss"), backdrop = $("backdrop"), toggle = $("debugToggle"), glossToggleBtn = $("glossToggle");
+  function closeDebug() { debug.hidden = true; toggle.setAttribute("aria-expanded", "false"); if (gloss.hidden) backdrop.hidden = true; }
+  function openDebug() { closeGloss(); debug.hidden = false; backdrop.hidden = false; toggle.setAttribute("aria-expanded", "true"); }
+  function closeGloss() { gloss.hidden = true; glossToggleBtn.setAttribute("aria-expanded", "false"); if (debug.hidden) backdrop.hidden = true; }
+  function openGloss() { closeDebug(); gloss.hidden = false; backdrop.hidden = false; glossToggleBtn.setAttribute("aria-expanded", "true"); }
   toggle.addEventListener("click", function () { debug.hidden ? openDebug() : closeDebug(); });
+  glossToggleBtn.addEventListener("click", function () { gloss.hidden ? openGloss() : closeGloss(); });
   $("debugClose").addEventListener("click", closeDebug);
-  backdrop.addEventListener("click", closeDebug);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !debug.hidden) closeDebug(); });
+  $("glossClose").addEventListener("click", closeGloss);
+  backdrop.addEventListener("click", function () { closeDebug(); closeGloss(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeDebug(); closeGloss(); } });
 
   /* ============================================================
      Steuerung (Debug)

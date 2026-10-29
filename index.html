@@ -25,6 +25,10 @@
       <button class="debug-toggle" id="debugToggle" aria-controls="debug" aria-expanded="false">
         <span class="material-icons" aria-hidden="true">settings</span> Debug
       </button>
+      <button class="debug-toggle" id="glossToggle" aria-controls="gloss" aria-expanded="false">
+        <span class="material-icons" aria-hidden="true">menu_book</span>
+        <span data-i18n="glossTitle">Glossar</span>
+      </button>
     </div>
   </header>
 
@@ -84,16 +88,6 @@
     </section>
   </main>
 
-  <section class="glossary" aria-label="Glossar">
-    <details class="glossary-box">
-      <summary>
-        <span class="material-icons" aria-hidden="true">menu_book</span>
-        <span data-i18n="glossTitle">Glossar</span>
-      </summary>
-      <dl class="glossary-list" id="glossary"></dl>
-    </details>
-  </section>
-
   <aside class="debug" id="debug" hidden aria-label="Debug-Menü Parameter">
     <div class="debug-head">
       <span class="eyebrow" data-i18n="grpTitle">Parameter</span>
@@ -140,6 +134,16 @@
       </div>
 
       <p class="note" data-i18n="note">Illustratives Rechenbeispiel — keine realen Messwerte.</p>
+    </div>
+  </aside>
+
+  <aside class="debug" id="gloss" hidden aria-label="Glossar">
+    <div class="debug-head">
+      <span class="eyebrow" data-i18n="glossTitle">Glossar</span>
+      <button class="icon-btn" id="glossClose" aria-label="Schließen"><span class="material-icons" aria-hidden="true">close</span></button>
+    </div>
+    <div class="debug-body">
+      <dl class="glossary-list" id="glossary"></dl>
     </div>
   </aside>
 
