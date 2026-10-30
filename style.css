@@ -210,6 +210,20 @@ body{
 .legend .lk{ display:inline-flex; align-items:center; gap:6px }
 .legend .sw{ width:10px; height:10px; border-radius:3px; background:var(--fg-3) }
 
+/* network map */
+.net{ width:100%; height:auto; display:block; margin-top:12px }
+.net text{ font-family:"Chivo Mono",ui-monospace,monospace }
+.net-box{ fill:var(--surface-2); stroke:var(--line); stroke-width:1 }
+.net-title{ font-size:10px; letter-spacing:0.1em; text-transform:uppercase; fill:var(--fg-3); font-weight:600 }
+.net-val{ font-size:12px; fill:var(--fg); font-weight:600; font-variant-numeric:tabular-nums }
+.net-item{ font-size:11px; fill:var(--fg-2) }
+.net-label{ font-size:10px; fill:var(--fg-3) }
+.net-link{ stroke:var(--series-1); stroke-linecap:round }
+.net-link-arrow{ fill:var(--series-1) }
+.net-sensor{ fill:var(--series-2) }
+.net-save{ font-size:12px; fill:var(--good); font-weight:600 }
+.net-arrow{ font-size:13px; fill:var(--fg-3) }
+
 /* lists */
 .list{ list-style:none; margin:16px 0 0; padding:0; display:grid; gap:10px }
 .list li{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:var(--fg-2); line-height:1.45 }

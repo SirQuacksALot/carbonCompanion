@@ -64,6 +64,7 @@
       r_source: "Based on: grid losses ≈ 7 %, smart-meter data 96 values/day, energy use kWh/m²/yr",
       what_hint: "Training runs in the cloud, inference at the edge.",
       what_line: "A measurement & accounting system for the net carbon balance of AI energy management.",
+      env_site: "Site", env_dc: "Data center", env_saves: "AI saves",
       u_risk: "AI Act: likely minimal risk — documentation and transparency.",
       impact_eyebrow: "Impact",
       impact_line: "A system that turns AI saving energy into a verifiable net carbon balance.",
@@ -154,6 +155,7 @@
       r_source: "Basierend auf: Netzverluste ≈ 7 %, Smart-Meter-Daten 96 Werte/Tag, Energieverbrauch kWh/m²/Jahr",
       what_hint: "Training läuft in der Cloud, Inferenz am Edge.",
       what_line: "Ein Mess- und Bilanzierungssystem für die Netto-CO₂-Bilanz des AI-Energiemanagements.",
+      env_site: "Standort", env_dc: "Rechenzentrum", env_saves: "KI spart",
       u_risk: "AI Act: voraussichtlich minimales Risiko — Dokumentation und Transparenz.",
       impact_eyebrow: "Impact",
       impact_line: "Ein System, das AI-Energieeinsparungen in eine nachprüfbare Netto-CO₂-Bilanz überführt.",
@@ -244,6 +246,7 @@
       r_source: "Na podstawie: straty sieci ≈ 7 %, dane liczników 96 wartości/dzień, zużycie energii kWh/m²/rok",
       what_hint: "Trenowanie w chmurze, inferencja na brzegu sieci (edge).",
       what_line: "System pomiarowo-rozliczeniowy bilansu węglowego netto zarządzania energią przez AI.",
+      env_site: "Obiekt", env_dc: "Centrum danych", env_saves: "AI oszczędza",
       u_risk: "Akt o AI: prawdopodobnie minimalne ryzyko — dokumentacja i przejrzystość.",
       impact_eyebrow: "Wpływ",
       impact_line: "System, który zamienia oszczędzanie energii przez AI w weryfikowalny bilans węglowy netto.",
@@ -334,6 +337,7 @@
       r_source: "Basato su: perdite di rete ≈ 7 %, dati smart meter 96 valori/giorno, consumo kWh/m²/anno",
       what_hint: "L'addestramento avviene nel cloud, l'inferenza all'edge.",
       what_line: "Un sistema di misura e contabilizzazione del bilancio carbonio netto della gestione energetica AI.",
+      env_site: "Sito", env_dc: "Data center", env_saves: "L'AI risparmia",
       u_risk: "AI Act: rischio probabilmente minimo — documentazione e trasparenza.",
       impact_eyebrow: "Impatto",
       impact_line: "Un sistema che trasforma il risparmio energetico dell'AI in un bilancio carbonio netto verificabile.",
@@ -424,6 +428,7 @@
       r_source: "Basado en: pérdidas de red ≈ 7 %, datos de contadores 96 valores/día, consumo kWh/m²/año",
       what_hint: "El entrenamiento se ejecuta en la nube, la inferencia en el borde.",
       what_line: "Un sistema de medición y contabilidad del balance neto de carbono de la gestión energética con IA.",
+      env_site: "Sitio", env_dc: "Centro de datos", env_saves: "La IA ahorra",
       u_risk: "Ley de IA: riesgo probablemente mínimo — documentación y transparencia.",
       impact_eyebrow: "Impacto",
       impact_line: "Un sistema que convierte el ahorro energético de la IA en un balance neto de carbono verificable.",
@@ -514,6 +519,7 @@
       r_source: "Basé sur : pertes réseau ≈ 7 %, données de compteurs 96 valeurs/jour, consommation kWh/m²/an",
       what_hint: "L'entraînement s'exécute dans le cloud, l'inférence en périphérie (edge).",
       what_line: "Un système de mesure et de comptabilisation du bilan carbone net de la gestion énergétique par IA.",
+      env_site: "Site", env_dc: "Centre de données", env_saves: "L'IA économise",
       u_risk: "Règlement IA : risque probablement minimal — documentation et transparence.",
       impact_eyebrow: "Impact",
       impact_line: "Un système qui transforme les économies d'énergie de l'IA en un bilan carbone net vérifiable.",
@@ -705,16 +711,11 @@
     {
       label: "topic_boundary",
       bubble: function () { return t("b_boundary"); },
-      card: function () {
+      card: function (res, mc, mood, p) {
         return '<div class="a-eyebrow">' + t("topic_boundary") + '</div>'
           + '<div class="a-unit">' + t("what_line") + '</div>'
+          + netSVG(p)
           + '<div class="a-meta" style="margin-top:8px">' + t("what_hint") + '</div>'
-          + '<ul class="list">'
-          + '<li><span class="mark off"></span><span>' + t("sy_sensors") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_data") + '</span><span class="tag est">' + t("tag_est") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_train") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
-          + '<li><span class="mark off"></span><span>' + t("sy_infer") + '</span><span class="tag meas">' + t("tag_meas") + '</span></li>'
-          + '</ul>'
           + '<div class="a-meta">' + t("sy_meta") + '</div>';
       }
     },
@@ -896,6 +897,56 @@
       s += '<circle cx="' + bx.toFixed(1) + '" cy="' + by.toFixed(1) + '" r="4" class="dot-bk"/>';
     }
     return '<svg class="days" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="30-day carbon balance">' + s + '</svg>';
+  }
+
+  /* ============================================================
+     Netzwerk-/Umgebungs-Karte (dynamisch aus Debug-Parametern)
+     ============================================================ */
+  function netSVG(p) {
+    var W = 480, H = 250;
+    function efColor(ef) { return ef < 150 ? "var(--good)" : ef < 600 ? "var(--warn)" : "var(--crit)"; }
+    var dcCol = efColor(p.dcEF);
+    var dataW = 1.5 + Math.min(p.dataGBday / 2000, 1) * 6;
+
+    var gridName = "";
+    for (var g = 0; g < GRID.length; g++) if (GRID[g].v === p.gridEF) gridName = t(GRID[g].k);
+
+    var cols = 6, maxDots = 18;
+    var dotCount = Math.max(0, Math.min(Math.round(p.numSensors), maxDots));
+
+    var s = "";
+
+    // Datenfluss (Sensoren → Rechenzentrum)
+    s += '<line x1="148" y1="76" x2="246" y2="76" class="net-link" style="stroke-width:' + dataW.toFixed(2) + '"/>';
+    s += '<path d="M246 76 L236 71.5 L236 80.5 Z" class="net-link-arrow"/>';
+    s += '<text x="197" y="64" text-anchor="middle" class="net-label">' + fmtNum(p.dataGBday, 0) + ' ' + t("u_gbDay") + '</text>';
+
+    // Standort (Sensoren)
+    s += '<rect x="16" y="28" width="132" height="96" rx="10" class="net-box"/>';
+    s += '<text x="28" y="50" class="net-title">' + t("env_site") + '</text>';
+    var i;
+    for (i = 0; i < dotCount; i++) {
+      s += '<circle cx="' + (30 + (i % cols) * 10) + '" cy="' + (64 + Math.floor(i / cols) * 10) + '" r="2.6" class="net-sensor"/>';
+    }
+    s += '<text x="28" y="112" class="net-val">' + fmtNum(p.numSensors, 0) + ' ' + t("l_sensors") + '</text>';
+
+    // Rechenzentrum (Training + Inferenz)
+    s += '<rect x="248" y="28" width="150" height="96" rx="10" class="net-box" style="stroke:' + dcCol + '"/>';
+    s += '<text x="260" y="50" class="net-title">' + t("env_dc") + '</text>';
+    s += '<circle cx="262" cy="66" r="3.5" style="fill:' + dcCol + '"/>';
+    s += '<text x="272" y="70" class="net-val">' + fmtNum(p.dcEF, 0) + ' g/kWh</text>';
+    s += '<text x="260" y="94" class="net-item">' + t("c_train") + ' · ' + fmtNum(p.trainingsPerYear, 0) + t("u_timesYr") + '</text>';
+    s += '<text x="260" y="114" class="net-item">' + t("c_infer") + ' · ' + fmtNum(p.inferenceW, 0) + ' W</text>';
+
+    // Einsparung (Energie → KI spart → Netz)
+    s += '<text x="20" y="186" class="net-title">' + t("grpSave") + '</text>';
+    s += '<text x="24" y="212" class="net-val">' + fmtNum(p.baselineMWh, 0) + ' ' + t("u_mwhYr") + '</text>';
+    s += '<text x="152" y="212" text-anchor="middle" class="net-arrow">→</text>';
+    s += '<text x="218" y="212" text-anchor="middle" class="net-save">' + t("env_saves") + ' ' + fmtPct(p.savingsPct) + '</text>';
+    s += '<text x="292" y="212" text-anchor="middle" class="net-arrow">→</text>';
+    s += '<text x="456" y="212" text-anchor="end" class="net-val">' + (gridName || (fmtNum(p.gridEF, 0) + ' g/kWh')) + '</text>';
+
+    return '<svg class="net" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="AI system environment">' + s + '</svg>';
   }
 
   /* ============================================================
